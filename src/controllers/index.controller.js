@@ -11,7 +11,8 @@ const pool = new Pool({
 const getRegiones = async (req, res) => {
    const response = await pool.query('SELECT * FROM region;');
    console.log(response.rows);
-   res.send('regiones');
+   
+   res.status(200).json(response.rows);
 }
 
 module.exports = {
