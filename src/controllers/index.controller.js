@@ -9,6 +9,7 @@ const pool = new Pool({
 });
 
 const getRegiones = async (req, res) => {
+ 
    const response = await pool.query('SELECT * FROM region;');
    console.log(response.rows);
    
@@ -16,6 +17,7 @@ const getRegiones = async (req, res) => {
 };
 
 const createRegion = async (req, res) =>{
+
     const {nombre} = req.body;
    const response = await pool.query('INSERT INTO region(nombre) VALUES ($1)', [nombre]);
    console.log(response);
