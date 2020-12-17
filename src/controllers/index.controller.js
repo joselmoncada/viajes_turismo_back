@@ -13,8 +13,16 @@ const getRegiones = async (req, res) => {
    console.log(response.rows);
    
    res.status(200).json(response.rows);
-}
+};
+
+const createRegion = async (req, res) =>{
+    const {nombre} = req.body;
+   const response = await pool.query('INSERT INTO region(nombre) VALUES ($1)', [nombre]);
+   console.log(response);
+   res.send('region creada con exito!');
+};
 
 module.exports = {
-    getRegiones
+    getRegiones,
+    createRegion
 }
