@@ -1,12 +1,5 @@
-const {Pool} = require('pg');
-
-const pool = new Pool({
-    host:'localhost',
-    user: 'postgres',
-    password: 'postgres',
-    database: 'viajes',
-    port: '5432'
-});
+const DB = require('../../DataBase');
+pool = DB.getPool()
 
 
 const getAgencias = async (req, res) =>{
@@ -28,6 +21,5 @@ const getAreaInteres = async (req, res) =>{
 module.exports = {
     
     getAgencias,
-    getAreaInteres,
-    pool,
+    getAreaInteres
 }

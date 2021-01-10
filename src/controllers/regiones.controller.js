@@ -1,4 +1,5 @@
-const {pool} =  require('../controllers/index.controller');
+const DB = require('../../DataBase');
+pool = DB.getPool()
 
 //EXAMPLES
 const getRegiones = async (req, res) => {

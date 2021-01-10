@@ -1,5 +1,5 @@
-const { pool } = require('../controllers/index.controller');
-
+const DB = require('../../DataBase');
+pool = DB.getPool()
 
 const getPaquetes = async (req, res) => {
 
