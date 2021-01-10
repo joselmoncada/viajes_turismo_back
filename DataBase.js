@@ -7,7 +7,7 @@ const getPool = () => {
     const pool = new Pool({
         host:'localhost',
         user:'postgres',
-        password:'postgres',
+        password:'123456',
         database:'viajes',
         port:'5432'
     });
