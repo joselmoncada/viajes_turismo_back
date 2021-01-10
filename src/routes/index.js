@@ -20,11 +20,16 @@ router.get('/atracciones', getAtracciones);
 
 
 router.get('/paquetes' , getPaquetes);
-router.get('/agencia/' , async function(request, response){
-    console.log('PARAM: '+ request.query.agencia);
-    const res = getAgenciaByName(request.query.agencia);
-    console.log('RESP: '+ res);
-    response.json(res);
+router.get('/agencia/' , async function(request, response, next){
+    try {
+        console.log('PARAM: '+ request.query.agencia);
+        const res = await getAgenciaByName(request.query.agencia);
+        console.log('RESP: '+ res);
+        response.json(res);
+    } catch (error) {
+        return next(error);
+    }
+ 
 } );
 
 router.post('/paquetes', createPaquete);
