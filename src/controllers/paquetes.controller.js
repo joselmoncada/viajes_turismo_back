@@ -44,8 +44,20 @@ const createPaquete = async (req, res, next) => {
     }
 };
 
+const deletePaquete = async(req, res, next) =>{ //no se como logre este pero funciona
+    try {
+        console.log('id paquete: ' + req);
+        console.log(("DELETE id FROM CJV_Paquete as p WHERE p.id  = " + req + ";"));
+        const response = await pool.query("DELETE FROM CJV_Paquete as p WHERE p.id  = " + req + ";");
+        return (response.rows);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getPaquetes,
     createPaquete,
     getAgenciaByName,
+    deletePaquete,
 }
