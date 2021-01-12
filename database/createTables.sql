@@ -47,7 +47,7 @@ create table CJV_atraccion(
 create table CJV_agencia(
 	id numeric(3) not null primary key,
 	nombre varchar(40) not null,
-	descripcion varchar(300) not null,
+	descripcion varchar(1000) not null,
 	pagina_web varchar(256) not null,
 	alcance varchar not null,
 	operacion varchar(10) not null,
