@@ -3,6 +3,7 @@ pool = DB.getPool()
 
 
 const getAgencias = async (req, res) =>{
+    
                                     //no quitar el id de la consulta
     const response = await pool.query('SELECT id, nombre FROM CJV_Agencia');
     console.log('agencias', response.rows);
@@ -23,11 +24,12 @@ const getAsociaciones  = async (req, res) => {
                                         FROM cjv_asociacion AS socio
                                             LEFT JOIN cjv_agencia AS agen1 ON agen1.id = socio.id_agencia1
                                             LEFT JOIN cjv_agencia AS agen2 ON agen2.id = socio.id_agencia2
-                                        ORDER BY fecha_inicio DESC, fecha_fin DESC`);
+                                        ORDER BY fecha_fin DESC,fecha_inicio DESC `);
     res.status(200).json(response.rows);
 }
 
 // Aqui comienza el codigo de las asociaciones
+
 const getAgenciasNoRelacionadasConAgencia = async (req, res) => {
     const id = req.query.id
     console.log('datos: ',id, req.query)

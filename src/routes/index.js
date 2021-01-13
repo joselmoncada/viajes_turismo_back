@@ -6,6 +6,7 @@ const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, create
 const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, } = require('../controllers/regiones.controller');
 const { getPaquetes, createPaquete, getAgenciaByName, deletePaquete } = require('../controllers/paquetes.controller');
 const {getRallies, createRally } = require('../controllers/rallies.controller');
+const {getHistoricoProveedor, getProveedoresNoRelacionadosConAgencia,createAsociacionConProveedor, updateAsocacionConProveedor } = require('../controllers/proveedores.controller');
 //EXAMPLE
 router.get('/regiones', getRegiones);
 router.post('/regiones', createRegion);
@@ -24,12 +25,13 @@ router.get('/asociacion/:id?', getAgenciasNoRelacionadasConAgencia);
 router.post('/asociacion', createAsociacion);
 router.put('/asociacion/:id1?/:id2?/:fecha?', finalizarAsociacion);
 
-
-//asociaciones
-
+//asociaciones-Proveedores
+router.get('/asociacion-proveedores', getHistoricoProveedor);
+router.get('/asociacion-proveedor/:id?', getProveedoresNoRelacionadosConAgencia);
+router.post('/asociacion-proveedor', createAsociacionConProveedor);
+router.put('/asociacion-proveedor/:id_agencia?/:id_proveedor?/:fecha?', updateAsocacionConProveedor);
 
 //PAQUETES
-
 
 router.get('/paquetes', getPaquetes);
 router.get('/agencia/', async function (request, response, next) {
