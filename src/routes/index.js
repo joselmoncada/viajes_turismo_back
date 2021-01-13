@@ -2,7 +2,7 @@ const { Router } = require('express');
 const router = Router();
 
 
-const { getAgencias, getAreaInteres, } = require('../controllers/index.controller');
+const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones } = require('../controllers/index.controller');
 const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, } = require('../controllers/regiones.controller');
 const { getPaquetes, createPaquete, getAgenciaByName, deletePaquete } = require('../controllers/paquetes.controller');
 const {getRallies, createRally } = require('../controllers/rallies.controller');
@@ -16,6 +16,17 @@ router.get('/areas_interes', getAreaInteres);
 router.get('/paises', getPaises);
 router.get('/ciudades', getCiudades);
 router.get('/atracciones', getAtracciones);
+
+//asocaciones
+
+router.get('/asociaciones', getAsociaciones);
+router.get('/asociacion/:id?', getAgenciasNoRelacionadasConAgencia);
+router.post('/asociacion', createAsociacion);
+router.put('/asociacion/:id1?/:id2?/:fecha?', finalizarAsociacion);
+
+
+//asociaciones
+
 
 //PAQUETES
 
