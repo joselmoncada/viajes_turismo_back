@@ -1,5 +1,4 @@
 const DB = require('../../DataBase');
-const { get } = require('../routes');
 pool = DB.getPool()
 
 const getRallies = async (req, res) => {
