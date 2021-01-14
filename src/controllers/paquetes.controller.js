@@ -33,7 +33,7 @@ const createPaquete = async (req, res, next) => {
         console.log('id '+ id_agencia[0].id);
 
 
-        const response = await pool.query('INSERT INTO CJV_Paquete(id_agencia,nombre, descripcion, dias_duracion,max_num_viajeros) VALUES ($1,$2,$3,$4,$5)',
+        const response = await pool.query("INSERT INTO CJV_Paquete(id_agencia,nombre, descripcion, dias_duracion,max_num_viajeros, id) VALUES ($1,$2,$3,$4,$5,NEXTVAL('cjv_s_paquete'))",
             [id_agencia[0].id, nombre, descripcion, dias_duracion, max_num_viajeros]);
 
         console.log(response);
