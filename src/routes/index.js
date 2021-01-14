@@ -4,7 +4,7 @@ const router = Router();
 
 const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones } = require('../controllers/index.controller');
 const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, } = require('../controllers/regiones.controller');
-const { getPaquetes, createPaquete, getAgenciaByName, deletePaquete } = require('../controllers/paquetes.controller');
+const { getPaquetes, createPaquete, getAgenciaByName, deletePaquete, getPaqueteById } = require('../controllers/paquetes.controller');
 const {getRallies, createRally } = require('../controllers/rallies.controller');
 const {getHistoricoProveedor, getProveedoresNoRelacionadosConAgencia,createAsociacionConProveedor, updateAsocacionConProveedor } = require('../controllers/proveedores.controller');
 //EXAMPLE
@@ -34,7 +34,10 @@ router.put('/asociacion-proveedor/:id_agencia?/:id_proveedor?/:fecha?', updateAs
 //PAQUETES
 
 router.get('/paquetes', getPaquetes);
-router.get('/agencia/', async function (request, response, next) {
+
+router.get('/paquetes/:id?', getPaqueteById);
+
+router.get('/agencia/:agencia?', getAgenciaByName); /*{
     try {
         console.log('PARAM: ' + request.query.agencia);
         const res = await getAgenciaByName(request.query.agencia);
@@ -44,11 +47,11 @@ router.get('/agencia/', async function (request, response, next) {
         console.log(error);
     }
 
-});
+});*/
 
 router.post('/paquetes', createPaquete);
 
-router.delete('/paquetes/:id', async function (req, res,next) {
+router.delete('/paquetes/:id', deletePaquete);/* {
     try {
         const paquete = req.params.id;
         console.log('param: '+paquete);
@@ -58,7 +61,7 @@ router.delete('/paquetes/:id', async function (req, res,next) {
     } catch (error) {
         return next(error);
     }
-});
+});*/
 
 //RALLIES
 router.get('/rallies', getRallies);
