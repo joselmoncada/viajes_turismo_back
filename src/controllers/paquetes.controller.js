@@ -11,8 +11,10 @@ const getPaquetes = async (req, res) => {
 
 const getAgenciaByName = async (req, res) => {
     try {
-        console.log('PARAM2: ' + req);
-        const response = await pool.query("SELECT id FROM CJV_Agencia as a WHERE a.nombre = '" + req + "';");
+        console.log('Data: ' + req);
+        console.log('Agencia: ' + req);
+        const agencia = req;
+        const response = await pool.query("SELECT id FROM CJV_Agencia as a WHERE a.nombre = '" + agencia + "';");
         console.log(response.rows);
         return (response.rows);
     } catch (error) {
@@ -33,7 +35,7 @@ const createPaquete = async (req, res, next) => {
         console.log('id '+ id_agencia[0].id);
 
 
-        const response = await pool.query('INSERT INTO CJV_Paquete(id_agencia,nombre, descripcion, dias_duracion,max_num_viajeros) VALUES ($1,$2,$3,$4,$5)',
+        const response = await pool.query("INSERT INTO CJV_Paquete(id_agencia,nombre, descripcion, dias_duracion,max_num_viajeros, id) VALUES ($1,$2,$3,$4,$5,NEXTVAL('cjv_s_paquete'))",
             [id_agencia[0].id, nombre, descripcion, dias_duracion, max_num_viajeros]);
 
         console.log(response);
@@ -46,12 +48,22 @@ const createPaquete = async (req, res, next) => {
 
 const deletePaquete = async(req, res, next) =>{ //no se como logre este pero funciona
     try {
-        console.log('id paquete: ' + req);
-        console.log(("DELETE id FROM CJV_Paquete as p WHERE p.id  = " + req + ";"));
-        const response = await pool.query("DELETE FROM CJV_Paquete as p WHERE p.id  = " + req + ";");
+        console.log('id paquete: ' + req.params.id);
+        console.log(("DELETE id FROM CJV_Paquete as p WHERE p.id  = " + req.params.id + ";"));
+        const response = await pool.query("DELETE FROM CJV_Paquete as p WHERE p.id  = " + req.params.id + ";");
         return (response.rows);
     } catch (error) {
         console.log(error)
+    }
+}
+
+const getPaqueteById = async(req, res) =>{
+    try {
+        const id = req.query.id;
+        const response = await pool.query("SELECT * FROM CJV_PAQUETE where id ="+id);
+        return (response.rows[0].body);
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -59,5 +71,6 @@ module.exports = {
     getPaquetes,
     createPaquete,
     getAgenciaByName,
+    getPaqueteById,
     deletePaquete,
 }
