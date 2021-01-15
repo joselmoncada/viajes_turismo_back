@@ -155,6 +155,18 @@ const createInstrumentoPago = async (req,res,next)=>{
 	}
 }
 
+const addBanco = async(req,res,next) => {
+	try {
+		const nombre = req.body.nombre
+		console.log('add Banco:', nombre)
+		const response = await pool.query(`insert into cjv_banco values (nextval('cjv_s_banco'),$1)`,[nombre])
+		res.status(200).json(response.rows)
+		console.log(response.rows)
+	} catch (e) {
+		return next(e);
+	}
+}
+
 const getBancos = async(req,res,next) => {
 	try {
 		console.log('get bancos')
@@ -222,9 +234,9 @@ module.exports = {
 	finalizarClienteRelacionConAgencia,
 	getRegistroDeCliente,
 	createInstrumentoPago,
+	addBanco,
 	getBancos,
 	getInstrumentosPorCliente,
 	getInstrumentoPago,
 	deleteInstrumentoPago,
-
 }

@@ -2,8 +2,6 @@
 
 -- DROP DATABASE viajes;
 
-
-
 CREATE DATABASE viajes
     WITH 
     OWNER = postgres
@@ -14,7 +12,6 @@ CREATE DATABASE viajes
     CONNECTION LIMIT = -1;
 
 -- SET DateStyle TO European;
-
 create table CJV_Pais(
 	id numeric(3) not null primary key,
 	nombre varchar(30) not null,
@@ -239,7 +236,7 @@ create table CJV_viajero (
 create table CJV_pasaporte( 
 	id_pais numeric(3) not null,
 	id_viajero numeric(9) not null,
-	num_pasaporte numeric(5) not null,
+	num_pasaporte numeric(9) not null,
 	fecha_vencimiento date not null,
 	constraint pk_pasaporte primary key(id_pais, id_viajero),
 	constraint fk_pais foreign key(id_pais) references CJV_pais(id),
@@ -250,7 +247,7 @@ create table CJV_registro_viajero(
 	id_agencia numeric(3) not null,
 	id_viajero numeric(9) not null,
 	fecha_inicio date not null,
-	fecha_vencimiento date,
+	fecha_fin date,
 	constraint pk_registro_viajero primary key(id_agencia, id_viajero,fecha_inicio),
 	constraint fk_agencia foreign key(id_agencia) references CJV_agencia(id),
 	constraint fk_viajero foreign key(id_viajero) references CJV_viajero(documento)
@@ -260,8 +257,8 @@ create table CJV_cliente(
 	id numeric(9) not null primary key,
 	nombre varchar(40) not null,
 	tipo_cliente char not null,
-	num_rif numeric(13) unique,
 	documento numeric(9) unique,
+	num_rif numeric(13) unique,
 	fecha_nacimiento date,
 	segundo_nombre varchar(20),
 	primer_apellido varchar(20),
@@ -325,6 +322,8 @@ create table CJV_instrumento_pago(
 	constraint fk_cliente foreign key (id_cliente) references CJV_cliente (id),
 	constraint fk_banco foreign key (id_banco) references CJV_Banco (id)
 );
+
+
 
 create table CJV_forma_pago(
 	id_contrato numeric(5) not null,

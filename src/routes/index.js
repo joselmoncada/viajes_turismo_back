@@ -17,7 +17,7 @@ const {createViajero, deleteViajero, getViajeros, createPasaporte,
 const {getClientes, getClienteByDOCorRIF, getClienteByID, crearClientePersona,  
     crearClienteJuridico, deleteCliente, registrarClienteAAgencia, 
     finalizarClienteRelacionConAgencia, getRegistroDeCliente, createInstrumentoPago, 
-    getBancos, getInstrumentosPorCliente, getInstrumentoPago, deleteInstrumentoPago
+    addBanco, getBancos, getInstrumentosPorCliente, getInstrumentoPago, deleteInstrumentoPago
     } = require('../controllers/cliente.controller');
 
 
@@ -67,6 +67,7 @@ router.delete('/cliente/:id?',deleteCliente)
     router.post('/registro-cliente',registrarClienteAAgencia)
     router.put('/registro-cliente/:id_agencia?/:id_cliente?/:fecha?',finalizarClienteRelacionConAgencia)
     router.get('/registro-cliente/:id_agencia?/:id_cliente?',getRegistroDeCliente)
+router.post('/banco',addBanco)
 router.get('/bancos',getBancos)
 router.post('/instrumento',createInstrumentoPago)
 router.get('/instrumentos/:id_cliente?',getInstrumentosPorCliente)
