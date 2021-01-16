@@ -53,9 +53,10 @@ router.delete('/viajero/:documento?',deleteViajero)
     router.get('/pasaportes-vigentes/:id_viajero?',getPasaportesDeViajeroVigentes)
     router.post('/pasaporte',createPasaporte)
     router.delete('/pasaporte/:id_viajero?/:id_pais?/:num_pasaporte?',deletePasaporte)
+router.get('/registro-viajero/:id_agencia?/:id_viajero?',getRegistroDeViajero)
 router.post('/registro-viajero',registrarViajeroAAgencia)
 router.put('/registro-viajero/:id_agencia?/:id_viajero?/:fecha?',finalizarViajeroRelacionConAgencia)
-router.get('/registro-viajero/:id_agencia?/:id_viajero?',getRegistroDeViajero)
+
 
 //Clientes
 router.get('/clientes',getClientes)
@@ -69,10 +70,10 @@ router.delete('/cliente/:id?',deleteCliente)
     router.get('/registro-cliente/:id_agencia?/:id_cliente?',getRegistroDeCliente)
 router.post('/banco',addBanco)
 router.get('/bancos',getBancos)
-router.post('/instrumento',createInstrumentoPago)
-router.get('/instrumentos/:id_cliente?',getInstrumentosPorCliente)
-router.get('/instrumento/:id_cliente?/:id?',getInstrumentoPago)
-router.delete('/instrumento/:id_cliente?/:id?',deleteInstrumentoPago)
+    router.get('/instrumentos/:id_cliente?',getInstrumentosPorCliente)
+    router.post('/instrumento',createInstrumentoPago)
+    router.get('/instrumento/:id_cliente?/:id?',getInstrumentoPago)
+    router.delete('/instrumento/:id_cliente?/:id?',deleteInstrumentoPago)
 
 
 

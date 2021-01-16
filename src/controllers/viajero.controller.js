@@ -2,6 +2,28 @@
 const DB = require('../../DataBase');
 pool = DB.getPool()
 
+const getViajeros = async (req,res,next)=>{
+    try{
+        const response = await pool.query(`select * from cjv_viajero`)
+        res.status(200).json(response.rows)
+    } catch (e) {
+        return next(e);
+    }
+}
+
+const getViajero = async (req,res,next)=>{
+    try{  
+        const documento = req.query.documento
+        console.log('get Viajero By Documento: ', documento)
+        const response = await pool.query(`select * from cjv_viajero
+                                        where documento = $1`, 
+                                        [documento])
+    
+        res.status(200).json(response.rows)
+    } catch (e) {
+        return next(e);
+    }
+}
 
 const createViajero = async (req,res,next)=>{
     const {documento, primer_nombre, primer_apellido, fecha_nacimiento, 
@@ -28,28 +50,7 @@ const deleteViajero = async (req,res,next)=>{
     }
 }
 
-const getViajeros = async (req,res,next)=>{
-    try{
-        const response = await pool.query(`select * from cjv_viajero`)
-        res.status(200).json(response.rows)
-    } catch (e) {
-        return next(e);
-    }
-}
 
-const getViajero = async (req,res,next)=>{
-    try{  
-        const documento = req.query.documento
-        console.log('get Viajero By Documento: ', documento)
-        const response = await pool.query(`select * from cjv_viajero
-                                        where documento = $1`, 
-                                        [documento])
-    
-        res.status(200).json(response.rows)
-    } catch (e) {
-        return next(e);
-    }
-}
 
 const createPasaporte = async (req,res,next)=>{
     try{ 
