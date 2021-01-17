@@ -22,7 +22,7 @@ const getClienteByDOCorRIF = async (req,res,next)=>{
 											where documento = $1 or num_rif = $2)`, 
 											[ documento, num_rif])
 		
-		res.status(200).json(response.rows)
+		res.send('mensaje enviado')
     } catch (e) {
         return next(e);
     }
@@ -38,6 +38,22 @@ const getClienteByID = async (req,res,next)=>{
 		console.log('get Cliente By ID:', id )
 		const response = await pool.query(`select * from cjv_cliente where id = $1`, [id])
 		
+		res.status(200).json(response.rows)
+    } catch (e) {
+        return next(e);
+    }
+}
+
+
+const getClientesNoViajeros = async (req,res,next)=>{ 
+	try {
+		
+		const response = await pool.query(`select documento, nombre, segundo_nombre, primer_apellido, segundo_apellido, fecha_nacimiento  
+											from cjv_cliente
+											where documento is not null and documento not in(
+												select documento 
+												from cjv_viajero)`)
+												console.log('clientes no viajeros',response.rows)
 		res.status(200).json(response.rows)
     } catch (e) {
         return next(e);
@@ -123,6 +139,22 @@ const finalizarClienteRelacionConAgencia = async (req,res,next)=>{
 		return next(e);
 	}
 }
+const finalizarViajeroRelacionConAgenciaByIDViajero = async (req,res,next)=>{
+    try{
+        const id_viajero= req.query.id_viajero
+        console.log('finalizar Relacion Con Agencia: ',req.query)
+
+        const response = await pool.query(`update cjv_registro_viajero
+                                        set fecha_fin = CURRENT_DATE
+                                        where fecha_fin is null and id_viajero = $1 `,
+                                        [id_viajero]);
+        console.log(response.rows);
+        res.status(200).json(response.rows);
+    } catch (e) {
+        return next(e);
+    }
+}
+
 
 const getRegistroDeCliente = async (req,res,next)=>{
 	try {
@@ -226,12 +258,14 @@ const deleteInstrumentoPago = async(req,res,next) => {
 module.exports = {
 	getClientes,
 	getClienteByDOCorRIF,
+	getClientesNoViajeros,
 	getClienteByID,
 	crearClientePersona,
 	crearClienteJuridico,
 	deleteCliente,
 	registrarClienteAAgencia,
 	finalizarClienteRelacionConAgencia,
+	finalizarViajeroRelacionConAgenciaByIDViajero,
 	getRegistroDeCliente,
 	createInstrumentoPago,
 	addBanco,

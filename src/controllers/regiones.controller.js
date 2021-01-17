@@ -23,14 +23,12 @@ const getRegiones = async (req, res) => {
 const getCiudades = async(req, res) =>{
 
     const response = await pool.query('SELECT * FROM CJV_Ciudad');
-    console.log(response.rows);
     res.status(200).json(response.rows);
 }
 
 const getPaises = async(req, res) =>{
 
     const response = await pool.query('SELECT * FROM CJV_Pais');
-    console.log(response.rows);
     res.status(200).json(response.rows);
 }
 
@@ -39,7 +37,6 @@ const getPaises = async(req, res) =>{
 const getAtracciones = async(req, res) =>{
 
     const response = await pool.query('SELECT * FROM CJV_Atraccion');
-    console.log(response.rows);
     res.status(200).json(response.rows);
 }
 

@@ -188,7 +188,7 @@ create table CJV_servicio_detalle (
 	descripcion varchar(300) not null,
 	tipo_servicio varchar(20) not null,
 	comida boolean,
-constraint check_servicio check( tipo_servicio in ('hospedaje','alquiler_auto','vuelo','crucero','ferry')),
+	constraint check_servicio check( tipo_servicio in ('hospedaje','alquiler_auto','vuelo','crucero','ferry')),
 	constraint pk_servicio primary key(id_agencia,id_paquete,id),
 	constraint fk_paquete foreign key(id_agencia,id_paquete) references CJV_paquete(id_agencia,id)
 );
@@ -238,7 +238,7 @@ create table CJV_pasaporte(
 	id_viajero numeric(9) not null,
 	num_pasaporte numeric(9) not null,
 	fecha_vencimiento date not null,
-	constraint pk_pasaporte primary key(id_pais, id_viajero),
+	constraint pk_pasaporte primary key(id_pais, id_viajero,num_pasaporte),
 	constraint fk_pais foreign key(id_pais) references CJV_pais(id),
 	constraint fk_viajero foreign key(id_viajero) references CJV_viajero(documento)
 );
