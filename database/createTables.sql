@@ -2,8 +2,6 @@
 
 -- DROP DATABASE viajes;
 
-
-
 CREATE DATABASE viajes
     WITH 
     OWNER = postgres
@@ -14,7 +12,6 @@ CREATE DATABASE viajes
     CONNECTION LIMIT = -1;
 
 -- SET DateStyle TO European;
-
 create table CJV_Pais(
 	id numeric(3) not null primary key,
 	nombre varchar(30) not null,
@@ -191,7 +188,7 @@ create table CJV_servicio_detalle (
 	descripcion varchar(300) not null,
 	tipo_servicio varchar(20) not null,
 	comida boolean,
-constraint check_servicio check( tipo_servicio in ('hospedaje','alquiler_auto','vuelo','crucero','ferry')),
+	constraint check_servicio check( tipo_servicio in ('hospedaje','alquiler_auto','vuelo','crucero','ferry')),
 	constraint pk_servicio primary key(id_agencia,id_paquete,id),
 	constraint fk_paquete foreign key(id_agencia,id_paquete) references CJV_paquete(id_agencia,id)
 );
@@ -238,19 +235,19 @@ create table CJV_viajero (
 
 create table CJV_pasaporte( 
 	id_pais numeric(3) not null,
-	id_viajero numeric(4) not null,
-	num_pasaporte numeric(5) not null,
+	id_viajero numeric(9) not null,
+	num_pasaporte numeric(9) not null,
 	fecha_vencimiento date not null,
-	constraint pk_pasaporte primary key(id_pais, id_viajero),
+	constraint pk_pasaporte primary key(id_pais, id_viajero,num_pasaporte),
 	constraint fk_pais foreign key(id_pais) references CJV_pais(id),
 	constraint fk_viajero foreign key(id_viajero) references CJV_viajero(documento)
 );
 
 create table CJV_registro_viajero( 
 	id_agencia numeric(3) not null,
-	id_viajero numeric(4) not null,
+	id_viajero numeric(9) not null,
 	fecha_inicio date not null,
-	fecha_vencimiento date,
+	fecha_fin date,
 	constraint pk_registro_viajero primary key(id_agencia, id_viajero,fecha_inicio),
 	constraint fk_agencia foreign key(id_agencia) references CJV_agencia(id),
 	constraint fk_viajero foreign key(id_viajero) references CJV_viajero(documento)
@@ -260,7 +257,8 @@ create table CJV_cliente(
 	id numeric(9) not null primary key,
 	nombre varchar(40) not null,
 	tipo_cliente char not null,
-	num_rif numeric(13),
+	documento numeric(9) unique,
+	num_rif numeric(13) unique,
 	fecha_nacimiento date,
 	segundo_nombre varchar(20),
 	primer_apellido varchar(20),
@@ -270,7 +268,7 @@ create table CJV_cliente(
 
 create table CJV_registro_cliente( 
 	id_agencia numeric(3) not null,
-	id_cliente numeric(4) not null,
+	id_cliente numeric(9) not null,
 	fecha_inicio date not null,
 	fecha_fin date,
 	constraint pk_registro primary key(id_agencia,id_cliente,fecha_inicio),
@@ -290,7 +288,7 @@ create table CJV_paquete_contrato(
 	id_paquete numeric(4) not null,
 	id_vendedor numeric(3) not null,
 	id_agencia_cliente numeric(3) not null,
-	id_cliente numeric(4) not null,
+	id_cliente numeric(9) not null,
 	fecha_registro_cliente date not null,
 	constraint fk_paquete foreign key(id_agencia, id_paquete) references CJV_paquete (id_agencia,id),
 	constraint fk_vendedor foreign key(id_vendedor) references CJV_vendedor (id),
@@ -300,7 +298,7 @@ create table CJV_paquete_contrato(
 create table CJV_cont_reg_viajero( 
 	id_contrato numeric(5) not null,
 	id_agencia numeric(3) not null,
-	id_viajero numeric(4) not null,
+	id_viajero numeric(9) not null,
 	fecha_registro date not null,
 	constraint pk_contrato_viajero primary key (id_contrato,id_agencia,id_viajero,fecha_registro),
 	constraint fk_contrato foreign key (id_contrato) references CJV_paquete_contrato (id),
@@ -313,21 +311,23 @@ create table CJV_banco(
 );
 
 create table CJV_instrumento_pago( 
-	id_cliente numeric(4) not null,
+	id_cliente numeric(9) not null,
 	id numeric(6) not null,
 	clasificacion varchar(12) not null,
 	id_banco numeric(4) not null,
 	numero numeric(16), 
-	email_valoracion varchar(40),
+	email varchar(40),
 	constraint tipo_instrumento check(clasificacion in ('t_credito', 't_debito', 'c_bancaria', 'zelle')),
 	constraint pk_instrumento primary key (id_cliente, id),
 	constraint fk_cliente foreign key (id_cliente) references CJV_cliente (id),
 	constraint fk_banco foreign key (id_banco) references CJV_Banco (id)
 );
 
+
+
 create table CJV_forma_pago(
 	id_contrato numeric(5) not null,
-	id_cliente numeric(4) not null,
+	id_cliente numeric(9) not null,
 	id_instrumento numeric(6) not null,
 	tipo char not null,
 	constraint tipo_pago check(tipo in('T','D','C','E')),
@@ -385,10 +385,10 @@ create table CJV_participacion(
 	puesto_final numeric(5),
 	fecha_culminacion date,
 	id_agencia_viajero numeric(3), 
-	id_viajero numeric(4),
+	id_viajero numeric(9),
 	fecha_reg_viajero date, 
 	id_agencia_cliente numeric(3),
-	id_cliente numeric(4), 
+	id_cliente numeric(9), 
 	fecha_reg_cliente date,
 	constraint pk_participacion primary key(id_rally, id),
 	constraint fk_rally foreign key(id_rally) references CJV_rally(id),

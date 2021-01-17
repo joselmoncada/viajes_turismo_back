@@ -28,6 +28,9 @@ CREATE SEQUENCE cjv_s_servicio_detalle
 CREATE SEQUENCE cjv_s_lugar_hotel
 	  start with 1 increment by 1 MAXVALUE 9999;
 
+CREATE SEQUENCE cjv_s_cliente
+      start with 1 increment by 1 MAXVALUE 99999;
+
 CREATE SEQUENCE cjv_s_paquete_contrato
 	  start with 1 increment by 1 MAXVALUE 99999;
 

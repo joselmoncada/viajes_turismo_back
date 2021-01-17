@@ -6,7 +6,23 @@ const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, create
 const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, } = require('../controllers/regiones.controller');
 const { getPaquetes, createPaquete, getAgenciaByName, deletePaquete, getPaqueteById } = require('../controllers/paquetes.controller');
 const {getRallies, createRally } = require('../controllers/rallies.controller');
-const {getHistoricoProveedor, getProveedoresNoRelacionadosConAgencia,createAsociacionConProveedor, updateAsocacionConProveedor } = require('../controllers/proveedores.controller');
+const { getHistoricoProveedor, getProveedoresNoRelacionadosConAgencia,
+        createAsociacionConProveedor, updateAsocacionConProveedor 
+    } = require('../controllers/proveedores.controller');
+const {createViajero, deleteViajero, getViajeros, getViajerosNoClientes, createPasaporte, 
+        getPasaportesDeViajero, getPasaportesDeViajeroVigentes,
+        deletePasaporte, registrarViajeroAAgencia, finalizarViajeroRelacionConAgencia,
+        finalizarViajeroRelacionConAgenciaByIDViajero,
+        getViajero,  getRegistroViajeroVigente, getTodosRegistrosViajero,
+        getAgenciasAsociable,cantidadViajesIncluidoViajero
+    } = require('../controllers/viajero.controller');
+const {getClientes, getClienteByDOCorRIF, getClientesNoViajeros, getClienteByID, crearClientePersona,  
+    crearClienteJuridico, deleteCliente, registrarClienteAAgencia, 
+    finalizarClienteRelacionConAgencia, getRegistroDeCliente, createInstrumentoPago, 
+    addBanco, getBancos, getInstrumentosPorCliente, getInstrumentoPago, deleteInstrumentoPago
+    } = require('../controllers/cliente.controller');
+
+
 //EXAMPLE
 router.get('/regiones', getRegiones);
 router.post('/regiones', createRegion);
@@ -19,7 +35,6 @@ router.get('/ciudades', getCiudades);
 router.get('/atracciones', getAtracciones);
 
 //asocaciones
-
 router.get('/asociaciones', getAsociaciones);
 router.get('/asociacion/:id?', getAgenciasNoRelacionadasConAgencia);
 router.post('/asociacion', createAsociacion);
@@ -30,6 +45,45 @@ router.get('/asociacion-proveedores', getHistoricoProveedor);
 router.get('/asociacion-proveedor/:id?', getProveedoresNoRelacionadosConAgencia);
 router.post('/asociacion-proveedor', createAsociacionConProveedor);
 router.put('/asociacion-proveedor/:id_agencia?/:id_proveedor?/:fecha?', updateAsocacionConProveedor);
+
+//Viajeros    
+router.get('/viajeros/no-clientes',getViajerosNoClientes)
+router.get('/viajeros',getViajeros)
+router.get('/viajero/viajes/:documento?',cantidadViajesIncluidoViajero)
+router.get('/viajero/:documento?',getViajero)
+router.post('/viajero',createViajero);
+router.delete('/viajero/:documento?',deleteViajero)
+    router.get('/pasaportes/:id_viajero?',getPasaportesDeViajero)
+    router.get('/pasaportes-vigentes/:id_viajero?',getPasaportesDeViajeroVigentes)
+    router.post('/pasaporte',createPasaporte)
+    router.delete('/pasaporte/:id_viajero?/:id_pais?/:num_pasaporte?',deletePasaporte)
+router.get('/registro-viajero-vigente/:id_viajero?',getRegistroViajeroVigente)
+router.get('/registro-viajero/agencias-disponibles/:id_viajero?',getAgenciasAsociable)
+router.get('/registro-viajero/:id_viajero?',getTodosRegistrosViajero)
+router.post('/registro-viajero',registrarViajeroAAgencia)
+router.put('/registro-viajero/byid/:id_viajero?',finalizarViajeroRelacionConAgenciaByIDViajero)
+router.put('/registro-viajero/:id_agencia?/:id_viajero?/:fecha?',finalizarViajeroRelacionConAgencia)
+
+
+//Clientes
+router.get('/clientes/no-viajeros',getClientesNoViajeros);
+router.get('/clientes',getClientes);
+router.post('/cliente',getClienteByDOCorRIF);
+router.get('/cliente/:id?',getClienteByID);
+router.post('/cliente/persona',crearClientePersona);
+router.post('/cliente/juridico',crearClienteJuridico);
+router.delete('/cliente/:id?',deleteCliente);
+    router.post('/registro-cliente',registrarClienteAAgencia);
+    router.put('/registro-cliente/:id_agencia?/:id_cliente?/:fecha?',finalizarClienteRelacionConAgencia);
+    router.get('/registro-cliente/:id_agencia?/:id_cliente?',getRegistroDeCliente);
+router.post('/banco',addBanco);
+router.get('/bancos',getBancos);
+    router.get('/instrumentos/:id_cliente?',getInstrumentosPorCliente);
+    router.post('/instrumento',createInstrumentoPago);
+    router.get('/instrumento/:id_cliente?/:id?',getInstrumentoPago);
+    router.delete('/instrumento/:id_cliente?/:id?',deleteInstrumentoPago);
+
+
 
 //PAQUETES
 
