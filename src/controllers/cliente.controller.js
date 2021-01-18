@@ -16,13 +16,14 @@ const getClienteByDOCorRIF = async (req,res,next)=>{
 
 		//se puede elegir en base a cual de las 3 variables buscar informacion (las 3 son unique)
 		//el sql puede aceltar sin problemas no definir alguna de las variables en al consulta en si 
-		const { documento, num_rif } = req.body
+		const documento = req.body.documento
+		const num_rif  = req.body.num_rif
+
 		console.log('get Cliente By ID or DOC or RIF: ', documento, num_rif )
 		const response = await pool.query(`select * from cjv_cliente
-											where documento = $1 or num_rif = $2)`, 
+											where documento = $1 or num_rif = $2`, 
 											[ documento, num_rif])
-		
-		res.send('mensaje enviado')
+		res.status(200).json(response.rows)
     } catch (e) {
         return next(e);
     }
@@ -63,7 +64,7 @@ const getClientesNoViajeros = async (req,res,next)=>{
 const crearClientePersona = async (req,res,next)=>{
 	try {
         const {documento, nombre,fecha_nacimiento,segundo_nombre, primer_apellido, segundo_apellido} = req.body;
-        console.log('crear Cliente Juridico: ', documento,nombre, fecha_nacimiento, segundo_nombre, primer_apellido, segundo_apellido);
+        console.log('crear Cliente Persona: ', documento,nombre, fecha_nacimiento, segundo_nombre, primer_apellido, segundo_apellido);
         const response = await pool.query(`insert into cjv_cliente 
 										(id, nombre, tipo_cliente, 
 										documento, fecha_nacimiento,
@@ -99,12 +100,19 @@ const crearClienteJuridico = async (req,res,next)=>{
 const deleteCliente = async (req,res,next)=>{
 	try {
 		const id = req.query.id
-		const response = pool.query(`delete from cjv_cliente
-									where id = $1 and id not in ( 
-									select id_cliente from cjv_registro_cliente 
-									where id_cliente = $1 and fecha_fin is null);`,
-									[id])
-		res.send('cliente eliminado con exito');
+		console.log('delete Cliente: ',id);
+		const response1 = await pool.query(`select count(id_cliente) as value from cjv_paquete_contrato where id_cliente = $1`,[id])
+		if(response1.rows[0].value){
+			const response2 = await pool.query(`delete from cjv_registro_cliente where id_cliente = $1`,[id])
+			const response3 = await pool.query(`delete from cjv_forma_pago where id_cliente = $1`,[id])
+			const response4 = await pool.query(`delete from cjv_instrumento_pago where id_cliente = $1`,[id])
+			const response5 = await pool.query(`delete from cjv_cliente where id = $1 `,[id])
+            res.status(200)
+            res.send('Se elimino correctamente la informacion');
+        }else{
+            res.status(500)
+            res.send('error no se pudo eliminar el viajero');
+        }
 	} catch (e) {
 		return next(e);
 	}
@@ -112,8 +120,7 @@ const deleteCliente = async (req,res,next)=>{
 
 const registrarClienteAAgencia = async (req,res,next)=>{
 	try {
-		const id_agencia = req.body.id_agencia
-		const id_cliente = req.body.id_cliente
+		const {id_agencia,id_cliente} = req.body
 		console.log('registrar Cliente A Agencia:', id_agencia, id_cliente)
 		const response = pool.query(`insert into cjv_registro_cliente(id_agencia, id_cliente, fecha_inicio)
 									values($1,$2,CURRENT_DATE)`,
@@ -134,20 +141,23 @@ const finalizarClienteRelacionConAgencia = async (req,res,next)=>{
 									set fecha_fin = CURRENT_DATE
 									where id_agencia = $1 and id_cliente = $2 and fecha_inicio = $3`,
 									[id_agencia, id_cliente, fecha])
-		res.send('se finalizo el registro entre cliente y agencia con exito');
+		console.log(response.rows);
+		res.status(200).json(response.rows);
 	} catch (e) {
 		return next(e);
 	}
 }
-const finalizarViajeroRelacionConAgenciaByIDViajero = async (req,res,next)=>{
-    try{
-        const id_viajero= req.query.id_viajero
-        console.log('finalizar Relacion Con Agencia: ',req.query)
 
-        const response = await pool.query(`update cjv_registro_viajero
+
+const finalizarClienteRelacionConAgenciasByIDCliente = async (req,res,next)=>{
+    try{
+        const id_cliente= req.query.id_cliente
+        console.log('finalizar Relacion Con Agencia By ID Cliente: ',req.query)
+
+        const response = await pool.query(`update cjv_registro_cliente
                                         set fecha_fin = CURRENT_DATE
-                                        where fecha_fin is null and id_viajero = $1 `,
-                                        [id_viajero]);
+                                        where fecha_fin is null and id_cliente = $1 `,
+                                        [id_cliente]);
         console.log(response.rows);
         res.status(200).json(response.rows);
     } catch (e) {
@@ -155,19 +165,52 @@ const finalizarViajeroRelacionConAgenciaByIDViajero = async (req,res,next)=>{
     }
 }
 
-
-const getRegistroDeCliente = async (req,res,next)=>{
+const getTodosRegistrosCliente = async (req,res,next)=>{
 	try {
-		const id_agencia = req.query.id_agencia
 		const id_cliente = req.query.id_cliente
-		console.log('get Registro De Cliente:',id_agencia, id_cliente)
+		console.log('get Registro De Cliente:', id_cliente)
+		const response = await pool.query(`select reg.id_agencia, agen.nombre as nombre_agencia, reg.id_cliente, 
+                                            cli.nombre as nombre_cliente, reg.fecha_inicio, fecha_fin 
+                                            from cjv_registro_cliente as reg
+                                            left join cjv_agencia as agen on id_agencia = agen.id
+                                            left join cjv_cliente as cli on id_cliente = cli.id
+                                            WHERE reg.id_cliente = $1`,
+									        [id_cliente])
+		res.status(200).json(response.rows)
+	} catch (e) {
+		return next(e);
+	}
+}
+
+const getClienteAgenciasAsociables = async(req,res,next)=>{
+    try{
+        const id_cliente = req.query.id_cliente
+        console.log('get Cliente Agencias Asociable:',id_cliente)
+        const response = await pool.query(`select id,nombre from cjv_agencia
+                                            where id not in(
+                                                select id_agencia 
+                                                from cjv_registro_cliente
+                                                where fecha_fin is null 
+                                                    and id_cliente= $1)`,
+                                            [id_cliente])
+        console.log(response.rows)
+        res.status(200).json(response.rows)
+    } catch(e){
+        return next(e);
+    }
+}
+
+const getRegistroDeClienteVigente = async (req,res,next)=>{
+	try {
+		const id_cliente = req.query.id_cliente
+		console.log('get Registro De Cliente Vigente:',id_agencia, id_cliente)
 		const response = pool.query(`select reg.id_agencia, agen.nombre as nombre_agencia, reg.id_cliente, 
-									client.nombre as nombre_cliente, reg.fecha_inicio, fecha_fin 
+									cli.nombre as nombre_cliente, cli.primer_apellido, reg.fecha_inicio, fecha_fin 
 									from cjv_registro_cliente as reg
  	 									left join cjv_agencia as agen   on id_agencia = agen.id
  										left join cjv_cliente as client on id_cliente = client.id
-									WHERE fecha_fin is null and reg.id_agencia = $1 and reg.id_cliente = $2`,
-									[id_agencia, id_cliente])
+									WHERE fecha_fin is nulland reg.id_cliente = $1`,
+									[id_cliente])
 		res.status(200).json(response.rows)
 	} catch (e) {
 		return next(e);
@@ -254,6 +297,18 @@ const deleteInstrumentoPago = async(req,res,next) => {
 	}
 }
 
+const cantidadContratosIncluidoCliente = async(req,res,next)=>{
+    try{
+        const id_cliente = req.query.id_cliente
+        console.log('cantidad Contratos Incluido Cliente: ',id_cliente)
+        const response = await pool.query(`select count(id_cliente) cantidad from cjv_paquete_contrato
+                                            where id_cliente = $1`,
+                                            [id_cliente])
+        res.status(200).json(response.rows)
+    } catch(e){
+        return next(e);
+    }
+}
 
 module.exports = {
 	getClientes,
@@ -263,10 +318,15 @@ module.exports = {
 	crearClientePersona,
 	crearClienteJuridico,
 	deleteCliente,
+
 	registrarClienteAAgencia,
 	finalizarClienteRelacionConAgencia,
-	finalizarViajeroRelacionConAgenciaByIDViajero,
-	getRegistroDeCliente,
+	finalizarClienteRelacionConAgenciasByIDCliente,
+	getTodosRegistrosCliente,
+	getRegistroDeClienteVigente,
+	getClienteAgenciasAsociables,
+	cantidadContratosIncluidoCliente,
+
 	createInstrumentoPago,
 	addBanco,
 	getBancos,
