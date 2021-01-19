@@ -257,8 +257,9 @@ const getInstrumentosPorCliente = async(req,res,next) => {
 	try {
 		const id_cliente = req.query.id_cliente
 		console.log('get Instrumentos Por Cliente:',id_cliente)
-		const response = await pool.query(`select id, clasificacion from cjv_instrumento_pago 
-									where id_cliente = $1`,[id_cliente])
+		const response = await pool.query(`select ip.id, ip.clasificacion, ip.numero, ip.email, ip.id_banco, ban.nombre nombre_banco from cjv_instrumento_pago ip
+											left join cjv_banco ban on ban.id = ip.id_banco 
+											where id_cliente = $1`,[id_cliente])
 		res.status(200).json(response.rows)
 	} catch (e) {
 		return next(e);
