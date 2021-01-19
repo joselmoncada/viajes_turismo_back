@@ -61,11 +61,18 @@ const deleteViajero = async (req,res,next)=>{
     try{
         const documento = req.query.documento
         console.log('delete Viajero: ',documento);
-        const response = await pool.query(`delete from cjv_viajero 
-                                        where documento = $1 and documento not in (
-                                        select id_viajero from cjv_registro_viajero where id_viajero = $1
-                                        )`,[documento])
-        res.send('viajero creado con exito!');
+        const response1 = await pool.query(`select count(id_viajero) as value from cjv_cont_reg_viajero where id_viajero = $1`,[documento])
+        if(response1.rows[0].value){
+            const response2 = await pool.query(`delete from cjv_registro_viajero where id_viajero = $1`,[documento])
+            const response3 = await pool.query(`delete from cjv_pasaporte where id_viajero = $1`,[documento])
+            const response4 = await pool.query(`delete from cjv_viajero where documento = $1`,[documento])
+            res.status(200)
+            res.send('Se elimino correctamente la informacion');
+        }else{
+            res.status(500)
+            res.send('error no se pudo eliminar el viajero');
+        }
+   
     } catch (e) {
         return next(e);
     }
@@ -131,9 +138,10 @@ const deletePasaporte = async (req,res,next)=>{
 const registrarViajeroAAgencia = async (req,res,next)=>{
     try{
         const {id_agencia,id_viajero} = req.body
+        console.log('registrar Cliente A Agencia:', id_agencia, id_viajero)
         const response = await pool.query(`insert into cjv_registro_viajero (id_agencia, id_viajero, fecha_inicio)
                                         values($1, $2, CURRENT_DATE)`,[id_agencia, id_viajero])
-        console.log('registrar Viajero A Agencia: ',response);
+
         res.send('viajero creado con exito!');
     } catch (e) {
         return next(e);
@@ -158,7 +166,7 @@ const finalizarViajeroRelacionConAgencia = async (req,res,next)=>{
     }
 }
 
-const finalizarViajeroRelacionConAgenciaByIDViajero = async (req,res,next)=>{
+const finalizarViajeroRelacionConAgenciasByIDViajero = async (req,res,next)=>{
     try{
         const id_viajero= req.query.id_viajero
         console.log('finalizar Relacion Con Agencia By ID Viajero: ',req.query)
@@ -177,9 +185,9 @@ const finalizarViajeroRelacionConAgenciaByIDViajero = async (req,res,next)=>{
 const getRegistroViajeroVigente = async (req,res,next)=>{
 	try {
 		const id_viajero = req.query.id_viajero
-		console.log('get Registro De Cliente:', id_viajero)
+		console.log('get Registro De Viajero Vigente:', id_viajero)
 		const response = await pool.query(`select reg.id_agencia, agen.nombre as nombre_agencia, reg.id_viajero, 
-									viaj.primer_nombre as nombre_viajero, reg.fecha_inicio, fecha_fin 
+									viaj.primer_nombre as nombre_viajero, viaj.primer_apellido, reg.fecha_inicio, fecha_fin 
 									from cjv_registro_viajero as reg
  	 									left join cjv_agencia as agen on id_agencia = agen.id
  										left join cjv_viajero as viaj on id_viajero = viaj.documento
@@ -208,10 +216,10 @@ const getTodosRegistrosViajero = async (req,res,next)=>{
 	}
 }
 
-const getAgenciasAsociable = async(req,res,next)=>{
+const getViajeroAgenciasAsociables = async(req,res,next)=>{
     try{
         const id_viajero = req.query.id_viajero
-        console.log('get Agencias Asociable:',id_viajero)
+        console.log('get Viajero Agencias Asociable:',id_viajero)
         const response = await pool.query(`select id,nombre from cjv_agencia
                                             where id not in(
                                                 select id_agencia 
@@ -229,7 +237,7 @@ const getAgenciasAsociable = async(req,res,next)=>{
 const cantidadViajesIncluidoViajero = async(req,res,next)=>{
     try{
         const id_viajero = req.query.id_viajero
-        console.log('get Agencias Asociable:',id_viajero)
+        console.log('cantidad Viajes Incluido Viajero:',id_viajero)
         const response = await pool.query(`select count(id_viajero) cantidad from cjv_cont_reg_viajero
                                             where id_viajero = $1`,
                                             [id_viajero])
@@ -249,11 +257,12 @@ module.exports = {
     getPasaportesDeViajero,
     getPasaportesDeViajeroVigentes,
     deletePasaporte,
+
     registrarViajeroAAgencia,
     finalizarViajeroRelacionConAgencia,
-    finalizarViajeroRelacionConAgenciaByIDViajero,
+    finalizarViajeroRelacionConAgenciasByIDViajero,
     getRegistroViajeroVigente,
     getTodosRegistrosViajero,
-    getAgenciasAsociable,
+    getViajeroAgenciasAsociables,
     cantidadViajesIncluidoViajero
 }
