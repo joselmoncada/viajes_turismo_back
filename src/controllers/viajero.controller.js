@@ -16,7 +16,7 @@ const getViajero = async (req,res,next)=>{
         const documento = req.query.documento
         console.log('get Viajero By Documento: ', documento)
         const response = await pool.query(` SELECT documento, primer_nombre, primer_apellido, fecha_nacimiento, 
-                                            genero, pais.nacionalidad, segundo_nombre, segundo_apellido, 
+                                            genero,id_pais, pais.nacionalidad, segundo_nombre, segundo_apellido, 
                                             COALESCE( reg.total, 0 ) num_viajes 
                                             FROM cjv_viajero
                                             left join(

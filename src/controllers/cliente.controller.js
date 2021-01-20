@@ -273,14 +273,13 @@ const getInstrumentosPorCliente = async(req,res,next) => {
 		const response = await pool.query(`	select id_cliente, ins.id, clasificacion, 
 												id_banco, ban.nombre nombre_banco, numero, email, 
 												COALESCE(fp.total , 0 ) num_contratos 
-											from cjv_instrumento_pago ins
+											from (select * from cjv_banco) ban ,cjv_instrumento_pago ins
 											left join(
 													select count(*) as total,id_instrumento 
 													from cjv_forma_pago 
 													group by id_instrumento) fp 
 												on ins.id = fp.id_instrumento
-											left join cjv_banco ban on ban.id = id_banco  
-											where id_cliente = $1`,[id_cliente])
+											where ban.id = id_banco and id_cliente = $1`,[id_cliente])
 		res.status(200).json(response.rows)
 	} catch (e) {
 		return next(e);
