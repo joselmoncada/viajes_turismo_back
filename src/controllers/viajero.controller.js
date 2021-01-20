@@ -15,10 +15,17 @@ const getViajero = async (req,res,next)=>{
     try{  
         const documento = req.query.documento
         console.log('get Viajero By Documento: ', documento)
-        const response = await pool.query(`select via.documento, via.primer_nombre, via.primer_apellido, via.fecha_nacimiento,
-                                            via.genero, via.id_pais, pais.nacionalidad, via.segundo_nombre, via.segundo_apellido from cjv_viajero via
-                                            left join cjv_pais pais on pais.id = via.id_pais
-                                            where via.documento = $1`, 
+        const response = await pool.query(` SELECT documento, primer_nombre, primer_apellido, fecha_nacimiento, 
+                                            genero, pais.nacionalidad, segundo_nombre, segundo_apellido, 
+                                            COALESCE( reg.total, 0 ) num_viajes 
+                                            FROM cjv_viajero
+                                            left join(
+                                                    select count(*) as total, id_viajero 
+                                                    from cjv_cont_reg_viajero 
+                                                    group by id_viajero) reg
+                                                on reg.id_viajero = documento
+                                            left join cjv_pais pais on id_pais = pais.id
+                                            where documento = $1`, 
                                         [documento])
         console.log(response.rows)
         res.status(200).json(response.rows)
@@ -61,18 +68,12 @@ const deleteViajero = async (req,res,next)=>{
     try{
         const documento = req.query.documento
         console.log('delete Viajero: ',documento);
-        const response1 = await pool.query(`select count(id_viajero) as value from cjv_cont_reg_viajero where id_viajero = $1`,[documento])
-        if(response1.rows[0].value){
             const response2 = await pool.query(`delete from cjv_registro_viajero where id_viajero = $1`,[documento])
             const response3 = await pool.query(`delete from cjv_pasaporte where id_viajero = $1`,[documento])
             const response4 = await pool.query(`delete from cjv_viajero where documento = $1`,[documento])
             res.status(200)
             res.send('Se elimino correctamente la informacion');
-        }else{
-            res.status(500)
-            res.send('error no se pudo eliminar el viajero');
-        }
-   
+            
     } catch (e) {
         return next(e);
     }
@@ -234,6 +235,7 @@ const getViajeroAgenciasAsociables = async(req,res,next)=>{
     }
 }
 
+//deprecate, ya se puede obtener este valor directamente en la consulta del viajero
 const cantidadViajesIncluidoViajero = async(req,res,next)=>{
     try{
         const id_viajero = req.query.id_viajero
