@@ -20,7 +20,16 @@ const getClienteByDOCorRIF = async (req,res,next)=>{
 		const num_rif  = req.body.num_rif
 
 		console.log('get Cliente By ID or DOC or RIF: ', documento, num_rif )
-		const response = await pool.query(`select * from cjv_cliente
+		const response = await pool.query(`	select id, nombre,documento,tipo_cliente, num_rif,
+												fecha_nacimiento, 
+												segundo_nombre,primer_apellido, segundo_apellido, 
+												COALESCE(cp.total, 0) num_contratos 
+											from cjv_cliente
+											left join( 
+													select count(*) total, id_cliente 
+													from cjv_paquete_contrato 
+													group by id_cliente) cp
+												on cp.id_cliente = id
 											where documento = $1 or num_rif = $2`, 
 											[ documento, num_rif])
 		res.status(200).json(response.rows)
@@ -37,7 +46,17 @@ const getClienteByID = async (req,res,next)=>{
 		//el sql puede aceltar sin problemas no definir alguna de las variables en al consulta en si 
 		const id = req.query.id
 		console.log('get Cliente By ID:', id )
-		const response = await pool.query(`select * from cjv_cliente where id = $1`, [id])
+		const response = await pool.query(`select id, nombre,documento,tipo_cliente, num_rif,
+												fecha_nacimiento, 
+												segundo_nombre,primer_apellido, segundo_apellido, 
+												COALESCE(cp.total, 0) num_contratos 
+											from cjv_cliente
+											left join( 
+													select count(*) total, id_cliente 
+													from cjv_paquete_contrato 
+													group by id_cliente) cp
+												on cp.id_cliente = id
+											where  id = $1`, [id])
 		
 		res.status(200).json(response.rows)
     } catch (e) {
@@ -101,18 +120,12 @@ const deleteCliente = async (req,res,next)=>{
 	try {
 		const id = req.query.id
 		console.log('delete Cliente: ',id);
-		const response1 = await pool.query(`select count(id_cliente) as value from cjv_paquete_contrato where id_cliente = $1`,[id])
-		if(response1.rows[0].value){
-			const response2 = await pool.query(`delete from cjv_registro_cliente where id_cliente = $1`,[id])
-			const response3 = await pool.query(`delete from cjv_forma_pago where id_cliente = $1`,[id])
-			const response4 = await pool.query(`delete from cjv_instrumento_pago where id_cliente = $1`,[id])
-			const response5 = await pool.query(`delete from cjv_cliente where id = $1 `,[id])
-            res.status(200)
-            res.send('Se elimino correctamente la informacion');
-        }else{
-            res.status(500)
-            res.send('error no se pudo eliminar el viajero');
-        }
+		const response2 = await pool.query(`delete from cjv_registro_cliente where id_cliente = $1`,[id])
+		const response3 = await pool.query(`delete from cjv_forma_pago where id_cliente = $1`,[id])
+		const response4 = await pool.query(`delete from cjv_instrumento_pago where id_cliente = $1`,[id])
+		const response5 = await pool.query(`delete from cjv_cliente where id = $1 `,[id])
+        res.status(200)
+        res.send('Se elimino correctamente la informacion');
 	} catch (e) {
 		return next(e);
 	}
@@ -257,8 +270,16 @@ const getInstrumentosPorCliente = async(req,res,next) => {
 	try {
 		const id_cliente = req.query.id_cliente
 		console.log('get Instrumentos Por Cliente:',id_cliente)
-		const response = await pool.query(`select ip.id, ip.clasificacion, ip.numero, ip.email, ip.id_banco, ban.nombre nombre_banco from cjv_instrumento_pago ip
-											left join cjv_banco ban on ban.id = ip.id_banco 
+		const response = await pool.query(`	select id_cliente, ins.id, clasificacion, 
+												id_banco, ban.nombre nombre_banco, numero, email, 
+												COALESCE(fp.total , 0 ) num_contratos 
+											from cjv_instrumento_pago ins
+											left join(
+													select count(*) as total,id_instrumento 
+													from cjv_forma_pago 
+													group by id_instrumento) fp 
+												on ins.id = fp.id_instrumento
+											left join cjv_banco ban on ban.id = id_banco  
 											where id_cliente = $1`,[id_cliente])
 		res.status(200).json(response.rows)
 	} catch (e) {
@@ -287,10 +308,7 @@ const deleteInstrumentoPago = async(req,res,next) => {
 		const id_cliente = req.query.id_cliente
 		const id = req.query.id
 		const response = await pool.query(`delete from cjv_instrumento_pago
-									where id_cliente = $1 
-										and id = $2 and id not in (
-										select id_instrumento from cjv_forma_pago
-										)
+											where id_cliente = $1 and id = $2 
 									`,[id_cliente,id])
 		res.status(200).json(response.rows)
 	} catch (e) {
