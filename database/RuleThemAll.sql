@@ -846,8 +846,16 @@ insert into cjv_banco values(nextval('cjv_s_banco'),'Kiwibank');
 
 -----PROVEEDORES
 
-insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Royal Caribbean International');
 insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'American Airlines');
+insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Air New Zealand');
+insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Virgin Atlantic');
+insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Melia Hotels International');
+insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'NH Hotel Group');
+insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Marriot International');
+insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Hilton WorldWide Holdings');
+insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Air France');
+insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Iberia');
+insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Royal Caribbean International');
 insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Kayak');
 insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Kawagoe Prince Hotel');
 insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'TAP Air Portugal');
