@@ -799,7 +799,6 @@ INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (9,'Turismo familiar'
 
 ------AGENCIAS
 
-
 INSERT INTO CJV_Agencia(id,nombre,descripcion,pagina_web,alcance,operacion) VALUES (nextval('cjv_s_agencia'),'mexicotours','Nuestro equipo está conformado por personas de diferentes naciones como México, Argentina, Austria, Alemania, y los Estados Unidos, juntando más de 60 años de experiencia.
 Sabemos que el éxito de una empresa va más allá de las expectativas económicas. Por eso adoptamos una visión integral donde trabajamos con diferentes personas, e instituciones en el mundo para implementar prácticas que aporten al bienestar económico, social y ambiental de nuestros colaboradores y su entorno.','https://mexicotours.com.mx/','I','minorista');
 INSERT INTO CJV_Agencia(id,nombre,descripcion,pagina_web,alcance,operacion) VALUES (nextval('cjv_s_agencia'),'BuscoUnViaje','Hemos reunido las mejores agencias en una sola plataforma para ofrecerte más de 2.000 viajes a más de 600 destinos de todo el mundo: experiencia viajera e innovación tecnológica para que llegues donde ni te imaginas, pero siempre con garantía de calidad, con autenticidad y sin tener que organizar por ti mismo aquello que parece imposible. Nosotros lo hacemos posible sin gastos extras ni comisiones porque queremos que aproveches tu tiempo disfrutando de la emoción del viaje y, por ello, nos esforzamos para que encontrar ese viaje que te encaja sea fácil y rápido.','www.buscounviaje.com','I','mayorista');
@@ -814,6 +813,23 @@ Como empresa responsable , siempre nos hemos comprometido a estar allí para nue
 INSERT INTO CJV_Agencia(id,nombre,descripcion,pagina_web,alcance,operacion) VALUES (nextval('cjv_s_agencia'),'all Japan Tours','All Japan Tours ofrece posibilidades ilimitadas de vacaciones para explorar y experimentar un viaje inolvidable a Japón. Ya sea que esté interesado en excursiones de cerezo japonés , visitas del festival , hojas de otoño excursiones o viajes de interés especial , nuestros paquetes turísticos Japón traerán sus sueños de vacaciones a la realidad.
 Elija recorridos según el estilo , el interés , la fecha o la temporada . Nuestros paquetes turísticos para grupos en Japón están completamente acompañados, y también podemos organizar recorridos privados de interés especial , recorridos grupales personalizadosy otros recorridos por países de Asia para satisfacer sus necesidades específicas.','https://alljapantours.com/','N','minorista');
 INSERT INTO CJV_Agencia(id,nombre,descripcion,pagina_web,alcance,operacion) VALUES (nextval('cjv_s_agencia'),'expedia','Expedia Group impulsa los viajes a una audiencia global altamente valiosa de consumidores de viajes, colaborando con las principales marcas de consumo del mundo para proporcionar una demanda incremental y reservas directas. Los agentes de viajes tienen acceso directo a una de las selecciones más amplias de productos y servicios de viajes en la plataforma de viajes del mundo.','https://www.expedia.mx/','I','mayorista');
+
+
+----ASOCIACIONES
+
+INSERT INTO cjv_asociacion (id_agencia1, id_agencia2, fecha_inicio, fecha_fin) VALUES 
+(4, 8, '7/7/2011', '24/9/2014'),
+(7, 3, '1/4/2013', '6/10/2019'),
+(9, 2, '19/12/2014', '21/5/2017'),
+(9, 5, '8/11/2015', null),
+(4, 3, '10/1/2017', null),
+(4, 2, '25/8/2018', null),
+(1, 2, '15/9/2019', null),
+(1, 5, '3/1/2020', null),
+(6, 8, '19/8/2020', null),
+(1, 4, '10/6/2019', null),
+(8, 2, '21/11/2018', null),
+(4, 9, '14/3/2017', null);
 
 
 ----BANCOS
