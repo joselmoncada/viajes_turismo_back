@@ -855,3 +855,26 @@ insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Trivago');
 insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Airbnb');
 insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'GetYourCar');
 insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Cruceros Quovadis');
+
+
+----AGEN_INT
+
+insert into cjv_agen_int values
+(1,	1),
+(2,	2),
+(3,	3),
+(4,	7),
+(5,	3),
+(6,	4),
+(7,	1),
+(8,	2),
+(9,	6),
+(1,	3),
+(2,	6),
+(3,	6),
+(4,	9),
+(5,	8),
+(6,	5),
+(7,	3),
+(8,	3),
+(9,	8);
