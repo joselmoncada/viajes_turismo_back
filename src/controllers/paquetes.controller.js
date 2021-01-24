@@ -9,20 +9,9 @@ const getPaquetes = async (req, res) => {
     res.status(200).json(response.rows);
 };
 
-const getAgenciaByName = async (req, res) => {
-    try {
-        console.log('Data: ' + req);
-        console.log('Agencia: ' + req);
-        const agencia = req;
-        const response = await pool.query("SELECT id FROM CJV_Agencia as a WHERE a.nombre = '" + agencia + "';");
-        console.log(response.rows);
-        return (response.rows);
-    } catch (error) {
-        console.log(error)
-    }
+const { getAgenciaByName } = require('../controllers/index.controller');
+const { getClienteByID, finalizarClienteRelacionConAgenciasByIDCliente, registrarClienteAAgencia } = require('./cliente.controller');
 
-    //res.status(404).json({"error":"No se encuentra en BD"});
-};
 
 
 const createPaquete = async (req, res, next) => {
@@ -67,10 +56,71 @@ const getPaqueteById = async(req, res) =>{
     }
 }
 
+
+const getPrecioPaquete = async(req, res) =>{
+    try {
+        const agencia = req.query.id_agencia;
+        const paquete = req.query.id_paquete;
+        
+        var currentDate = new Date().toLocaleString().slice(0,10);
+        const response = await pool.query(`SELECT * FROM CJV_HISTORICO_PRECIO
+         WHERE id_agencia=$1 and id_paquete=$2 and fecha_fin=null;`, [agencia, paquete]);
+         return res.status(200).json(response.rows);
+
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const postPaqueteContrato = async (req, res)=>{
+
+    try {
+
+        const paquete = getPaqueteById(id_paquete);
+        const total_neto = getPrecioPaquete(id_paquete, id_agencia);
+        id_paquete_agencia = paquete.id_agencia;
+        const registro_cliente = getRegistroClienteById(id_cliente); //cjv_registro_cliente
+        if(registro_cliente.id_agencia != id_paquete_agencia){
+            finalizarClienteRelacionConAgenciasByIDCliente(id_cliente);
+        }
+        registrarClienteAAgencia(id_paquete_agencia, id_cliente);
+        const fecha_registro_cliente = registro_cliente.fecha_inicio;
+        //SI EL CLIENTE ESTA ASOCIADO A UNA AGENCIA SE DEBE ELIMINAR DICHA ASOCIACION
+
+        /*const id_agencia_cliente = cliente.id_agencia;
+        const fecha_registro_cliente = cliente.fecha_inicio;*/
+        
+        /** 
+         *  total_neto,  // costo + descuento si lo hay
+            fecha_creacion, //current date
+            fecha_aprobacion, //null
+            fecha_viaje, ****
+            num_factura, //null
+            email_valoracion,
+            id_agencia, // select * from paquete where id=idpaquete
+            id_paquete,*********
+            id_vendedor, //asesor
+            id_agencia_cliente, //getClienteByID
+            id_cliente,
+            fecha_registro_cliente */
+        
+        const {fecha_viaje, email_valoracion,id_paquete,id_vendedor,id_cliente, } = req.body;
+
+                  const response = await pool.query(`INSERT INTO CJV_PAQUETE_CONTRATO
+                  (id,total_neto, fecha_creacion, fecha_aprobacion, fecha_viaje, num_factura, email_valoracion,id_agencia, id_paquete, id_vendedor, id_agencia_cliente, id_cliente, fecha_registro_cliente)
+                   VALUES (nextval('cjv_s_paquete_contrato'),$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,`);
+    } catch (error) {
+        
+    }
+}
+
 module.exports = {
     getPaquetes,
     createPaquete,
     getAgenciaByName,
     getPaqueteById,
     deletePaquete,
+    getPrecioPaquete,
+
 }

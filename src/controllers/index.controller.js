@@ -10,6 +10,22 @@ const getAgencias = async (req, res) =>{
     res.status(200).json(response.rows);
 }
 
+const getAgenciaByName = async (req, res) => {
+    try {
+        console.log('Data: ' + req);
+        console.log('Agencia: ' + req);
+        const agencia = req;
+        const response = await pool.query("SELECT id FROM CJV_Agencia as a WHERE a.nombre = '" + agencia + "';");
+        console.log(response.rows);
+        return (response.rows);
+    } catch (error) {
+        console.log(error)
+    }
+
+    //res.status(404).json({"error":"No se encuentra en BD"});
+};
+
+
 const getAreaInteres = async (req, res) => {
     const response = await pool.query('SELECT nombre FROM CJV_Area_Interes');
     console.log(response.rows);
@@ -76,5 +92,6 @@ module.exports = {
     getAgenciasNoRelacionadasConAgencia,
     createAsociacion,
     finalizarAsociacion,
-    getAsociaciones
+    getAsociaciones,
+    getAgenciaByName,
 }
