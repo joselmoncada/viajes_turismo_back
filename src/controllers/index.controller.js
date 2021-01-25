@@ -6,7 +6,6 @@ const getAgencias = async (req, res) =>{
     
                                     //no quitar el id de la consulta
     const response = await pool.query('SELECT id, nombre FROM CJV_Agencia');
-    console.log('agencias', response.rows);
     res.status(200).json(response.rows);
 }
 

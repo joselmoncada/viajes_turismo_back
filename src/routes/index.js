@@ -4,7 +4,17 @@ const router = Router();
 
 const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones } = require('../controllers/index.controller');
 const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, } = require('../controllers/regiones.controller');
-const { getPaquetes, createPaquete, getAgenciaByName, deletePaquete, getPaqueteById } = require('../controllers/paquetes.controller');
+
+const { getPaquetes, createPaquete, getAgenciaByName, 
+    deletePaquete, getPaqueteById,getPaqueteByPk,
+    createPrecio, updatePrecio, getPrecioByPk,  
+    getHistoricoPreciosByPk, getPaquetesDisponibles,
+    getCalendarioDisponible, getHistoricoCalendario, 
+    createDateCalendario, getLugaresHoteltes,
+    getServiciosPaquete, createServicioPaquete,
+    deleteServicio,
+    } = require('../controllers/paquetes.controller');
+
 const {getRallies, createRally } = require('../controllers/rallies.controller');
 const { getHistoricoProveedor, getProveedoresNoRelacionadosConAgencia,
         createAsociacionConProveedor, updateAsocacionConProveedor 
@@ -93,35 +103,31 @@ router.get('/bancos',getBancos);
 
 //PAQUETES
 
+
 router.get('/paquetes', getPaquetes);
-
 router.get('/paquetes/:id?', getPaqueteById);
+router.get('/paquete/:id_agencia?/:id?', getPaqueteByPk);
+router.get('/paquetes-diponibles', getPaquetesDisponibles) // te da todos los paquetes disponibles,. no tiene filtro de agencia u otros
+router.post('/paquete', createPaquete);
+router.delete('/paquete',deletePaquete)
 
-router.get('/agencia/:agencia?', getAgenciaByName); /*{
-    try {
-        console.log('PARAM: ' + request.query.agencia);
-        const res = await getAgenciaByName(request.query.agencia);
-        console.log('RESP: ' + res);
-        response.json(res);
-    } catch (error) {
-        console.log(error);
-    }
+router.post('/paquete/precio',createPrecio)
+router.put('/paquete/precio', updatePrecio)
+router.post('/paquete/get-precio',getPrecioByPk)
+router.post('/paquete/get-historico-precios',getHistoricoPreciosByPk)
 
-});*/
+router.post('/paquete/get-calendario', getCalendarioDisponible)
+router.post('/paquete/get-historico-calendario', getHistoricoCalendario)
+router.post('/paquete/fecha', createDateCalendario)
 
-router.post('/paquetes', createPaquete);
+router.post('/paquete/get-servicios',getServiciosPaquete)
+router.post('/paquete/create-servicio',createServicioPaquete)
+router.delete('/paquete/servicio',deleteServicio)
+router.post('/paquete/get-hoteles',getLugaresHoteltes)
 
-router.delete('/paquetes/:id', deletePaquete);/* {
-    try {
-        const paquete = req.params.id;
-        console.log('param: '+paquete);
-        const response = await deletePaquete(paquete);
-        //console.log(response);
-        res.json(response);
-    } catch (error) {
-        return next(error);
-    }
-});*/
+
+router.get('/agencia/:agencia?', getAgenciaByName); 
+
 
 //RALLIES
 router.get('/rallies', getRallies);
