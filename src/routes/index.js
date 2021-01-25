@@ -2,9 +2,9 @@ const { Router } = require('express');
 const router = Router();
 
 
-const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones } = require('../controllers/index.controller');
+const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones, getVendedoresFromAgencia } = require('../controllers/index.controller');
 const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, } = require('../controllers/regiones.controller');
-const { getPaquetes, createPaquete, getAgenciaByName, deletePaquete, getPaqueteById, getPrecioPaquete } = require('../controllers/paquetes.controller');
+const { getPaquetes, createPaquete, getAgenciaByName, deletePaquete, getPaqueteById, getPrecioPaquete ,createPaqueteContrato} = require('../controllers/paquetes.controller');
 const {getRallies, createRally } = require('../controllers/rallies.controller');
 const { getHistoricoProveedor, getProveedoresNoRelacionadosConAgencia,
         createAsociacionConProveedor, updateAsocacionConProveedor 
@@ -32,6 +32,8 @@ const {getClientes, getClienteByDOCorRIF, getClientesNoViajeros, getClienteByID,
 router.get('/agencias', getAgencias);
 router.get('/agencia/:agencia?', getAgenciaByName); 
 
+///VENDEDORES - ASESORES
+router.get('/agencia-vendedores/:id_agencia?', getVendedoresFromAgencia);
 
 //PAISES, CIUDADES, ATRACCIONES,INTERESES
 router.get('/areas_interes', getAreaInteres);
@@ -101,12 +103,13 @@ router.get('/paquetes', getPaquetes);
 
 router.get('/paquetes/:id?', getPaqueteById);
 
-
 router.post('/paquetes', createPaquete);
 
 router.delete('/paquetes/:id', deletePaquete);
 
-router.get('/paquete-costo/:id_agencia?/:id_paquete?', getPrecioPaquete)
+router.get('/paquete-costo/:id_agencia?/:id_paquete?', getPrecioPaquete);
+
+router.post('/paquete-contrato',createPaqueteContrato);
 
 //RALLIES
 router.get('/rallies', getRallies);

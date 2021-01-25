@@ -73,43 +73,29 @@ const getPrecioPaquete = async(req, res) =>{
     }
 }
 
-const postPaqueteContrato = async (req, res)=>{
+const createPaqueteContrato = async (req, res)=>{
 
     try {
 
         const paquete = getPaqueteById(id_paquete);
         const total_neto = getPrecioPaquete(id_paquete, id_agencia);
-        id_paquete_agencia = paquete.id_agencia;
+        const id_paquete_agencia = paquete.id_agencia;
         const registro_cliente = getRegistroClienteById(id_cliente); //cjv_registro_cliente
+        //SI EL CLIENTE ESTA ASOCIADO A UNA AGENCIA SE DEBE ELIMINAR DICHA ASOCIACION
         if(registro_cliente.id_agencia != id_paquete_agencia){
             finalizarClienteRelacionConAgenciasByIDCliente(id_cliente);
         }
         registrarClienteAAgencia(id_paquete_agencia, id_cliente);
         const fecha_registro_cliente = registro_cliente.fecha_inicio;
-        //SI EL CLIENTE ESTA ASOCIADO A UNA AGENCIA SE DEBE ELIMINAR DICHA ASOCIACION
-
-        /*const id_agencia_cliente = cliente.id_agencia;
-        const fecha_registro_cliente = cliente.fecha_inicio;*/
         
-        /** 
-         *  total_neto,  // costo + descuento si lo hay
-            fecha_creacion, //current date
-            fecha_aprobacion, //null
-            fecha_viaje, ****
-            num_factura, //null
-            email_valoracion,
-            id_agencia, // select * from paquete where id=idpaquete
-            id_paquete,*********
-            id_vendedor, //asesor
-            id_agencia_cliente, //getClienteByID
-            id_cliente,
-            fecha_registro_cliente */
         
-        const {fecha_viaje, email_valoracion,id_paquete,id_vendedor,id_cliente, } = req.body;
+        
+        const {fecha_viaje, email_valoracion,id_paquete,id_vendedor,id_cliente} = req.body;
 
                   const response = await pool.query(`INSERT INTO CJV_PAQUETE_CONTRATO
                   (id,total_neto, fecha_creacion, fecha_aprobacion, fecha_viaje, num_factura, email_valoracion,id_agencia, id_paquete, id_vendedor, id_agencia_cliente, id_cliente, fecha_registro_cliente)
-                   VALUES (nextval('cjv_s_paquete_contrato'),$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,`);
+                   VALUES (nextval('cjv_s_paquete_contrato'),$1,CURRENT_DATE,CURRENT_DATE,$2,nextval('cjv_s_num_factura'), $3, $4,$4, $5,$6,$7,$8,$9 );`,
+                   [total_neto,fecha_viaje,email_valoracion,id_paquete_agencia,paquete,id_vendedor, registro_cliente.id_agencia, id_cliente,  fecha_registro_cliente ]);
     } catch (error) {
         
     }
@@ -122,5 +108,6 @@ module.exports = {
     getPaqueteById,
     deletePaquete,
     getPrecioPaquete,
+    createPaqueteContrato,
 
 }
