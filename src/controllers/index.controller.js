@@ -8,7 +8,7 @@ const getAgencias = async (req, res) =>{
         const response = await pool.query('SELECT id, nombre FROM CJV_Agencia');
         res.status(200).json(response.rows);
     }catch(e){
-        console.log(e)
+        console.log('Error:',e)
         res.status(500).send(e)
     }
 }
@@ -17,10 +17,44 @@ const getAreaInteres = async (req, res) => {
 
     try{
         const response = await pool.query('SELECT nombre FROM CJV_Area_Interes');
-        console.log(response.rows);
         res.status(200).json(response.rows);
     }catch(e){
-        console.log(e)
+        console.log('Error:',e)
+        res.status(500).send(e)
+    }
+    
+}
+
+const getAreaInteresByAgenciaID= async (req, res) => {
+
+    try{
+        const{id_agencia} = req.query;
+        const response = await pool.query(`select ai.id, ai.nombre, ai.descripcion from cjv_area_interes ai, cjv_agen_int i
+                        where ai.id = i.id_area_interes and  i.id_agencia = $1 `,
+                        [id_agencia]);
+        res.status(200).json(response.rows);
+    }catch(e){
+        console.log('Error:',e)
+        res.status(500).send(e)
+    }
+    
+}
+
+const getAreaInteresByPaquetePK= async (req, res) => {
+
+    try{
+        const{id_agencia, id_paquete} = req.query;
+        const response = await pool.query(`select ai.id, ai.nombre, ai.descripcion 
+                            from  cjv_area_interes ai, cjv_agen_int i
+                            where ai.id not in (
+                                    select id_area_interes 
+                                    from cjv_especializacion 
+                                    where id_agencia = $1 and id_paquete = $2) 
+                                and ai.id = i.id_area_interes and  i.id_agencia = $1   `,
+                        [id_agencia, id_paquete]);
+        res.status(200).json(response.rows);
+    }catch(e){
+        console.log('Error:',e)
         res.status(500).send(e)
     }
     
@@ -38,7 +72,7 @@ const getAsociaciones  = async (req, res) => {
                                             ORDER BY fecha_fin DESC,fecha_inicio DESC `);
         res.status(200).json(response.rows);
     }catch(e){
-        console.log(e)
+        console.log('Error:',e)
         res.status(500).send(e)
     }
 }
@@ -57,7 +91,7 @@ const getAgenciasNoRelacionadasConAgencia = async (req, res) => {
         console.log(response.rows);
         res.status(200).json(response.rows);
     }catch(e){
-        console.log(e)
+        console.log('Error:',e)
         res.status(500).send(e)
     }
 }
@@ -72,7 +106,7 @@ const createAsociacion = async (req, res) => {
         console.log(response.rows);
         res.status(200).json(response.rows);
     }catch(e){
-        console.log(e)
+        console.log('Error:',e)
         res.status(500).send(e)
     }
 }
@@ -91,7 +125,7 @@ const finalizarAsociacion =  async (req, res) => {
         console.log(response.rows);
         res.status(200).json(response.rows);
     }catch(e){
-        console.log(e)
+        console.log('Error:',e)
         res.status(500).send(e)
     }
 }
@@ -102,6 +136,8 @@ module.exports = {
     
     getAgencias,
     getAreaInteres,
+    getAreaInteresByAgenciaID,
+    getAreaInteresByPaquetePK,
     getAgenciasNoRelacionadasConAgencia,
     createAsociacion,
     finalizarAsociacion,

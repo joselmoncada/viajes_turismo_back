@@ -2,7 +2,7 @@ const { Router } = require('express');
 const router = Router();
 
 
-const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones } = require('../controllers/index.controller');
+const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones, getAreaInteresByAgenciaID, getAreaInteresByPaquetePK } = require('../controllers/index.controller');
 const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, getCiudadesByPais, } = require('../controllers/regiones.controller');
 
 const { getPaquetes, createPaquete, getAgenciaByName, 
@@ -13,8 +13,8 @@ const { getPaquetes, createPaquete, getAgenciaByName,
     createDateCalendario, getLugaresHoteltes,
     getServiciosPaquete, createServicioPaquete,
     deleteServicio,
-    createElementoItinerario,
-    getItinerarioByPaquete,updateDuracionPaquete
+    createElementoItinerario, getPaqueteEspecializaciones,
+    getItinerarioByPaquete,updateDuracionPaquete, createEspecializacion
     } = require('../controllers/paquetes.controller');
 
 const {getRallies, createRally } = require('../controllers/rallies.controller');
@@ -42,6 +42,8 @@ router.post('/regiones', createRegion);
 
 
 router.get('/agencias', getAgencias);
+router.get('/areas_interes/agencia/:id_agencia?',getAreaInteresByAgenciaID)
+router.get('/areas_interes/paquete/:id_agencia?/:id_paquete?',getAreaInteresByPaquetePK)
 router.get('/areas_interes', getAreaInteres);
 router.get('/paises', getPaises);
 router.get('/ciudades', getCiudades);
@@ -105,8 +107,6 @@ router.get('/bancos',getBancos);
 
 
 //PAQUETES
-
-
 router.get('/paquetes', getPaquetes);
 router.get('/paquetes/:id?', getPaqueteById);
 router.get('/paquete/:id_agencia?/:id?', getPaqueteByPk);
@@ -117,23 +117,30 @@ router.delete('/paquete',deletePaquete)
 //PAQUETES - PRECIO
 router.post('/paquete/precio',createPrecio)
 router.put('/paquete/precio', updatePrecio)
-router.post('/paquete/get-precio',getPrecioByPk)
-router.post('/paquete/get-historico-precios',getHistoricoPreciosByPk)
+router.post('/paquete/precio/bypk',getPrecioByPk)
+router.post('/paquete/precios/historico',getHistoricoPreciosByPk)
 
 //PAQUETES - CALENDARIO
-router.post('/paquete/get-calendario', getCalendarioDisponible)
-router.post('/paquete/get-historico-calendario', getHistoricoCalendario)
+router.post('/paquete/calendario', getCalendarioDisponible)
+router.post('/paquete/calendario/historico', getHistoricoCalendario)
 router.post('/paquete/fecha', createDateCalendario)
 
 //PAQUETES - SERVICIOS
-router.post('/paquete/get-servicios',getServiciosPaquete)
-router.post('/paquete/create-servicio',createServicioPaquete)
+router.post('/paquete/servicios',getServiciosPaquete)
+router.post('/paquete/servicio/crear',createServicioPaquete)
 router.delete('/paquete/servicio',deleteServicio)
-router.post('/paquete/get-hoteles',getLugaresHoteltes)
+router.post('/paquete/hoteles',getLugaresHoteltes)
 
 //PAQUETES - ITINERARIO
-router.post('/paquete/create-elemento-itinerario', createElementoItinerario)
-router.post('/paquete/get-itinerario', getItinerarioByPaquete)
+router.post('/paquete/itinerario', getItinerarioByPaquete)
+router.post('/paquete/itinerario/elemento/crear', createElementoItinerario)
+
+
+
+//PAQUETE - Especializacion
+router.post('/paquete/especializaciones', getPaqueteEspecializaciones)
+router.post('/paquete/especializacion/crear', createEspecializacion)
+
 
 router.get('/agencia/:agencia?', getAgenciaByName); 
 

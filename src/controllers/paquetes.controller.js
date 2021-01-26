@@ -34,8 +34,13 @@ const createPaquete = async (req, res, next) => {
         console.log('creado: ',response.rows)
         res.status(200).json(response.rows);
     } catch (e) {
-        console.log(e)
-        res.status(500).send(e);
+        if(e.code == 23505){
+            console.log('Error:', e.detail)
+            res.status(409).send(e);
+        }else{
+            console.log('Error:', e.detail)
+            res.status(500).send(e);
+        }
     }
 };
 
@@ -212,8 +217,14 @@ const createPrecio = async(req,res) =>{
                                            [id_agencia,id_paquete,valor_base]);
         res.status(200).json(response.rows)
    } catch (e) {
-        console.log(e)
-        res.status(500).send(e);
+        if(e.code == 23505){
+            console.log(e.detail)
+            res.status(409).send( e.detail);
+        }else{
+            console.log(e)
+            res.status(500).send( e.detail);
+        }
+
    }
 }   
 
@@ -287,7 +298,7 @@ const createDateCalendario = async(req,res) =>{
         res.status(200).json(response.rows)
     } catch (e) {
         if(e.code == 23505){
-            console.log('llave duplicada')
+            console.log(e.detail)
             res.status(409).send( e.detail);
         }else{
             console.log(e)
@@ -337,8 +348,13 @@ const createServicioPaquete = async(req,res) =>{
         }           
         
     } catch (e) {
+        if(e.code == 23505){
+            console.log(e.detail)
+            res.status(409).send( e.detail);
+        }else{
             console.log(e)
             res.status(500).send( e.detail);
+        }
     }
 }
 
@@ -394,8 +410,13 @@ const createElementoItinerario = async(req,res) =>{
                                             ,[id_agencia,id_paquete,secuencia,tiempo_estancia_dias,id_pais,id_ciudad]);
         res.status(200).json(response1.rows)   
     } catch (e) {
+        if(e.code == 23505){
+            console.log(e.detail)
+            res.status(409).send( e.detail);
+        }else{
             console.log(e)
             res.status(500).send( e.detail);
+        }
     }
 };
 
@@ -406,7 +427,7 @@ const deleteElementoItinarario = async(req,res) =>{
 const getItinerarioByPaquete = async(req,res) =>{
     try {
         const {id_agencia, id_paquete} = req.body
-        console.log('create Elemento Itinerario: ', id_agencia, id_paquete)
+        console.log('get Itinerario By Paquete: ', id_agencia, id_paquete)
         
         const response1 = await pool.query(` select id_agencia, id_paquete, itin.id, secuencia, 
                                                 tiempo_estancia_dias, itin.id_pais, itin.id_ciudad, 
@@ -423,8 +444,35 @@ const getItinerarioByPaquete = async(req,res) =>{
 };
 
 
+const getPaqueteEspecializaciones = async(req,res) =>{ 
+    try {
+        const {id_agencia, id_paquete} = req.body
+        console.log('get Especializacion: ',id_agencia, id_paquete)
 
+        const response = await pool.query(`select ai.id, ai.nombre ,descripcion from cjv_area_interes ai,cjv_especializacion esp
+                                            where esp.id_area_interes = ai.id and id_agencia_paquete = $1 and id_paquete = $2`,
+                                            [id_agencia,id_paquete]);                            
+        res.status(200).json(response.rows)
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    }
+}
 
+const createEspecializacion = async(req,res) =>{ 
+    try {
+        const {id_agencia, id_paquete, id_area_interes} = req.body
+        console.log('create Especializacion: ',id_agencia, id_paquete, id_area_interes)
+
+        const response = await pool.query(`insert into cjv_especializacion (id_area_interes, id, id_agencia, id_agencia_paquete, id_paquete)
+                                            values($1,nextval('cjv_s_especializacion'),$2,$3,$4)`,
+                                            [id_area_interes, id_agencia,id_agencia,id_paquete]);                            
+        res.status(200).json(response.rows)
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    }
+}
 
 module.exports = {
 
@@ -454,4 +502,6 @@ module.exports = {
     getItinerarioByPaquete,
     createElementoItinerario,
 
+    getPaqueteEspecializaciones,
+    createEspecializacion,
 }
