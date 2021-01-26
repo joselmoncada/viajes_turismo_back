@@ -54,3 +54,6 @@ CREATE SEQUENCE cjv_s_premio
 
 CREATE SEQUENCE cjv_s_valoracion
 	  start with 1 increment by 1 MAXVALUE 999999;
+
+CREATE SEQUENCE cjv_s_num_factura
+start with 1 increment by 1 MAXVALUE 999999;
