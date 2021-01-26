@@ -588,7 +588,7 @@ La mayor parte de la población neozelandesa es de ascendencia europea; los ind�
 Nueva Zelanda es un país desarrollado que se posiciona en lugares altos dentro de escalafones internacionales sobre muchos temas, incluyendo la ausencia de corrupción, el nivel de educación y la libertad económica,10​ y también destaca en su índice de desarrollo humano, que lo posiciona en el décimo tercer lugar en el mundo en 2016');
 INSERT INTO CJV_Pais(id,nombre,continente,nacionalidad,descripcion) VALUES (11,'Isla de Pascua','Oceania','chilena','es una isla de Chile, perteneciente a la Región de Valparaíso, ubicada en la Polinesia, Oceania, en medio del océano Pacífico a 3700 kilómetros de Caldera.​ Tiene una superficie de 163,6 km², lo que la convierte en la mayor de las islas del Chile insular, y una población de 7750 habitantes, concentrados en Hanga Roa, capital y único poblado existente en la isla. La tierra habitada más cercana es el territorio británico de las Islas Pitcairn, a unos 2000 km al oeste.
 
-La isla es uno de los principales destinos turísticos del país debido a su naturaleza y la cultura ancestral de la etnia rapanui, cuyo más notable vestigio corresponde a enormes estatuas antropomorfas conocidas como moais. Para preservar dichas características, el pueblo rapanui administra desde 2016 el parque nacional Rapa Nui a través de la Comunidad Indígena Polinesica Ma''u Henua,​ mientras que la Unesco declaró este parque como patrimonio de la humanidad en 1995.
+La isla es uno de los principales destinos turísticos del país debido a su naturaleza y la cultura ancestral de la etnia rapanui, cuyo más notable vestigio corresponde a enormes estatuas antropomorfas conocidas como moais. Para preservar dichas características, el pueblo rapanui administra desde 2016 el parque nacional Rapa Nui a través de la Comunidad Indígena Polinesica Mau Henua,​ mientras que la Unesco declaró este parque como patrimonio de la humanidad en 1995.
 
 El nombre tradicional que recibe esta isla corresponde al de Rapa Nui, que significa «Rapa grande» o «Gran Rapa» en el idioma de los navegantes tahitianos que visitaban la isla en el siglo XIX. El nombre estaría asociado con el parecido encontrado por los tahitianos con la isla de Rapa, en la actual Polinesia Francesa, y a la cual también se le conoce como Rapa Iti.');
 INSERT INTO CJV_Pais(id,nombre,continente,nacionalidad,descripcion) VALUES (12,'Polinecia francesa','Oceania','francesa','es una colectividad de ultramar francesa localizada al sur del océano Pacífico. Está compuesta por 118 islas y atolones de los cuales 67 están habitados. La isla Tahití, en el archipiélago de las islas de la Sociedad, es la más famosa y poblada de las islas, con Papeete, la capital y localidad más grande, localizada en ella.
@@ -740,7 +740,7 @@ Su elemento distintivo es su alta torre de más de 70 metros y 368 escalones, y 
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (3,3,6,'Barrio medieval de Auge','A él llegas desde la catedral en un paseo que se convierte en un descenso por varias estrechas y empinadas calles que te conducen hacia el río.
 Al llegar a Auge, también conocido como la ciudad baja, te aviso que tendrás la sensación de encontrarte en un pequeño pueblo, con sus casas entramadas y hasta los restos de una fortificación.
 De hecho, Auge en origen fue un pequeño pueblo que con el tiempo pasó a ser absorbido por el municipio de Friburgo.','https://res.cloudinary.com/vicalex/image/upload/v1610389946/DBViajes/Barrio_medieval_de_Auge.jpg');
-INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (4,4,7,'La Acrópolis','puede considerarse la más representativa de las acrópolis griegas. La acrópolis era, literalmente, la ciudad alta​ (ἄκρο- ''cima, extremo, punta'', πόλις ''ciudad) y estaba presente en la mayoría de las ciudades griegas, con una doble función: defensiva y como sede de los principales lugares de culto. La de Atenas está situada sobre una cima, que se alza 156 metros sobre el nivel de mar. También es conocida como Cecropia en honor del legendario hombre-serpiente, Cécrope, el primer rey ateniense.','https://res.cloudinary.com/vicalex/image/upload/v1610389891/DBViajes/La_Acropolis.jpg');
+INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (4,4,7,'La Acrópolis','puede considerarse la más representativa de las acrópolis griegas. La acrópolis era, literalmente, la ciudad alta​ (ἄκρο- cima, extremo, punta, πόλις ciudad) y estaba presente en la mayoría de las ciudades griegas, con una doble función: defensiva y como sede de los principales lugares de culto. La de Atenas está situada sobre una cima, que se alza 156 metros sobre el nivel de mar. También es conocida como Cecropia en honor del legendario hombre-serpiente, Cécrope, el primer rey ateniense.','https://res.cloudinary.com/vicalex/image/upload/v1610389891/DBViajes/La_Acropolis.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (4,4,8,'Museo de la Acrópolis','es un museo arqueológico griego situado en la ciudad de Atenas, en un edificio ubicado a unos 300 m al sur de la acrópolis. Es uno de los principales museos arqueológicos de Atenas y es también considerado como uno de los más importantes del mundo.​','https://res.cloudinary.com/vicalex/image/upload/v1610390002/DBViajes/museo-de-acropolis.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (5,5,9,'Fuerte viejo de Zanzibar','es una fortificación ubicada en Stone Town, Zanzíbar, Tanzania. Es el edificio más antiguo​ y una de las principales atracciones turísticas de Stone Town.','https://res.cloudinary.com/vicalex/image/upload/v1610389921/DBViajes/Fuerte-viejo-de-Zanzibar.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (5,5,10,'Hamamni','Los baños persas de Hamamni se encuentran en un edificio histórico de Stone Town, Zanzíbar. El nombre Hamamni también se usa para referirse al vecindario donde se encuentra el edificio.','https://res.cloudinary.com/vicalex/image/upload/v1610390012/DBViajes/Hamamni_Persian_Baths.jpg');
@@ -762,8 +762,8 @@ INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VA
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (13,13,26,'Torii Flotante del Santuario Itsukushima','El gran torii del santuario Itsukushima es, sin duda alguna, el símbolo de la isla de Miyajima. Se construyó en 1168 a unos 200 metros de la costa, exactamente a 212,7 metros de distancia del oratorio Haiden y a 173,4 metros de distancia de la lámpara de cobre Hitasaki.','https://res.cloudinary.com/vicalex/image/upload/v1610389987/DBViajes/Torii-Flotante.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (14,14,27,'Templo de Confucio','El Templo de Confucio en Qufu, provincia de Shandong, China, es el templo de Confucio "original", el más amplio y conocido de Asia Oriental.','https://res.cloudinary.com/vicalex/image/upload/v1610389829/DBViajes/Templo_de-Confucio.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (14,14,28,'Fuerte Anping','Construido por los holandeses en 1624, fue la primera fortaleza de Taiwán conocida entonces como "Ciudad de Orange" y la sede de gobierno de los holandeses, así como su centro comercial. En el año 1661, después que Zheng Chenggong (Koxinga) expulsó a los holandeses cambió su nombre a Anping.','https://res.cloudinary.com/vicalex/image/upload/v1610389815/DBViajes/Fuerte-Anping.jpg');
-INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (15,15,29,'Museo Valenzuela','Museo Valenzuela is a museum in Valenzuela in Metro Manila, Philippines. It is the city''s historical and cultural landmark, named after Dr. Pío Valenzuela in 1963. Museo Valenzuela features collections of artifacts depicting the city''s past and continuing development, it also serves as a repository of the city''s rich heritage and a beacon of light to its people and guests. It is likewise a venue for historical, cultural, and artistic presentations as well as seminars and symposia on national and local issues.','https://res.cloudinary.com/vicalex/image/upload/v1610389828/DBViajes/MuseoValenzuelajf4368_15.jpg');
-INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (15,15,30,'Valenzuela people´s park','The Valenzuela People''s Park, officially the Valenzuela City People''s Park and also known to local residents as simply People''s Park or VCPP, is an urban community park located in the city of Valenzuela, Philippines.','https://res.cloudinary.com/vicalex/image/upload/v1610389841/DBViajes/Peoples_Park.jpg');
+INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (15,15,29,'Museo Valenzuela','Museo Valenzuela is a museum in Valenzuela in Metro Manila, Philippines. It is the citys historical and cultural landmark, named after Dr. Pío Valenzuela in 1963. Museo Valenzuela features collections of artifacts depicting the citys past and continuing development, it also serves as a repository of the citys rich heritage and a beacon of light to its people and guests. It is likewise a venue for historical, cultural, and artistic presentations as well as seminars and symposia on national and local issues.','https://res.cloudinary.com/vicalex/image/upload/v1610389828/DBViajes/MuseoValenzuelajf4368_15.jpg');
+INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (15,15,30,'Valenzuela people´s park','The Valenzuela Peoples Park, officially the Valenzuela City Peoples Park and also known to local residents as simply Peoples Park or VCPP, is an urban community park located in the city of Valenzuela, Philippines.','https://res.cloudinary.com/vicalex/image/upload/v1610389841/DBViajes/Peoples_Park.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (16,16,31,'museo de los vestigios de la guerra','El Museo de los Vestigios de la Guerra es un museo situado en la calle Vo Van Tan de la ciudad Ho Chi Minh, en Vietnam. Su objetivo es mostrar al mundo el resultado de la ocupación estadounidense y de ese periodo de la historia.','https://res.cloudinary.com/vicalex/image/upload/v1610389973/DBViajes/Museo-Vestigios-de-la-guera.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (16,16,32,'Saigon Skydeck','Mirador acristalado con vistas panorámicas, situado en la 49.ª planta de la Bitexco Financial Tower.','https://res.cloudinary.com/vicalex/image/upload/v1610389855/DBViajes/saigon-skydeck.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (17,17,33,'Cascadas de Agua Azul','El área de protección de flora y fauna Cascadas de Agua Azul, también de la Catarata de Agua Azul, es una área de protección de flora y fauna de México localizada en el estado de Chiapas de reconocimiento internacional.​​','https://res.cloudinary.com/vicalex/image/upload/v1610389826/DBViajes/Cascada-Agua-Azul.jpg');
@@ -774,7 +774,7 @@ INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VA
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (19,19,38,'El camino real a Guane','El Camino Real es un fantástico camino rodeado de naturaleza y paisajes impresionantes.','https://res.cloudinary.com/vicalex/image/upload/v1610389928/DBViajes/Camino-Real.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (20,20,39,'Caminito','Un sitio inolvidable para la familia.','https://res.cloudinary.com/vicalex/image/upload/v1610389898/DBViajes/caminito.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (20,20,40,'Casa Rosada','es la sede del Poder Ejecutivo de la República Argentina. Dentro de la misma se encuentra el despacho del presidente de la Nación','https://res.cloudinary.com/vicalex/image/upload/v1610390009/DBViajes/casa_rosada.jpg');
-INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (21,21,41,'walter white''s house','La casa de la famosa serie de television Breaking Bad.','https://res.cloudinary.com/vicalex/image/upload/v1610389829/DBViajes/Walter-White-House.jpg');
+INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (21,21,41,'walter whites house','La casa de la famosa serie de television Breaking Bad.','https://res.cloudinary.com/vicalex/image/upload/v1610389829/DBViajes/Walter-White-House.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (21,21,42,'ABQ BioPark Botanic Garden','El Jardín Botánico de Río Grande, es un jardín botánico de 8 hectáreas de extensión y 900 m² de conservatorio ubicado junto al río Grande en Albuquerque, Nuevo México. Está administrado por la «New Mexico BioPark Society». Presenta trabajos para la «International Agenda for Botanic Gardens in Conservation».','https://res.cloudinary.com/vicalex/image/upload/v1610390010/DBViajes/ABQ-BioPark.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (22,22,43,'distrito historico de Gastwon','El animado barrio de Gastown es conocido por su silbante Reloj de Vapor y su mezcla de tiendas de recuerdos, galerías de arte independientes y tiendas de decoración en edificios victorianos. El panorama moderno de comida y bebida incluye elegantes salones de cócteles y restaurantes que sirven de todo, desde sándwiches gurmé hasta mariscos locales.','https://res.cloudinary.com/vicalex/image/upload/v1610389981/DBViajes/gastown_steamclock_vagastown.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (22,22,44,'isla Granville','Granville Island es una península y un distrito comercial en Vancouver, Columbia Británica, Canadá. Se encuentra al otro lado de False Creek desde el centro de Vancouver, debajo del extremo sur del Granville Street Bridge.','https://res.cloudinary.com/vicalex/image/upload/v1610389996/DBViajes/cayo-arena.-puerto-plata.jpg');
@@ -782,19 +782,6 @@ INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VA
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (23,23,46,'Cayo Arena','Un cayo para el mayor disfrute tropical de toda la zona','https://res.cloudinary.com/vicalex/image/upload/v1610389996/DBViajes/cayo-arena.-puerto-plata.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (24,24,47,'Blue Mountain','Un destino turistico infaltable en tu visita por el pais.','https://res.cloudinary.com/vicalex/image/upload/v1610389963/DBViajes/Blue-Mountain.jpg');
 INSERT INTO CJV_Atraccion(id_pais,id_ciudad,id,nombre,descripcion,url_imagen) VALUES (24,24,48,'el Museo Bob Marley','El Museo Bob Marley es un museo en Kingston, la capital de Jamaica, dedicado al músico de reggae Bob Marley. El museo está ubicado en 56 Hope Road, Kingston 6, donde fue alguna vez el lugar de residencia del cantante.','https://res.cloudinary.com/vicalex/image/upload/v1610389832/DBViajes/Museo-de-Bob-Marley.jpg');
-
-
---------AREAS DE INTERES
-
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (1,'Aventura','El turismo de aventura es un tipo de turismo que implica exploraciones o viajes con una percepción de riesgos, y que potencialmente requiere de destrezas especiales o de ciertas condiciones físicas donde es común la práctica de algún deporte extremo.');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (2,'Celebraciones Especiales','Los viajes que son de este tipo se centran en festejar fechas importantes ya sea algo cultural o bien que sea un evento importante para una persona que merece una celebración diferente.');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (3,'Cultura & Educación','Es un tipo de turismo enfocado al aprendizaje, conocer nuevos lugares y aprender de ellos lo más que se pueda es el objetivo de esta área del turismo');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (4,'Submarinismo','Turismo enfocado a la exploración y admiración del fondo del mar, su flora y fauna, sus estructuras, etc.');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (5,'Pesca','Se centra en las rutas de pesca, en donde se pueden entrar todo tipo de peces');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (6,'Gastronomía','Turismo enfocado a la comidas típicas de las regiones');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (7,'Romance','Este área de interés se enfoca en fortalecer relaciones de parejas, perfecto para una luna de miel.');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (8,'SPA & Bienestar','La relajación es el fuerte de este tipo de turismo, se centra en el descanso, la recuperación de fuerzas y lo más importante hacer sentir a las personas que han recobrado vitalidad.');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (9,'Turismo familiar','El turismo de este tipo se trata de realizar actividades entre toda la familia, conocer nuevos lugares y crear nuevos y grandiosos recuerdos con los seres queridos');
 
 
 ------AGENCIAS
@@ -831,18 +818,55 @@ INSERT INTO cjv_asociacion (id_agencia1, id_agencia2, fecha_inicio, fecha_fin) V
 (8, 2, '21/11/2018', null),
 (4, 9, '14/3/2017', null);
 
+--------AREAS DE INTERES
 
-----BANCOS
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (1,'Aventura','El turismo de aventura es un tipo de turismo que implica exploraciones o viajes con una percepción de riesgos, y que potencialmente requiere de destrezas especiales o de ciertas condiciones físicas donde es común la práctica de algún deporte extremo.');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (2,'Celebraciones Especiales','Los viajes que son de este tipo se centran en festejar fechas importantes ya sea algo cultural o bien que sea un evento importante para una persona que merece una celebración diferente.');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (3,'Cultura & Educación','Es un tipo de turismo enfocado al aprendizaje, conocer nuevos lugares y aprender de ellos lo más que se pueda es el objetivo de esta área del turismo');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (4,'Submarinismo','Turismo enfocado a la exploración y admiración del fondo del mar, su flora y fauna, sus estructuras, etc.');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (5,'Pesca','Se centra en las rutas de pesca, en donde se pueden entrar todo tipo de peces');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (6,'Gastronomía','Turismo enfocado a la comidas típicas de las regiones');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (7,'Romance','Este área de interés se enfoca en fortalecer relaciones de parejas, perfecto para una luna de miel.');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (8,'SPA & Bienestar','La relajación es el fuerte de este tipo de turismo, se centra en el descanso, la recuperación de fuerzas y lo más importante hacer sentir a las personas que han recobrado vitalidad.');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (9,'Turismo familiar','El turismo de este tipo se trata de realizar actividades entre toda la familia, conocer nuevos lugares y crear nuevos y grandiosos recuerdos con los seres queridos');
 
-insert into cjv_banco values(nextval('cjv_s_banco'),'Santander');
-insert into cjv_banco values(nextval('cjv_s_banco'),'Bank of America');
-insert into cjv_banco values(nextval('cjv_s_banco'),'BBVA Bancomer');
-insert into cjv_banco values(nextval('cjv_s_banco'),'JP Morgan Chase & Co');
-insert into cjv_banco values(nextval('cjv_s_banco'),'Michinoku Bank');
-insert into cjv_banco values(nextval('cjv_s_banco'),'Banca di Cesena');
-insert into cjv_banco values(nextval('cjv_s_banco'),'Banco Itaú');
-insert into cjv_banco values(nextval('cjv_s_banco'),'Banco de la Nación Argentina');
-insert into cjv_banco values(nextval('cjv_s_banco'),'Kiwibank');
+
+----AGEN_INT
+
+INSERT INTO cjv_agen_int VALUES
+(1,	1),
+(2,	2),
+(3,	3),
+(4,	7),
+(5,	3),
+(6,	4),
+(7,	1),
+(8,	2),
+(9,	6),
+(1,	3),
+(2,	6),
+(3,	6),
+(4,	9),
+(5,	8),
+(6,	5),
+(7,	3),
+(8,	3),
+(9,	8);
+
+
+----DESCUENTO
+
+INSERT INTO CJV_descuento VALUES
+(1, 1, '10/5/2019', 'niños', 10, 'descuento para menores de edad', null),
+(2, 2, '20/5/2019', 'tercera edad', 15, 'descuento para mayores de 60 años', null),
+(3, 3, '12/7/2019', 'niños', 12, 'descuento para menores de edad', null),
+(4, 4, '13/9/2019', 'mujeres', 8, 'descuento para damas', null),
+(5, 5, '14/5/2019', 'tercera edad', 20, 'descuento para mayores de 60 años', null),
+(6, 6, '4/10/2019', 'mujeres', 8, 'descuento para damas', null),
+(7, 7, '16/3/2019', 'niños', 10, 'descuento para menores de edad', null),
+(8, 8, '17/7/2019', 'tercera edad', 15, 'descuento para mayores de 60 años', null),
+(9, 9, '18/5/2019', 'niños', 14, 'descuento para menores de edad', null);
+
 
 -----PROVEEDORES
 
@@ -864,25 +888,567 @@ insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Airbnb');
 insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'GetYourCar');
 insert into cjv_proveedor values(nextval('cjv_s_proveedor'),'Cruceros Quovadis');
 
+----HISTORICO_PROVEEDOR
 
-----AGEN_INT
+INSERT INTO CJV_historico_proveedor VALUES
+(1, 9, '8/11/2015', '5/9/2016'),
+(4, 5, '10/1/2017', '22/2/2019'),
+(7, 4, '10/1/2017', '3/10/2017'),
+(1, 1, '23/5/2018', null),
+(1, 6, '15/7/2019', null),
+(2, 2, '7/10/2019', null),
+(2, 5, '12/11/2018', null),
+(3, 1, '21/6/2019', null),
+(3, 6, '17/2/2019', null),
+(4, 3, '5/8/2020', null),
+(4, 7, '22/1/2019', null),
+(5, 8, '21/3/2018', null),
+(5, 5, '28/7/2019', null),
+(6, 4, '2/4/2019', null),
+(6, 9, '11/12/2019', null),
+(7, 2, '24/5/2020', null),
+(7, 7, '4/6/2019', null),
+(8, 4, '22/6/2020', null),
+(8, 7, '9/10/2019', null),
+(9, 1, '12/2/2019', null),
+(9, 4, '19/4/2019', null);
 
-insert into cjv_agen_int values
-(1,	1),
-(2,	2),
-(3,	3),
-(4,	7),
-(5,	3),
-(6,	4),
-(7,	1),
-(8,	2),
-(9,	6),
-(1,	3),
-(2,	6),
-(3,	6),
-(4,	9),
-(5,	8),
-(6,	5),
-(7,	3),
-(8,	3),
-(9,	8);
+
+----VENDEDOR
+INSERT INTO CJV_vendedor VALUES
+(1, 'Jorge', 'Gonzalez', '10/5/1993', 'M', 1, 'Carlos', 'Hernandez'),
+(2, 'Victor', 'Barrios', '8/11/1995', 'M', 2, 'Ramon', 'Morffe'),
+(3, 'Jose', 'Gomez', '7/4/1992', 'M', 3, null, 'Pizarro'),
+(4, 'Cristian', 'Ramirez', '11/7/1996', 'M', 4, 'Jorge', 'Perez'),
+(5, 'Madelein', 'Fernandez', '31/1/2000', 'F', 5, 'Sofia', 'Marquez'),
+(6, 'Victoria', 'Rivero', '13/5/1999', 'F', 6, null, 'Jordan'),
+(7, 'Carlos', 'Martinez', '15/3/1997', 'M', 7, 'Esteban', 'Franquis'),
+(8, 'Sofia', 'Gerrero', '10/7/1995', 'F', 8, 'Carolina', 'Betancourt'),
+(9, 'Carla', 'Almeida', '24/5/1994', 'F', 9, 'Elizabeth', 'Cardenas');
+
+
+----PAQUETE
+
+INSERT INTO CJV_paquete VALUES
+(1, 1, 'Aventuras inolvidables', 'Conoce lo mejor de la naturaleza de la mano de aventuras inolvidables', 5, 6),
+(3, 2, 'Fin de semana en pareja', 'Fin de semana en pareja para darle un cariñito a tu relacion', 3, 2),
+(4, 3, 'Paraiso para 2 personas', 'Uno de los destinos mas paradisiacos del planeta', 3, 2),
+(8, 4, 'Festival Hanami', 'Conoce mas de la cultura asiatica a traves de uno de los Festivales mas importantes', 7, 6),
+(2, 5, 'Descanso en Pareja', '2 dias de descanso para parejas', 2, 2),
+(7, 6, 'Decubre nuevas Culturas', 'Un viaje para descubrir las maravillas de las culturas locales siendo amable con el ambiente', 4, 4),
+(5, 7, 'Fin de semana romantico', 'Fin de semana para 2 con todo incluido, para que disfrutes en pareja de las maravillas que te esperan', 3, 2),
+(6, 8, 'La magia del medio oriente', 'Conoce estas tierras exoticas con tu grupo familiar o amigos con todo incluido', 7, 4),
+(9, 9, 'Europa en grupo', 'Conocer Europa con tus amigos o familia', 15, 10);
+
+----ESPECIALIZACION
+
+INSERT INTO CJV_especializacion VALUES
+(1, 1, 1, 1, 1, 1, 17, 17, 33, 'Aventura al aire libre'),
+(2, 2, 2, 2, 2, 5, 10, 10, 19, 'Paraiso animal'),
+(6, 3, 3, 3, 3, 2, 22, 22, 43, 'Para paladares exigentes'),
+(7, 4, 4, 4, 4, 3, 23, 23, 46, 'Un viaje romantico'),
+(8, 5, 5, 5, 5, 7, 6, 6, 11, 'Fin de semana en pareja '),
+(4, 6, 6, 6, 6, 8, 5, 5, 9, 'Conociendo la estructuras antiguas'),
+(3, 7, 7, 7, 7, 6, 18, 18, 36, 'Cultura Responsable'),
+(3, 8, 8, 8, 8, 4, 13, 13, 26, 'Cultura Asiatica'),
+(8, 9, 9, 9, 9, 9, 2, 2, 3, 'Conociendo Europa');
+
+
+----CALENDARIO_ANUAL
+
+INSERT INTO CJV_calendario_anual VALUES
+(1, 1, '10/5/2021', 'Temporada baja'),
+(3, 2, '7/6/2021', 'TIempo para paladares exigentes'),
+(4, 3, '8/8/2021', 'El tiempo es magico'),
+(8, 4, '20/2/2021', 'Epoca del Festival'),
+(2, 5, '5/1/2021', 'Inciando el año'),
+(7, 6, '11/3/2021', 'Tiempo para disfrutar'),
+(5, 7, '17/5/2021', 'Epoca para desconectarse'),
+(6, 8, '13/4/2021', 'Tiempo para conocer'),
+(9, 9, '8/11/2021', 'Conociendo las estaciones'),
+(1, 1, '8/11/2018', 'Temporada baja'),
+(3, 2, '9/4/2020', 'TIempo para paladares exigentes'),
+(4, 3, '16/7/2019', 'El tiempo es magico'),
+(8, 4, '13/5/2020', 'Epoca del Festival'),
+(2, 5, '10/5/2019', 'Inciando el año'),
+(7, 6, '7/6/2018', 'Tiempo para disfrutar'),
+(5, 7, '8/8/2019', 'Epoca para desconectarse'),
+(6, 8, '20/2/2019', 'Tiempo para conocer'),
+(9, 9, '5/1/2020', 'Conociendo las estaciones');
+
+
+----ITINERARIO
+
+INSERT INTO CJV_itinerario VALUES
+(1, 1, 1, 1, 2, 17, 17),
+(3, 2, 2, 1, 1, 22, 22),
+(4, 3, 3, 1, 1, 23, 23),
+(8, 4, 4, 1, 3, 13, 13),
+(2, 5, 5, 1, 1, 10, 10),
+(7, 6, 6, 1, 2, 18, 18),
+(5, 7, 7, 1, 1, 6, 6),
+(6, 8, 8, 1, 3, 5, 5),
+(9, 9, 9, 1, 5, 2, 2),
+(1, 1, 10, 2, 2, 17, 17),
+(3, 2, 11, 2, 1, 22, 22),
+(4, 3, 12, 2, 1, 23, 23),
+(8, 4, 13, 2, 2, 13, 13),
+(2, 5, 14, 2, 1, 10, 10),
+(7, 6, 15, 2, 1, 18, 18),
+(5, 7, 16, 2, 1, 6, 6),
+(6, 8, 17, 2, 2, 5, 5),
+(9, 9, 18, 2, 5, 2, 2),
+(1, 1, 19, 3, 1, 17, 17),
+(3, 2, 20, 3, 1, 22, 22),
+(4, 3, 21, 3, 1, 23, 23),
+(8, 4, 22, 3, 2, 13, 13),
+(7, 6, 24, 3, 1, 18, 18),
+(5, 7, 25, 3, 1, 6, 6),
+(6, 8, 26, 3, 2, 5, 5),
+(9, 9, 27, 3, 5, 2, 2);
+
+
+----ITIN_ATRACCION
+
+INSERT INTO CJV_itin_atraccion VALUES
+(1, 1, 1, 17, 17, 33, 1),
+(3, 2, 2, 22, 22, 44, 1),
+(4, 3, 3, 23, 23, 45, 1),
+(8, 4, 4, 13, 13, 26, 1),
+(2, 5, 5, 10, 10, 19, 1),
+(7, 6, 6, 18, 18, 35, 1),
+(5, 7, 7, 6, 6, 11, 1),
+(6, 8, 8, 5, 5, 10, 1),
+(9, 9, 9, 2, 2, 4, 1),
+(1, 1, 10, 17, 17, 34, 2),
+(3, 2, 11, 22, 22, 43, 2),
+(4, 3, 12, 23, 23, 46, 2),
+(8, 4, 13, 13, 13, 25, 2),
+(2, 5, 14, 10, 10, 20, 2),
+(7, 6, 15, 18, 18, 36, 2),
+(5, 7, 16, 6, 6, 12, 2),
+(6, 8, 17, 5, 5, 9, 2),
+(9, 9, 18, 2, 2, 3, 2),
+(1, 1, 19, 17, 17, 33, 3),
+(3, 2, 20, 22, 22, 44, 3),
+(4, 3, 21, 23, 23, 45, 3),
+(8, 4, 22, 13, 13, 26, 3),
+(7, 6, 24, 18, 18, 35, 3),
+(5, 7, 25, 6, 6, 11, 3),
+(6, 8, 26, 5, 5, 10, 3),
+(9, 9, 27, 2, 2, 4, 3);
+
+
+----SERVICIO_DETALLE
+
+INSERT INTO CJV_servicio_detalle VALUES
+(1, 1, 1, 'Marriot International', 'Descanso en la mejor franquicia', 'hospedaje', true),
+(3, 2, 2, 'Marriot International', 'Descanso en la mejor franquicia', 'hospedaje', true),
+(4, 3, 3, 'Hilton WorldWide Holdings ', 'Uno de las mejores cadenas', 'hospedaje', true),
+(8, 4, 4, 'Melia Hotels International', 'Lo mejor de España en el mundo', 'hospedaje', true),
+(2, 5, 5, 'NH Hotel Group', 'Tradicion de Comodidad y Descanso', 'hospedaje', true),
+(7, 6, 6, 'Hilton WorldWide Holdings ', 'Uno de las mejores cadenas', 'hospedaje', true),
+(5, 7, 7, 'NH Hotel Group', 'Tradicion de Comodidad y Descanso, sin comida', 'hospedaje', false),
+(6, 8, 8, 'Melia Hotels International', 'Lo mejor de España en el mundo, sin comida', 'hospedaje', false),
+(9, 9, 9, 'Melia Hotels International', 'Lo mejor de España en el mundo, sin comida', 'hospedaje', false),
+(3, 2, 10, 'American Airlines', 'Aerolinea top mundial', 'vuelo', false),
+(5, 7, 11, 'Air France', 'Años de confianza en el aire', 'vuelo', false),
+(7, 6, 12, 'Air New Zealand', 'aerolinea confiable', 'vuelo', false),
+(4, 3, 13, 'Virgin Atlantic', 'A donde quieras ir con seguridad', 'vuelo', false);
+
+
+----LUGAR_HOTEL
+
+INSERT INTO CJV_lugar_Hotel VALUES
+(1, 'Marriot International', 17, 17),
+(2, 'Marriot International', 22, 22),
+(3, 'Hilton WorldWide Holdings ', 23, 23),
+(4, 'Melia Hotels International', 13, 13),
+(5, 'NH Hotel Group', 10, 10),
+(6, 'Hilton WorldWide Holdings ', 18, 18),
+(7, 'NH Hotel Group', 6, 6),
+(8, 'Melia Hotels International', 5, 5),
+(9, 'Melia Hotels International', 2, 2);
+
+----DET_HOTEL
+
+INSERT INTO CJV_det_hotel VALUES
+(1, 1, 1, 1),
+(3, 2, 2, 2),
+(4, 3, 3, 3),
+(8, 4, 4, 4),
+(2, 5, 5, 5),
+(7, 6, 6, 6),
+(5, 7, 7, 7),
+(6, 8, 8, 8),
+(9, 9, 9, 9);
+
+
+----HISTORICO_PRECIO
+
+INSERT INTO CJV_historico_precio VALUES
+(1, 1, '10/5/2021', 7564, null),
+(3, 2, '7/6/2021', 8754, null),
+(4, 3, '8/8/2021', 5432, null),
+(8, 4, '20/2/2021', 4600, null),
+(2, 5, '5/1/2021', 2377, null),
+(7, 6, '11/3/2021', 6435, null),
+(5, 7, '17/5/2021', 3899, null),
+(6, 8, '13/4/2021', 5799, null),
+(9, 9, '8/11/2021', 15789, null),
+(3, 2, '9/4/2020', 8155, '9/12/2020'),
+(5, 7, '16/7/2019', 3980, '16/10/2019'),
+(2, 5, '13/5/2020', 2209, '13/11/2020');
+
+
+----VIAJERO
+
+INSERT INTO CJV_viajero VALUES
+(24510592, 'José', 'Garcia', '24/12/1980', 'M', 10, 'Vicente', 'Tovar'),
+(21708619, 'Alejandra', 'Carrero', '27/10/1989', 'F', 15, null, 'Garcia'),
+(18436954, 'Alejandra', 'Tovar', '27/10/1952', 'F', 22, 'Carla', 'Márquez'),
+(19450018, 'Carlos', 'Tovar', '14/1/1959', 'M', 4, 'Jorge', 'Garcia'),
+(21729173, 'Esteban', 'Perez', '24/11/1955', 'M', 7, 'Fernando', 'Arria'),
+(16641708, 'Josefina', 'Perez', '23/3/1970', 'F', 11, 'Angelica', 'Montiel'),
+(19805895, 'Fabiola', 'Mesa', '15/3/1972', 'F', 8, 'Vanessa', 'Tovar'),
+(23396353, 'Vicente', 'Márquez', '3/11/1998', 'M', 17, 'Diego', 'González'),
+(20667449, 'Clara', 'Montiel', '16/9/1967', 'F', 19, 'Josefina', 'Oropeza'),
+(20944186, 'Ruben', 'Perez', '4/11/1953', 'M', 1, 'Julio', 'Palacios'),
+(25986806, 'Vicente', 'Bastidas', '16/9/1971', 'M', 3, 'Fernando', 'González'),
+(23234792, 'Jorge', 'Carrero', '13/3/1964', 'M', 13, 'Gerardo', 'Bolivar'),
+(23395421, 'Vanessa', 'Goncalves', '19/10/1968', 'F', 1, 'Angelica', 'Goncalves'),
+(20052498, 'Julio', 'Garcia', '7/2/1990', 'M', 6, null, 'Tovar'),
+(20088330, 'Vanessa', 'Garcia', '18/1/1992', 'F', 20, 'Fabiola', 'Mesa'),
+(22789498, 'Clara', 'Navas', '27/2/1972', 'F', 5, 'Fabiola', 'Tovar'),
+(20751372, 'Jorge', 'Carrero', '18/9/1996', 'M', 14, 'Vicente', 'González'),
+(26623094, 'Angelica', 'Palacios', '12/2/1995', 'F', 16, 'Carla', 'Montiel');
+
+
+----PASAPORTE
+
+INSERT INTO CJV_pasaporte VALUES
+(22, 18436954, 18436954, '10/5/2022'),
+(11, 16641708, 16641708, '7/6/2023'),
+(19, 20667449, 20667449, '8/8/2022'),
+(13, 23234792, 23234792, '20/2/2024'),
+(1, 23395421, 23395421, '5/7/2023'),
+(6, 20052498, 20052498, '11/8/2023'),
+(20, 20088330, 20088330, '17/3/2022'),
+(5, 22789498, 22789498, '22/7/2022'),
+(14, 20751372, 20751372, '22/9/2023');
+
+
+----REGISTRO_VAJERO
+
+INSERT INTO CJV_registro_viajero VALUES
+(1, 24510592, '8/11/2018', null),
+(2, 21708619, '9/4/2020', null),
+(3, 18436954, '16/7/2019', null),
+(4, 19450018, '13/5/2020', null),
+(5, 21729173, '10/5/2019', null),
+(6, 16641708, '7/6/2018', null),
+(7, 19805895, '8/8/2019', null),
+(8, 23396353, '20/2/2019', null),
+(9, 20667449, '5/1/2020', null),
+(1, 20944186, '8/11/2018', null),
+(2, 25986806, '9/4/2020', null),
+(3, 23234792, '16/7/2019', null),
+(4, 23395421, '13/5/2020', null),
+(5, 20052498, '10/5/2019', null),
+(6, 20088330, '7/6/2018', null),
+(7, 22789498, '8/8/2019', null),
+(8, 20751372, '20/2/2019', null),
+(9, 26623094, '5/1/2020', null);
+
+
+----CLIENTE
+
+INSERT INTO CJV_cliente VALUES
+(1, 'Inversiones Valle', 'J', null, 127163236, null, null, null, null),
+(2, 'Zira', 'J', null, 134232327, null, null, null, null),
+(3, 'Horizonte', 'J', null, 125786543, null, null, null, null),
+(4, 'Rebecca', 'P', 21177253, null, '4/2/1994', 'Maria', 'Vargas', 'Carrero'),
+(5, 'Ruben', 'P', 16570246, null, '28/8/1969', 'Esteban', 'Montiel', 'Goncalves'),
+(6, 'Fabiola', 'P', 21754763, null, '24/5/1990', 'Clara', 'Ferandez', 'Goncalves'),
+(7, 'Maria', 'P', 25964371, null, '18/8/1968', 'Josefina', 'Martinez', 'González'),
+(8, 'Alejandra', 'P', 15947541, null, '14/9/1958', null, 'Bolivar', 'Herrera'),
+(9, 'Esteban', 'P', 22403927, null, '6/2/1962', 'Carlos', 'Tovar', 'Avellaneda');
+
+
+----REGISTRO_CLIENTE
+
+INSERT INTO CJV_registro_cliente VALUES
+(1, 1, '8/11/2018', null),
+(2, 2, '9/4/2020', null),
+(3, 3, '16/7/2019', null),
+(4, 4, '13/5/2020', null),
+(5, 5, '10/5/2019', null),
+(6, 6, '7/6/2018', null),
+(7, 7, '8/8/2019', null),
+(8, 8, '20/2/2019', null),
+(9, 9, '5/1/2020', null);
+
+
+----PAQUETE_CONTRATO
+
+INSERT INTO CJV_paquete_contrato VALUES
+(1, 7564, '8/11/2018', '8/11/2018', '8/12/2018', 1101, 'JoséGarcia2@gmail.com', 1, 1, 1, 1, 1, '8/11/2018'),
+(2, 2377, '9/4/2020', '9/4/2020', '9/5/2020', 5178, 'AlejandraCarrero3@gmail.com', 2, 5, 2, 2, 2, '9/4/2020'),
+(3, 8754, '16/7/2019', '16/7/2019', '16/8/2019', 2456, 'AlejandraTovar11@gmail.com', 3, 2, 3, 3, 3, '16/7/2019'),
+(4, 5432, '13/5/2020', '13/5/2020', '13/6/2020', 5897, 'CarlosTovar08@gmail.com', 4, 3, 4, 4, 4, '13/5/2020'),
+(5, 3899, '10/5/2019', '10/5/2019', '15/5/2019', 2145, 'EstebanPerez0@gmail.com6', 5, 7, 5, 5, 5, '10/5/2019'),
+(6, 5799, '7/6/2018', '7/6/2018', '20/6/2018', 977, 'JosefinaPerez@gmail.com', 6, 8, 6, 6, 6, '7/6/2018'),
+(7, 6435, '8/8/2019', '12/8/2019', '12/10/2019', 2713, 'FabiolaMesa@gmail.com', 7, 6, 7, 7, 7, '8/8/2019'),
+(8, 4600, '20/2/2019', '23/2/2019', '15/3/2019', 2014, 'VicenteMárquez@gmail.com', 8, 4, 8, 8, 8, '20/2/2019'),
+(9, 15789, '5/1/2020', '11/1/2020', '11/3/2020', 4982, 'ClaraMontiel@gmail.com', 9, 9, 9, 9, 9, '5/1/2020');
+
+
+----CONT_REG_VIAJERO
+
+INSERT INTO CJV_cont_reg_viajero VALUES
+(1, 1, 24510592, '8/11/2018'),
+(2, 2, 21708619, '9/4/2020'),
+(3, 3, 18436954, '16/7/2019'),
+(4, 4, 19450018, '13/5/2020'),
+(5, 5, 21729173, '10/5/2019'),
+(6, 6, 16641708, '7/6/2018'),
+(7, 7, 19805895, '8/8/2019'),
+(8, 8, 23396353, '20/2/2019'),
+(9, 9, 20667449, '5/1/2020'),
+(1, 1, 20944186, '8/11/2018'),
+(2, 2, 25986806, '9/4/2020'),
+(3, 3, 23234792, '16/7/2019'),
+(4, 4, 23395421, '13/5/2020'),
+(5, 5, 20052498, '10/5/2019'),
+(6, 6, 20088330, '7/6/2018'),
+(7, 7, 22789498, '8/8/2019'),
+(8, 8, 20751372, '20/2/2019'),
+(9, 9, 26623094, '5/1/2020');
+
+
+----BANCOS
+
+insert into cjv_banco values(nextval('cjv_s_banco'),'Santander');
+insert into cjv_banco values(nextval('cjv_s_banco'),'Bank of America');
+insert into cjv_banco values(nextval('cjv_s_banco'),'BBVA Bancomer');
+insert into cjv_banco values(nextval('cjv_s_banco'),'JP Morgan Chase & Co');
+insert into cjv_banco values(nextval('cjv_s_banco'),'Michinoku Bank');
+insert into cjv_banco values(nextval('cjv_s_banco'),'Banca di Cesena');
+insert into cjv_banco values(nextval('cjv_s_banco'),'Banco Itaú');
+insert into cjv_banco values(nextval('cjv_s_banco'),'Banco de la Nación Argentina');
+insert into cjv_banco values(nextval('cjv_s_banco'),'Kiwibank');
+
+
+----INSTRUMENTO_PAGO
+
+INSERT INTO CJV_instrumento_pago VALUES
+(1, 1, 't_credito', 1, 4567458145265892, null),
+(2, 2, 't_debito', 2, 7412785498574365, null),
+(3, 3, 'c_bancaria', 3, 6547895321645897, null),
+(4, 4, 'zelle', 4, null, 'RebeccaVargas@gmail.com'),
+(5, 5, 't_credito', 5, 2457895641234753, null),
+(6, 6, 't_debito', 6, 4561789498763215, null),
+(7, 7, 'c_bancaria', 7, 9856741285219632, null),
+(8, 8, 'zelle', 8, null, 'AlejandraBolivar@gmail.com'),
+(9, 9, 't_credito', 9, 3579685424169514, null);
+
+
+----FORMA_PAGO
+
+INSERT INTO CJV_forma_pago VALUES
+(1, 1, 1, 'C'),
+(2, 2, 2, 'D'),
+(3, 3, 3, 'T'),
+(4, 4, 4, 'E'),
+(5, 5, 5, 'C'),
+(6, 6, 6, 'D'),
+(7, 7, 7, 'T'),
+(8, 8, 8, 'E'),
+(9, 9, 9, 'C');
+
+
+----RALLY
+
+INSERT INTO CJV_rally VALUES
+(1, 'Oriente Como Nunca', '10/5/2021', '10/6/2021', 10, 'P', 2745, 'Recorriendo Africa y Asia'),
+(2, 'Asia Fascinante', '7/6/2021', '7/8/2021', 15, 'I', 3457, 'VIsita los lugares más maravillosos de este continente'),
+(3, 'Portugal y Suiza juntos', '8/8/2021', '8/10/2021', 8, 'P', 2456, 'Recorre estos dos paises en pareja'),
+(4, 'Oceania Magica', '20/2/2021', '20/4/2021', 6, 'I', 4789, 'Recorre los lugares magicos de este continente'),
+(5, 'Segundo Tour Europa ', '5/1/2021', '5/3/2021', 4, 'I', 5879, 'Europa a inicio de Año'),
+(6, 'Africa de ensueño', '11/3/2021', '11/4/2021', 8, 'I', 2486, 'Conoce Africa recorriendo los mejores lugares'),
+(7, 'Playas del mundo', '17/5/2021', '17/8/2021', 6, 'P', 7618, 'Disfruta acompañado de estas maravillosas playas'),
+(8, 'Primer Tour Europa', '9/7/2020', '9/9/2020', 10, 'I', 4399, 'Europa en temporada de Vacaciones'),
+(9, 'America en Vivo', '13/9/2020', '13/10/2020', 10, 'I', 5124, 'Recorre America');
+
+
+----CIRCUITO
+
+INSERT INTO CJV_circuito VALUES
+(5, 5, 1, 1, 2),
+(6, 6, 1, 2, 2),
+(15, 15, 1, 3, 2),
+(5, 5, 2, 1, 3),
+(7, 7, 2, 2, 3),
+(8, 8, 2, 3, 3),
+(1, 1, 3, 1, 4),
+(3, 3, 3, 2, 4),
+(10, 10, 4, 1, 3),
+(11, 11, 4, 2, 3),
+(12, 12, 4, 3, 3),
+(1, 1, 5, 1, 4),
+(2, 2, 5, 2, 4),
+(4, 4, 5, 3, 4),
+(5, 5, 6, 1, 4),
+(6, 6, 6, 2, 4),
+(7, 7, 6, 3, 4),
+(12, 12, 7, 1, 5),
+(23, 23, 7, 2, 5),
+(3, 3, 8, 1, 3),
+(2, 2, 8, 2, 3),
+(1, 1, 8, 3, 3),
+(22, 22, 9, 1, 4),
+(23, 23, 9, 2, 3),
+(24, 24, 9, 3, 3);
+
+
+----ATRACCION_RALLY
+
+INSERT INTO CJV_atraccion_rally VALUES
+(5, 5, 1, 5, 5, 9),
+(5, 5, 1, 5, 5, 10),
+(6, 6, 1, 6, 6, 11),
+(6, 6, 1, 6, 6, 12),
+(15, 15, 1, 15, 15, 29),
+(15, 15, 1, 15, 15, 30),
+(5, 5, 2, 5, 5, 9),
+(5, 5, 2, 5, 5, 10),
+(7, 7, 2, 7, 7, 13),
+(7, 7, 2, 7, 7, 14),
+(8, 8, 2, 8, 8, 15),
+(8, 8, 2, 8, 8, 16),
+(1, 1, 3, 1, 1, 1),
+(1, 1, 3, 1, 1, 2),
+(3, 3, 3, 3, 3, 5),
+(3, 3, 3, 3, 3, 6),
+(10, 10, 4, 10, 10, 19),
+(10, 10, 4, 10, 10, 20),
+(11, 11, 4, 11, 11, 21),
+(11, 11, 4, 11, 11, 22),
+(12, 12, 4, 12, 12, 23),
+(12, 12, 4, 12, 12, 24),
+(1, 1, 5, 1, 1, 1),
+(1, 1, 5, 1, 1, 2),
+(2, 2, 5, 2, 2, 3),
+(2, 2, 5, 2, 2, 4),
+(4, 4, 5, 4, 4, 7),
+(4, 4, 5, 4, 4, 8),
+(5, 5, 6, 5, 5, 9),
+(5, 5, 6, 5, 5, 10),
+(6, 6, 6, 6, 6, 11),
+(6, 6, 6, 6, 6, 12),
+(7, 7, 6, 7, 7, 13),
+(7, 7, 6, 7, 7, 14),
+(12, 12, 7, 12, 12, 23),
+(23, 23, 7, 23, 23, 46),
+(3, 3, 8, 3, 3, 6),
+(3, 3, 8, 3, 3, 5),
+(2, 2, 8, 2, 2, 4),
+(2, 2, 8, 2, 2, 3),
+(1, 1, 8, 1, 1, 2),
+(1, 1, 8, 1, 1, 1),
+(22, 22, 9, 22, 22, 43),
+(22, 22, 9, 22, 22, 44),
+(23, 23, 9, 23, 23, 45),
+(23, 23, 9, 23, 23, 46),
+(24, 24, 9, 24, 24, 47),
+(24, 24, 9, 24, 24, 48);
+
+
+----ORGANIZADOR
+
+INSERT INTO CJV_organizador VALUES
+(1, 1, 6),
+(2, 2, 7),
+(3, 3, 4),
+(4, 4, 6),
+(5, 5, 2),
+(6, 6, 8),
+(7, 7, 4),
+(3, 8, 4),
+(9, 9, 3),
+(5, 8, 3),
+(1, 8, 3),
+(2, 9, 3),
+(3, 9, 4),
+(7, 1, 4),
+(3, 2, 8),
+(5, 3, 4),
+(1, 5, 2),
+(1, 7, 2);
+
+
+----PARTICIPACION
+
+INSERT INTO CJV_participacion VALUES
+(8, 1, 12, 1, '11/8/2020',null,null, null, 5, 5, '10/5/2019'),
+(8, 2, 17, 2, '14/8/2020', 1, 24510592, '8/11/2018',null,null, null),
+(8, 3, 13, 3, '20/8/2020', 3, 18436954, '16/7/2019',null,null, null),
+(8, 4, 21, 4, '7/9/2020', 5, 21729173, '10/5/2019',null,null, null),
+(9, 5, 7, 1, '28/9/2020',null,null, null, 9, 9, '5/1/2020'),
+(9, 6, 11, 2, '30/9/2020', 2, 21708619, '9/4/2020',null,null, null),
+(9, 7, 14, 3, '2/10/2020', 3, 18436954, '16/7/2019',null,null, null),
+(9, 8, 19, 4, '4/10/2020', 2, 25986806, '9/4/2020',null,null, null),
+(9, 9, 23, 5, '6/10/2020', 3, 23234792, '16/7/2019',null,null, null);
+
+
+----PREMIO
+
+INSERT INTO CJV_premio VALUES
+(1, 1, 'Iphone 10', 1, 'el primer lugar gana un iphone 10'),
+(1, 2, 'Boletos para Londres', 2, 'el segundo lugar gana boletos para londres'),
+(1, 3, 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia'),
+(2, 4, 'Automovil 0 Kilometros', 1, 'el primer lugar gana Automovil 0 Kilometros Marca Hyundai'),
+(2, 5, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(2, 6, 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia'),
+(3, 7, 'Crucero por el Caribe', 1, 'el primer lugar gana un crucero por el Caribe con todos los gastos pagos'),
+(3, 8, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(3, 9, 'Boletos para Paris', 3, 'el tercer lugar gana boletos para Paris'),
+(4, 10, 'Automovil 0 Kilometros', 1, 'el primer lugar gana Automovil 0 Kilometros Marca Chevrolet'),
+(4, 11, 'Samsung Galaxy S10', 2, 'el segundo lugar gana un Samsung Galaxy S10'),
+(4, 12, 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia'),
+(5, 13, 'Crucero por el Caribe', 1, 'el primer lugar gana un crucero por el Caribe con todos los gastos pagos'),
+(5, 14, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(5, 15, 'Afiche de la Agencia', 3, 'el tercer lugar gana un afiche de la Agencia con fondo de Lugar paradisiaco'),
+(6, 16, 'Automovil 0 Kilometros', 1, 'el primer lugar gana Automovil 0 Kilometros Marca Peugeot'),
+(6, 17, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(6, 18, 'Afiche de la Agencia', 3, 'el tercer lugar gana un afiche de la Agencia con fondo de Lugar paradisiaco'),
+(7, 19, 'Crucero por el Caribe', 1, 'el primer lugar gana un crucero por el Caribe con todos los gastos pagos'),
+(7, 20, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(7, 21, 'Boletos para Nueva York', 3, 'el tercer lugar gana boletos para New York'),
+(8, 22, 'Huawei P30', 1, 'el primer lugar gana un Huawei P30'),
+(8, 23, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(8, 24, 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia'),
+(9, 25, 'Automovil 0 Kilometros', 1, 'el primer lugar gana Automovil 0 Kilometros Marca Renault'),
+(9, 26, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(9, 27, 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia');
+
+
+----VALORACION
+
+INSERT INTO CJV_valoracion VALUES
+(1, 23,null,null,null,null,null,null, 3),
+(2,null, 23, 23,null,null,null,null, 3),
+(3,null,null,null, 23, 23, 45,null, 3),
+(4,null,null,null, 23, 23, 46,null, 3),
+(5, 3,null,null,null,null,null,null, 8),
+(6,null, 3, 3,null,null,null,null, 8),
+(7, 2,null,null,null,null,null,null, 8),
+(8,null, 2, 2,null,null,null,null, 8),
+(9, 1,null,null,null,null,null,null, 8),
+(10,null, 1, 1,null,null,null,null, 8),
+(11,null,null,null, 3, 3, 6,null, 8),
+(12,null,null,null, 3, 3, 5,null, 8),
+(13,null,null,null, 2, 2, 4,null, 8),
+(14,null,null,null, 2, 2, 3,null, 8),
+(15,null,null,null, 1, 1, 2,null, 8),
+(16,null,null,null, 1, 1, 1,null, 8);
