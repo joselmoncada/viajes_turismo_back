@@ -3,7 +3,7 @@ const router = Router();
 
 
 const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones } = require('../controllers/index.controller');
-const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, } = require('../controllers/regiones.controller');
+const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, getCiudadesByPais, } = require('../controllers/regiones.controller');
 
 const { getPaquetes, createPaquete, getAgenciaByName, 
     deletePaquete, getPaqueteById,getPaqueteByPk,
@@ -13,6 +13,8 @@ const { getPaquetes, createPaquete, getAgenciaByName,
     createDateCalendario, getLugaresHoteltes,
     getServiciosPaquete, createServicioPaquete,
     deleteServicio,
+    createElementoItinerario,
+    getItinerarioByPaquete,updateDuracionPaquete
     } = require('../controllers/paquetes.controller');
 
 const {getRallies, createRally } = require('../controllers/rallies.controller');
@@ -43,6 +45,7 @@ router.get('/agencias', getAgencias);
 router.get('/areas_interes', getAreaInteres);
 router.get('/paises', getPaises);
 router.get('/ciudades', getCiudades);
+router.post('/ciudades-de-pais',getCiudadesByPais)
 router.get('/atracciones', getAtracciones);
 
 //asocaciones
@@ -109,22 +112,28 @@ router.get('/paquetes/:id?', getPaqueteById);
 router.get('/paquete/:id_agencia?/:id?', getPaqueteByPk);
 router.get('/paquetes-diponibles', getPaquetesDisponibles) // te da todos los paquetes disponibles,. no tiene filtro de agencia u otros
 router.post('/paquete', createPaquete);
+router.put('/paquete/duracion',updateDuracionPaquete)
 router.delete('/paquete',deletePaquete)
-
+//PAQUETES - PRECIO
 router.post('/paquete/precio',createPrecio)
 router.put('/paquete/precio', updatePrecio)
 router.post('/paquete/get-precio',getPrecioByPk)
 router.post('/paquete/get-historico-precios',getHistoricoPreciosByPk)
 
+//PAQUETES - CALENDARIO
 router.post('/paquete/get-calendario', getCalendarioDisponible)
 router.post('/paquete/get-historico-calendario', getHistoricoCalendario)
 router.post('/paquete/fecha', createDateCalendario)
 
+//PAQUETES - SERVICIOS
 router.post('/paquete/get-servicios',getServiciosPaquete)
 router.post('/paquete/create-servicio',createServicioPaquete)
 router.delete('/paquete/servicio',deleteServicio)
 router.post('/paquete/get-hoteles',getLugaresHoteltes)
 
+//PAQUETES - ITINERARIO
+router.post('/paquete/create-elemento-itinerario', createElementoItinerario)
+router.post('/paquete/get-itinerario', getItinerarioByPaquete)
 
 router.get('/agencia/:agencia?', getAgenciaByName); 
 

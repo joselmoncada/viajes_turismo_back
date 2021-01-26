@@ -7,7 +7,8 @@ const getViajeros = async (req,res,next)=>{
         const response = await pool.query(`select * from cjv_viajero`)
         res.status(200).json(response.rows)
     } catch (e) {
-        return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -30,7 +31,8 @@ const getViajero = async (req,res,next)=>{
         console.log(response.rows)
         res.status(200).json(response.rows)
     } catch (e) {
-        return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -45,7 +47,8 @@ const getViajerosNoClientes = async (req,res,next)=>{
 		
 		res.status(200).json(response.rows)
     } catch (e) {
-        return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -59,8 +62,8 @@ const createViajero = async (req,res,next)=>{
                                             genero, id_pais, segundo_nombre, segundo_apellido]);
     res.send('viajero guardado');
     } catch (e) {
-        console.log(e)
-        return next(e.detail);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -75,7 +78,8 @@ const deleteViajero = async (req,res,next)=>{
             res.send('Se elimino correctamente la informacion');
             
     } catch (e) {
-        return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -89,7 +93,8 @@ const createPasaporte = async (req,res,next)=>{
         console.log('create Pasaporte: ', response);
         res.send('viajero creado con exito!'); 
     } catch (e) {
-        return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -101,7 +106,8 @@ const getPasaportesDeViajero = async (req,res,next)=>{
                                     [id_viajero])
         res.status(200).json(response.rows)
     } catch (e) {
-    return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -116,7 +122,8 @@ const getPasaportesDeViajeroVigentes = async (req,res,next)=>{
                                     [id_viajero])
         res.status(200).json(response.rows)
     } catch (e) {
-        return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -132,7 +139,8 @@ const deletePasaporte = async (req,res,next)=>{
         console.log('delete Pasaporte: ',response);
         res.send('viajero creado con exito!');
     } catch (e) {
-        return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -145,7 +153,8 @@ const registrarViajeroAAgencia = async (req,res,next)=>{
 
         res.send('viajero creado con exito!');
     } catch (e) {
-        return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -163,7 +172,8 @@ const finalizarViajeroRelacionConAgencia = async (req,res,next)=>{
         console.log(response.rows);
         res.status(200).json(response.rows);
     } catch (e) {
-        return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -179,7 +189,8 @@ const finalizarViajeroRelacionConAgenciasByIDViajero = async (req,res,next)=>{
         console.log(response.rows);
         res.status(200).json(response.rows);
     } catch (e) {
-        return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -196,7 +207,8 @@ const getRegistroViajeroVigente = async (req,res,next)=>{
 									[id_viajero])
 		res.status(200).json(response.rows)
 	} catch (e) {
-		return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -213,7 +225,8 @@ const getTodosRegistrosViajero = async (req,res,next)=>{
 									        [id_viajero])
 		res.status(200).json(response.rows)
 	} catch (e) {
-		return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -231,7 +244,8 @@ const getViajeroAgenciasAsociables = async(req,res,next)=>{
         console.log(response.rows)
         res.status(200).json(response.rows)
     } catch(e){
-        return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -245,7 +259,8 @@ const cantidadViajesIncluidoViajero = async(req,res,next)=>{
                                             [id_viajero])
         res.status(200).json(response.rows)
     } catch(e){
-        return next(e);
+        console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 

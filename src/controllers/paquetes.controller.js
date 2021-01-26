@@ -2,9 +2,14 @@ const DB = require('../../DataBase');
 pool = DB.getPool()
 
 const getPaquetes = async (req, res) => {
-    console.log('get paquetes')
-    const response = await pool.query('SELECT * FROM CJV_Paquete;');
-    res.status(200).json(response.rows);
+    try {
+        console.log('get paquetes')
+        const response = await pool.query('SELECT * FROM CJV_Paquete;');
+        res.status(200).json(response.rows);
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    }
 };
 
 const getAgenciaByName = async (req, res) => {
@@ -13,21 +18,24 @@ const getAgenciaByName = async (req, res) => {
         const response = await pool.query("SELECT id FROM CJV_Agencia as a WHERE a.nombre = $1",[nombre]);
         res.status(200).json(response.rows);
     } catch (e) {
-        res.status(500).send('Error: ocurrio un problema a la hora ejecutar la consulta')
+        console.log(e)
+        res.status(500).send(e);
     }
 };
 
 const createPaquete = async (req, res, next) => {
     try {
-        const { id_agencia, nombre,  descripcion, dias_duracion, max_num_viajeros } = req.body;
-        console.log('create Paquete:', req.body)
+        const { id_agencia, nombre,  descripcion, max_num_viajeros } = req.body;
+        console.log('create Paquete ahora:', id_agencia, nombre,  descripcion, max_num_viajeros)
         const response = await pool.query(`INSERT INTO CJV_Paquete
                                             (id_agencia, id, nombre, descripcion, dias_duracion, max_num_viajeros ) 
-                                            VALUES ($1, NEXTVAL('cjv_s_paquete'), $2,$3,$4,$5);`,
-                                            [id_agencia, nombre, descripcion, dias_duracion, max_num_viajeros]);
+                                            VALUES ($1, NEXTVAL('cjv_s_paquete'), $2,$3,0,$4);`,
+                                            [id_agencia, nombre, descripcion, max_num_viajeros]);
+        console.log('creado: ',response.rows)
         res.status(200).json(response.rows);
     } catch (e) {
-        res.status(500).send( e.detail);
+        console.log(e)
+        res.status(500).send(e);
     }
 };
 
@@ -38,7 +46,8 @@ const getPaqueteById = async(req, res) =>{
         const response = await pool.query("SELECT * FROM CJV_PAQUETE where id = $1",[id]);
         res.status(200).json(response.rows[0])
     } catch (e) {
-        res.status(500).send( e.detail);
+        console.log(e)
+        res.status(500).send(e);
     }
 };
 
@@ -50,17 +59,18 @@ const getPaqueteByPk = async(req, res) =>{
         const id_agencia = req.query.id_agencia;
         console.log('get Paquete By Pk: ', id_agencia, id)
 
-        const response = await pool.query(`select paq.id_agencia, paq.id, nombre, 
-                                            descripcion, dias_duracion,COALESCE(max_num_viajeros,0) max_num_viajeros, 
-                                            COALESCE(num_contratos,0) num_contratos
-                                            FROM cjv_paquete paq
-                                                left join (select count(*) num_contratos, id_agencia, id_paquete 
-                                                            from cjv_paquete_contrato 
-                                                            group by id_agencia, id_paquete) cont
-                                                    on cont.id_agencia = paq.id_agencia and cont.id_paquete = paq.id 
-                                            where paq.id_agencia = $1 and id = $2;`,[id_agencia,id]);
+        const response = await pool.query(`select paq.id_agencia, nombre_agencia, paq.id, nombre,  descripcion, 
+                                                dias_duracion,COALESCE(max_num_viajeros,0) max_num_viajeros, 
+                                                COALESCE(num_contratos,0) num_contratos
+                                            FROM (select id, nombre nombre_agencia from cjv_agencia) agen,cjv_paquete paq
+                                            left join (select count(*) num_contratos, id_agencia, id_paquete 
+                                                from cjv_paquete_contrato 
+                                            group by id_agencia, id_paquete) cont
+                                                on cont.id_agencia = paq.id_agencia and cont.id_paquete = paq.id 
+                                            where paq.id_agencia = agen.id and paq.id_agencia = $1 and paq.id = $2;`,[id_agencia,id]);
         res.status(200).json(response.rows[0])
     } catch (e) {
+        console.log(e)
         res.status(500).send(e)
     }
 };
@@ -77,7 +87,8 @@ const getPrecioByPk= async(req,res) =>{
         console.log('respuesta: ', response.rows)
         res.status(200).json(response.rows)
     } catch (e) {
-        res.status(500).send(e)
+        console.log(e)
+        res.status(500).send(e);
     }
 }
 
@@ -94,7 +105,8 @@ const getHistoricoPreciosByPk = async(req,res) =>{
         console.log('respuesta:', response.rows)                                     
         res.status(200).json(response.rows)
     } catch (e) {
-        res.status(500).send( e.detail);
+        console.log(e)
+        res.status(500).send(e);
     }
 }
 
@@ -136,7 +148,24 @@ const getPaquetesDisponibles = async(req,res) => {
                                     
         res.status(200).json(response.rows)
     } catch (e) {
-        res.status(500).send( e.detail);
+        console.log(e)
+        res.status(500).send(e);
+    }
+}
+
+const updateDuracionPaquete = async(req,res) =>{
+    try{
+        const { id_agencia, id_paquete, duracion} = req.body
+        console.log('update Duracion Paquete: ', id_agencia, id_paquete, duracion)
+        const response = await pool.query(`update cjv_paquete
+                                    set dias_duracion = $1
+                                    where id_agencia = $2 and id = $3`,
+                                    [duracion, id_agencia, id_paquete])
+    res.status(200).json(response.rows)
+    }
+    catch(e){
+        console.log(e)
+        res.status(500).send(e);
     }
 }
 
@@ -161,7 +190,8 @@ const deletePaquete = async(req,res) =>{
         res.status(200).json(response7.rows)
         
     } catch (e) {
-        res.status(500).send( e );
+        console.log(e)
+        res.status(500).send(e);
     }
 }
 
@@ -182,8 +212,8 @@ const createPrecio = async(req,res) =>{
                                            [id_agencia,id_paquete,valor_base]);
         res.status(200).json(response.rows)
    } catch (e) {
-       console.log(e)
-        res.status(500).send( e.detail);
+        console.log(e)
+        res.status(500).send(e);
    }
 }   
 
@@ -199,7 +229,8 @@ const updatePrecio = async(res,req) =>{
                                                 [id_agencia,id_paquete,]);
         res.status(200).json(response.rows)
     } catch (e) {
-        res.status(500).send( e.detail);
+        console.log(e)
+        res.status(500).send(e);
     }
 }
 
@@ -217,7 +248,8 @@ const getCalendarioDisponible = async(req,res) =>{
         console.log('respuesta:', response.rows)                                     
         res.status(200).json(response.rows)
     } catch (e) {
-        res.status(500).send( e.detail);
+        console.log(e)
+        res.status(500).send(e);
     }
 }
 
@@ -234,7 +266,8 @@ const getHistoricoCalendario = async(req,res) =>{
         console.log('respuesta:', response.rows)                                     
         res.status(200).json(response.rows)
     } catch (e) {
-        res.status(500).send( e.detail);
+        console.log(e)
+        res.status(500).send(e);
     }
 }
 
@@ -277,7 +310,8 @@ const getServiciosPaquete = async(req,res) =>{
         console.log(response.rows)                     
         res.status(200).json(response.rows)
     } catch (e) {
-        res.status(500).send( e.detail);
+        console.log(e)
+        res.status(500).send(e);
     }
 }
 
@@ -320,7 +354,8 @@ const deleteServicio = async(req,res) =>{
                         [id_agencia, id_paquete, id])
         res.status(200).json(response2.rows)  
     } catch (e) {
-        res.status(500).send( e );
+        console.log(e)
+        res.status(500).send(e);
     }
 }
 
@@ -339,7 +374,8 @@ const getLugaresHoteltes = async (req,res) =>{
                                             where id_ciudad = c.id`);                            
         res.status(200).json(response.rows)
     } catch (e) {
-        res.status(500).send( e.detail);
+        console.log(e)
+        res.status(500).send(e);
     }
 }
 
@@ -348,7 +384,19 @@ const getElementoItinerarioById = async(req,res) =>{
 };
 
 const createElementoItinerario = async(req,res) =>{
+    try {
+        const {id_agencia, id_paquete,secuencia, tiempo_estancia_dias, id_pais, id_ciudad} = req.body
 
+        console.log('create Elemento Itinerario: ', id_agencia, id_paquete, secuencia, tiempo_estancia_dias, id_pais, id_ciudad)
+        
+        const response1 = await pool.query(`insert into cjv_itinerario
+                                            values($1,$2,nextval('cjv_s_itinerario'),$3,$4,$5,$6)`
+                                            ,[id_agencia,id_paquete,secuencia,tiempo_estancia_dias,id_pais,id_ciudad]);
+        res.status(200).json(response1.rows)   
+    } catch (e) {
+            console.log(e)
+            res.status(500).send( e.detail);
+    }
 };
 
 const deleteElementoItinarario = async(req,res) =>{
@@ -356,7 +404,22 @@ const deleteElementoItinarario = async(req,res) =>{
 };
 
 const getItinerarioByPaquete = async(req,res) =>{
-
+    try {
+        const {id_agencia, id_paquete} = req.body
+        console.log('create Elemento Itinerario: ', id_agencia, id_paquete)
+        
+        const response1 = await pool.query(` select id_agencia, id_paquete, itin.id, secuencia, 
+                                                tiempo_estancia_dias, itin.id_pais, itin.id_ciudad, 
+                                                ciu.nombre nombre_ciudad
+                                            from (select id_pais, id, nombre from cjv_ciudad) ciu, cjv_itinerario itin
+                                            where itin.id_pais = ciu.id_pais and itin.id_ciudad = ciu.id 
+                                                and itin.id_agencia = $1 and itin.id_paquete = $2`
+                                            ,[id_agencia, id_paquete]);
+        res.status(200).json(response1.rows)   
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    }
 };
 
 
@@ -371,6 +434,7 @@ module.exports = {
     getPaqueteByPk,
     getPaquetesDisponibles,
     createPaquete,
+    updateDuracionPaquete,
     deletePaquete,
 
     getHistoricoPreciosByPk,
@@ -386,5 +450,8 @@ module.exports = {
     createServicioPaquete,
     deleteServicio,
     getLugaresHoteltes,
+
+    getItinerarioByPaquete,
+    createElementoItinerario,
 
 }
