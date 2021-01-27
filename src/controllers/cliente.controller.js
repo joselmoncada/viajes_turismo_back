@@ -259,7 +259,11 @@ const createInstrumentoPago = async (req,res,next)=>{
 									values($1,nextval('cjv_s_instrumento_pago'),$2,$3,$4,$5)`,
 									[id_cliente, clasificacion, id_banco, numero, email])
 		res.status(200).json(response)
+		res.send("Instrumento creado");
+		
 	} catch (e) {
+		console.log(JSON.stringify(error));
+		res.send(error);
 		return next(e);
 	}
 }

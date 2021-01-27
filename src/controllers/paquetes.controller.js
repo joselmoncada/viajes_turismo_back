@@ -108,8 +108,8 @@ const createPaqueteContrato = async (req, res)=>{
 
         //SI EL CLIENTE ESTA ASOCIADO A UNA AGENCIA SE DEBE ELIMINAR DICHA ASOCIACION
 
-        if(res3.rows.length>=0){
-           registro_cliente = res3.rows[0]
+        if(res3.rows.length>0){
+           registro_cliente = res3.rows[0];
             if(registro_cliente.id_agencia != id_paquete_agencia){
                 const res4 = await pool.query(`update cjv_registro_cliente
                                             set fecha_fin = CURRENT_DATE
@@ -123,7 +123,7 @@ const createPaqueteContrato = async (req, res)=>{
             const res5 = await pool.query(`insert into cjv_registro_cliente(id_agencia, id_cliente, fecha_inicio)
 									values($1,$2,CURRENT_DATE)`,
                                     [id_paquete_agencia, id_cliente]);
-            registro_cliente = res5.rows;
+            registro_cliente = res5.rows[0];
            console.log("response Insert registro "+JSON.stringify(registro_cliente));
         }
       
@@ -144,10 +144,14 @@ const createPaqueteContrato = async (req, res)=>{
 const getContratoId = async(req,res)=>{
    try {
     const {fecha_viaje, id_paquete,id_cliente}= req.body;
-    const response = await pool.query(`SELECT id FROM CJV_PAQUETE_CONTRATO WHERE 
+    let response = await pool.query(`SELECT id FROM CJV_PAQUETE_CONTRATO WHERE 
     fecha_viaje=$1 AND id_paquete=$2 AND id_cliente=$3
     `, [fecha_viaje, id_paquete,id_cliente]);
-    res.status(200).json(response.rows);
+    if(response.rows.length>0){
+        response = response.rows[0];
+    }
+    console.log("Contrato: "+ response);
+    res.status(200).json(response);
    } catch (error) {
        console.log(error);
    }
@@ -163,9 +167,32 @@ const asociarFormaPago = async (req, res )=>{
         VALUES ($1,$2,$3,$4);`, [id_contrato, id_cliente, id_instrumento, tipo]);
         console.log(response);
         //res.status(200).json(response.rows);
-        res.send("Froma de pago asociada exitosamente")
+        res.send("Froma de pago asociada exitosamente");
     } catch (error) {
-        console.log(error);
+        
+        console.log(JSON.stringify(error));
+        res.send(error);
+    }
+}
+
+const asociarViajeroContrato =  (req, res )=>{
+    /**Asocia un listado de viajeros con un contrato generado */
+    try {
+        
+        const {id_contrato,id_agencia,viajeros} = req.body;
+       // id_contrato|id_agencia|id_viajero|fecha_registro
+
+        viajeros.forEach(viajero => {
+           let res1 =  pool.query(`INSERT INTO CJV_FORMA_PAGO(id_contrato, id_cliente, id_instrumento, tipo )
+            VALUES ($1,$2,$3,CURRENT_DATE);`, [id_contrato, id_agencia, viajero.id_viajero]);
+            console.log(res1);
+        });
+        //res.status(200).json(response.rows);
+        //res.send("Viajeros asociados exitosamente");
+    } catch (error) {
+        
+        console.log(JSON.stringify(error));
+        res.send(error);
     }
 }
 
@@ -178,6 +205,7 @@ module.exports = {
     getPrecioPaquete,
     createPaqueteContrato,
     asociarFormaPago,
-    getContratoId
+    getContratoId,
+    asociarViajeroContrato,
 
 }
