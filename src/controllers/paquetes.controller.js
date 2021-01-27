@@ -64,7 +64,7 @@ const getPrecioPaquete = async(req, res) =>{
         
         var currentDate = new Date().toLocaleString().slice(0,10);
         const response = await pool.query(`SELECT * FROM CJV_HISTORICO_PRECIO
-         WHERE id_agencia=$1 and id_paquete=$2 and fecha_fin=null;`, [agencia, paquete]);
+         WHERE id_agencia=$1 and id_paquete=$2 and fecha_fin is null;`, [agencia, paquete]);
          return res.status(200).json(response.rows);
 
 
@@ -87,13 +87,14 @@ const createPaqueteContrato = async (req, res)=>{
 
         /**OBTENGO OBJ PRECIO DESDE ID DEL PAQUETE Y AGENCIA */
         const res2 =  await pool.query(`SELECT * FROM CJV_HISTORICO_PRECIO 
-        WHERE id_agencia=$1 and id_paquete=$2 and fecha_fin=null;`, [id_paquete_agencia, id_paquete]);
+        WHERE id_agencia=$1 and id_paquete=$2 and fecha_fin is null;`, [id_paquete_agencia, id_paquete]);
+        console.log("Total neto: "+ JSON.stringify(res2.rows));
         let total_neto = 0;
         if(res2.rows.length>=0){
             total_neto = res2.rows[0].valor_base;
-    
+            
         }
-        console.log("Total neto: "+ total_neto);
+       
 
         /**OBTENGO REGISTRO_CLIENTE DADO EL ID DEL CLIENTE --> ID_AGENCIA_CLIENTE, FECHA_INICIO DE LA ASOCIACION*/
         const res3 =  await pool.query(`SELECT reg.id_agencia as id_agencia, agen.nombre as nombre_agencia, reg.id_cliente, 
