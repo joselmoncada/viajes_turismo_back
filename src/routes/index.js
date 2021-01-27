@@ -114,6 +114,6 @@ router.post('/paquete-contrato',createPaqueteContrato);
 //RALLIES
 router.get('/rallies', getRallies);
 router.post('/rallies', createRally);
-router.delete('/rallies/:id', deleteRally);
+router.delete('/rallies/:id?', deleteRally);
 
 module.exports = router;

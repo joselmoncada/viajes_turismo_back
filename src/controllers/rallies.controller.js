@@ -16,20 +16,20 @@ const createRally = async (req, res) => {
         const response = await pool.query("INSERT INTO CJV_RALLY (id,nombre,fecha_inicio,fecha_limite,max_num_cupos,modalidad,costo_participacion,informacion)"+
         "VALUES (NEXTVAL('cjv_s_rally'),$1,$2,$3,$4,$5,$6,$7)", [nombre,fecha_inicio,fecha_limite,max_num_cupos, modalidad,costo_participacion,informacion]);
         console.log(response);
-
-        res.send('Rally creado con exito!');
+        res.status(200).json("Rally :" + JSON.stringify(req.body) + " creado");
     } catch (error) {
         console.log(error);
     }
 }
 
 const deleteRally = async (req, res) => {
-    try {        
+    try {
+        
         console.log('Rally: ' + req.params.id);
         console.log("DELETE FROM CJV_rally WHERE id = " + req.params.id + ";");
         const response = await pool.query("DELETE FROM CJV_rally WHERE id = " + req.params.id + ";");
         console.log(response);
-        res.send('Rally eliminado con exito!');
+        res.status(200).json("Rally con el id: " + req.params.id + " eliminado");
     } catch (error) {
         console.log(error);
     }
