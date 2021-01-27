@@ -4,7 +4,7 @@ const router = Router();
 
 const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones, getVendedoresFromAgencia } = require('../controllers/index.controller');
 const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, } = require('../controllers/regiones.controller');
-const { getPaquetes, createPaquete, getAgenciaByName, deletePaquete, getPaqueteById, getPrecioPaquete ,createPaqueteContrato} = require('../controllers/paquetes.controller');
+const { getPaquetes, createPaquete, getAgenciaByName, deletePaquete, getPaqueteById, getPrecioPaquete ,createPaqueteContrato, asociarFormaPago, getContratoId} = require('../controllers/paquetes.controller');
 const {getRallies, createRally } = require('../controllers/rallies.controller');
 const { getHistoricoProveedor, getProveedoresNoRelacionadosConAgencia,
         createAsociacionConProveedor, updateAsocacionConProveedor 
@@ -108,8 +108,10 @@ router.post('/paquetes', createPaquete);
 router.delete('/paquetes/:id', deletePaquete);
 
 router.get('/paquete-costo/:id_agencia?/:id_paquete?', getPrecioPaquete);
-
-router.post('/paquete-contrato',createPaqueteContrato);
+//apartado Contrato
+router.post('/contrato',createPaqueteContrato);
+router.post('/get-contrato', getContratoId);
+router.post('/contrato/forma-pago', asociarFormaPago);
 
 //RALLIES
 router.get('/rallies', getRallies);

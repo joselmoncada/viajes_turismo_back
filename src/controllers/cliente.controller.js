@@ -64,6 +64,27 @@ const getClienteByID = async (req,res,next)=>{
     }
 }
 
+const getRegistroClienteById = async(req,res) =>{
+	try {
+		
+		const id_cliente = req.query.id_cliente
+		console.log('get RegistroCliente By ID:', id_cliente )
+		const response = await pool.query(`select id from cjv_cliente
+											left join( 
+													select count(*) total, id_cliente 
+													from cjv_registro_cliente 
+													group by id_cliente) registro
+												on registro.id_cliente = id
+											where  id = $1`, [id_cliente])
+		
+		res.status(200).json(response.rows);
+		
+    } catch (e) {
+		console.log(error);
+        return next(e);
+    }
+}
+
 
 const getClientesNoViajeros = async (req,res,next)=>{ 
 	try {
