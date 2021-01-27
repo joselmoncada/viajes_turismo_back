@@ -24,12 +24,11 @@ const createRally = async (req, res) => {
 }
 
 const deleteRally = async (req, res) => {
-    try {
-        const {id} = req.body;
-        console.log('Rally: '+JSON.stringify(req.body))
-        const response = await pool.query("DELETE FROM CJV_RALLY WHERE id = $1",[id]);
+    try {        
+        console.log('Rally: ' + req.params.id);
+        console.log("DELETE FROM CJV_rally WHERE id = " + req.params.id + ";");
+        const response = await pool.query("DELETE FROM CJV_rally WHERE id = " + req.params.id + ";");
         console.log(response);
-
         res.send('Rally eliminado con exito!');
     } catch (error) {
         console.log(error);

@@ -5,7 +5,7 @@ const router = Router();
 const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones, getVendedoresFromAgencia } = require('../controllers/index.controller');
 const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, } = require('../controllers/regiones.controller');
 const { getPaquetes, createPaquete, getAgenciaByName, deletePaquete, getPaqueteById, getPrecioPaquete ,createPaqueteContrato} = require('../controllers/paquetes.controller');
-const {getRallies, createRally } = require('../controllers/rallies.controller');
+const {getRallies, createRally, deleteRally } = require('../controllers/rallies.controller');
 const { getHistoricoProveedor, getProveedoresNoRelacionadosConAgencia,
         createAsociacionConProveedor, updateAsocacionConProveedor 
     } = require('../controllers/proveedores.controller');
@@ -114,6 +114,6 @@ router.post('/paquete-contrato',createPaqueteContrato);
 //RALLIES
 router.get('/rallies', getRallies);
 router.post('/rallies', createRally);
-
+router.delete('/rallies/:id', deleteRally);
 
 module.exports = router;
