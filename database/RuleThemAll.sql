@@ -503,7 +503,7 @@ CREATE SEQUENCE cjv_s_valoracion
 	  start with 1 increment by 1 MAXVALUE 999999;
 
 CREATE SEQUENCE cjv_s_num_factura
-start with 1 increment by 1 MAXVALUE 999999;
+start with 700 increment by 1 MAXVALUE 999999;
 
 
 /******INSERCIONES-INSERT****************/
@@ -822,15 +822,15 @@ INSERT INTO cjv_asociacion (id_agencia1, id_agencia2, fecha_inicio, fecha_fin) V
 
 --------AREAS DE INTERES
 
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (1,'Aventura','El turismo de aventura es un tipo de turismo que implica exploraciones o viajes con una percepción de riesgos, y que potencialmente requiere de destrezas especiales o de ciertas condiciones físicas donde es común la práctica de algún deporte extremo.');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (2,'Celebraciones Especiales','Los viajes que son de este tipo se centran en festejar fechas importantes ya sea algo cultural o bien que sea un evento importante para una persona que merece una celebración diferente.');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (3,'Cultura & Educación','Es un tipo de turismo enfocado al aprendizaje, conocer nuevos lugares y aprender de ellos lo más que se pueda es el objetivo de esta área del turismo');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (4,'Submarinismo','Turismo enfocado a la exploración y admiración del fondo del mar, su flora y fauna, sus estructuras, etc.');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (5,'Pesca','Se centra en las rutas de pesca, en donde se pueden entrar todo tipo de peces');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (6,'Gastronomía','Turismo enfocado a la comidas típicas de las regiones');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (7,'Romance','Este área de interés se enfoca en fortalecer relaciones de parejas, perfecto para una luna de miel.');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (8,'SPA & Bienestar','La relajación es el fuerte de este tipo de turismo, se centra en el descanso, la recuperación de fuerzas y lo más importante hacer sentir a las personas que han recobrado vitalidad.');
-INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (9,'Turismo familiar','El turismo de este tipo se trata de realizar actividades entre toda la familia, conocer nuevos lugares y crear nuevos y grandiosos recuerdos con los seres queridos');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (nextval('cjv_s_area_interes'),'Aventura','El turismo de aventura es un tipo de turismo que implica exploraciones o viajes con una percepción de riesgos, y que potencialmente requiere de destrezas especiales o de ciertas condiciones físicas donde es común la práctica de algún deporte extremo.');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (nextval('cjv_s_area_interes'),'Celebraciones Especiales','Los viajes que son de este tipo se centran en festejar fechas importantes ya sea algo cultural o bien que sea un evento importante para una persona que merece una celebración diferente.');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (nextval('cjv_s_area_interes'),'Cultura & Educación','Es un tipo de turismo enfocado al aprendizaje, conocer nuevos lugares y aprender de ellos lo más que se pueda es el objetivo de esta área del turismo');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (nextval('cjv_s_area_interes'),'Submarinismo','Turismo enfocado a la exploración y admiración del fondo del mar, su flora y fauna, sus estructuras, etc.');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (nextval('cjv_s_area_interes'),'Pesca','Se centra en las rutas de pesca, en donde se pueden entrar todo tipo de peces');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (nextval('cjv_s_area_interes'),'Gastronomía','Turismo enfocado a la comidas típicas de las regiones');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (nextval('cjv_s_area_interes'),'Romance','Este área de interés se enfoca en fortalecer relaciones de parejas, perfecto para una luna de miel.');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (nextval('cjv_s_area_interes'),'SPA & Bienestar','La relajación es el fuerte de este tipo de turismo, se centra en el descanso, la recuperación de fuerzas y lo más importante hacer sentir a las personas que han recobrado vitalidad.');
+INSERT INTO CJV_Area_interes(id,nombre,descripcion) VALUES (nextval('cjv_s_area_interes'),'Turismo familiar','El turismo de este tipo se trata de realizar actividades entre toda la familia, conocer nuevos lugares y crear nuevos y grandiosos recuerdos con los seres queridos');
 
 
 ----AGEN_INT
@@ -859,15 +859,15 @@ INSERT INTO cjv_agen_int VALUES
 ----DESCUENTO
 
 INSERT INTO CJV_descuento VALUES
-(1, 1, '10/5/2019', 'niños', 10, 'descuento para menores de edad', null),
-(2, 2, '20/5/2019', 'tercera edad', 15, 'descuento para mayores de 60 años', null),
-(3, 3, '12/7/2019', 'niños', 12, 'descuento para menores de edad', null),
-(4, 4, '13/9/2019', 'mujeres', 8, 'descuento para damas', null),
-(5, 5, '14/5/2019', 'tercera edad', 20, 'descuento para mayores de 60 años', null),
-(6, 6, '4/10/2019', 'mujeres', 8, 'descuento para damas', null),
-(7, 7, '16/3/2019', 'niños', 10, 'descuento para menores de edad', null),
-(8, 8, '17/7/2019', 'tercera edad', 15, 'descuento para mayores de 60 años', null),
-(9, 9, '18/5/2019', 'niños', 14, 'descuento para menores de edad', null);
+(1, nextval('cjv_s_descuento'), '10/5/2019', 'niños', 10, 'descuento para menores de edad', null),
+(2, nextval('cjv_s_descuento'), '20/5/2019', 'tercera edad', 15, 'descuento para mayores de 60 años', null),
+(3, nextval('cjv_s_descuento'), '12/7/2019', 'niños', 12, 'descuento para menores de edad', null),
+(4, nextval('cjv_s_descuento'), '13/9/2019', 'mujeres', 8, 'descuento para damas', null),
+(5, nextval('cjv_s_descuento'), '14/5/2019', 'tercera edad', 20, 'descuento para mayores de 60 años', null),
+(6, nextval('cjv_s_descuento'), '4/10/2019', 'mujeres', 8, 'descuento para damas', null),
+(7, nextval('cjv_s_descuento'), '16/3/2019', 'niños', 10, 'descuento para menores de edad', null),
+(8, nextval('cjv_s_descuento'), '17/7/2019', 'tercera edad', 15, 'descuento para mayores de 60 años', null),
+(9, nextval('cjv_s_descuento'), '18/5/2019', 'niños', 14, 'descuento para menores de edad', null);
 
 
 -----PROVEEDORES
@@ -918,42 +918,42 @@ INSERT INTO CJV_historico_proveedor VALUES
 
 ----VENDEDOR
 INSERT INTO CJV_vendedor VALUES
-(1, 'Jorge', 'Gonzalez', '10/5/1993', 'M', 1, 'Carlos', 'Hernandez'),
-(2, 'Victor', 'Barrios', '8/11/1995', 'M', 2, 'Ramon', 'Morffe'),
-(3, 'Jose', 'Gomez', '7/4/1992', 'M', 3, null, 'Pizarro'),
-(4, 'Cristian', 'Ramirez', '11/7/1996', 'M', 4, 'Jorge', 'Perez'),
-(5, 'Madelein', 'Fernandez', '31/1/2000', 'F', 5, 'Sofia', 'Marquez'),
-(6, 'Victoria', 'Rivero', '13/5/1999', 'F', 6, null, 'Jordan'),
-(7, 'Carlos', 'Martinez', '15/3/1997', 'M', 7, 'Esteban', 'Franquis'),
-(8, 'Sofia', 'Gerrero', '10/7/1995', 'F', 8, 'Carolina', 'Betancourt'),
-(9, 'Carla', 'Almeida', '24/5/1994', 'F', 9, 'Elizabeth', 'Cardenas');
+(nextval('cjv_s_vendedor'), 'Jorge', 'Gonzalez', '10/5/1993', 'M', 1, 'Carlos', 'Hernandez'),
+(nextval('cjv_s_vendedor'), 'Victor', 'Barrios', '8/11/1995', 'M', 2, 'Ramon', 'Morffe'),
+(nextval('cjv_s_vendedor'), 'Jose', 'Gomez', '7/4/1992', 'M', 3, null, 'Pizarro'),
+(nextval('cjv_s_vendedor'), 'Cristian', 'Ramirez', '11/7/1996', 'M', 4, 'Jorge', 'Perez'),
+(nextval('cjv_s_vendedor'), 'Madelein', 'Fernandez', '31/1/2000', 'F', 5, 'Sofia', 'Marquez'),
+(nextval('cjv_s_vendedor'), 'Victoria', 'Rivero', '13/5/1999', 'F', 6, null, 'Jordan'),
+(nextval('cjv_s_vendedor'), 'Carlos', 'Martinez', '15/3/1997', 'M', 7, 'Esteban', 'Franquis'),
+(nextval('cjv_s_vendedor'), 'Sofia', 'Gerrero', '10/7/1995', 'F', 8, 'Carolina', 'Betancourt'),
+(nextval('cjv_s_vendedor'), 'Carla', 'Almeida', '24/5/1994', 'F', 9, 'Elizabeth', 'Cardenas');
 
 
 ----PAQUETE
 
 INSERT INTO CJV_paquete VALUES
-(1, 1, 'Aventuras inolvidables', 'Conoce lo mejor de la naturaleza de la mano de aventuras inolvidables', 5, 6),
-(3, 2, 'Fin de semana en pareja', 'Fin de semana en pareja para darle un cariñito a tu relacion', 3, 2),
-(4, 3, 'Paraiso para 2 personas', 'Uno de los destinos mas paradisiacos del planeta', 3, 2),
-(8, 4, 'Festival Hanami', 'Conoce mas de la cultura asiatica a traves de uno de los Festivales mas importantes', 7, 6),
-(2, 5, 'Descanso en Pareja', '2 dias de descanso para parejas', 2, 2),
-(7, 6, 'Decubre nuevas Culturas', 'Un viaje para descubrir las maravillas de las culturas locales siendo amable con el ambiente', 4, 4),
-(5, 7, 'Fin de semana romantico', 'Fin de semana para 2 con todo incluido, para que disfrutes en pareja de las maravillas que te esperan', 3, 2),
-(6, 8, 'La magia del medio oriente', 'Conoce estas tierras exoticas con tu grupo familiar o amigos con todo incluido', 7, 4),
-(9, 9, 'Europa en grupo', 'Conocer Europa con tus amigos o familia', 15, 10);
+(1, nextval('cjv_s_paquete'), 'Aventuras inolvidables', 'Conoce lo mejor de la naturaleza de la mano de aventuras inolvidables', 5, 6),
+(3, nextval('cjv_s_paquete'), 'Fin de semana en pareja', 'Fin de semana en pareja para darle un cariñito a tu relacion', 3, 2),
+(4, nextval('cjv_s_paquete'), 'Paraiso para 2 personas', 'Uno de los destinos mas paradisiacos del planeta', 3, 2),
+(8, nextval('cjv_s_paquete'), 'Festival Hanami', 'Conoce mas de la cultura asiatica a traves de uno de los Festivales mas importantes', 7, 6),
+(2, nextval('cjv_s_paquete'), 'Descanso en Pareja', '2 dias de descanso para parejas', 2, 2),
+(7, nextval('cjv_s_paquete'), 'Decubre nuevas Culturas', 'Un viaje para descubrir las maravillas de las culturas locales siendo amable con el ambiente', 4, 4),
+(5, nextval('cjv_s_paquete'), 'Fin de semana romantico', 'Fin de semana para 2 con todo incluido, para que disfrutes en pareja de las maravillas que te esperan', 3, 2),
+(6, nextval('cjv_s_paquete'), 'La magia del medio oriente', 'Conoce estas tierras exoticas con tu grupo familiar o amigos con todo incluido', 7, 4),
+(9, nextval('cjv_s_paquete'), 'Europa en grupo', 'Conocer Europa con tus amigos o familia', 15, 10);
 
 ----ESPECIALIZACION
 
 INSERT INTO CJV_especializacion VALUES
-(1, 1, 1, 1, 1, 1, 17, 17, 33, 'Aventura al aire libre'),
-(2, 2, 2, 2, 2, 5, 10, 10, 19, 'Paraiso animal'),
-(6, 3, 3, 3, 3, 2, 22, 22, 43, 'Para paladares exigentes'),
-(7, 4, 4, 4, 4, 3, 23, 23, 46, 'Un viaje romantico'),
-(8, 5, 5, 5, 5, 7, 6, 6, 11, 'Fin de semana en pareja '),
-(4, 6, 6, 6, 6, 8, 5, 5, 9, 'Conociendo la estructuras antiguas'),
-(3, 7, 7, 7, 7, 6, 18, 18, 36, 'Cultura Responsable'),
-(3, 8, 8, 8, 8, 4, 13, 13, 26, 'Cultura Asiatica'),
-(8, 9, 9, 9, 9, 9, 2, 2, 3, 'Conociendo Europa');
+(1, nextval('cjv_s_especializacion'), 1, 1, 1, 1, 17, 17, 33, 'Aventura al aire libre'),
+(2, nextval('cjv_s_especializacion'), 2, 2, 2, 5, 10, 10, 19, 'Paraiso animal'),
+(6, nextval('cjv_s_especializacion'), 3, 3, 3, 2, 22, 22, 43, 'Para paladares exigentes'),
+(7, nextval('cjv_s_especializacion'), 4, 4, 4, 3, 23, 23, 46, 'Un viaje romantico'),
+(8, nextval('cjv_s_especializacion'), 5, 5, 5, 7, 6, 6, 11, 'Fin de semana en pareja '),
+(4, nextval('cjv_s_especializacion'), 6, 6, 6, 8, 5, 5, 9, 'Conociendo la estructuras antiguas'),
+(3, nextval('cjv_s_especializacion'), 7, 7, 7, 6, 18, 18, 36, 'Cultura Responsable'),
+(3, nextval('cjv_s_especializacion'), 8, 8, 8, 4, 13, 13, 26, 'Cultura Asiatica'),
+(8, nextval('cjv_s_especializacion'), 9, 9, 9, 9, 2, 2, 3, 'Conociendo Europa');
 
 
 ----CALENDARIO_ANUAL
@@ -982,32 +982,32 @@ INSERT INTO CJV_calendario_anual VALUES
 ----ITINERARIO
 
 INSERT INTO CJV_itinerario VALUES
-(1, 1, 1, 1, 2, 17, 17),
-(3, 2, 2, 1, 1, 22, 22),
-(4, 3, 3, 1, 1, 23, 23),
-(8, 4, 4, 1, 3, 13, 13),
-(2, 5, 5, 1, 1, 10, 10),
-(7, 6, 6, 1, 2, 18, 18),
-(5, 7, 7, 1, 1, 6, 6),
-(6, 8, 8, 1, 3, 5, 5),
-(9, 9, 9, 1, 5, 2, 2),
-(1, 1, 10, 2, 2, 17, 17),
-(3, 2, 11, 2, 1, 22, 22),
-(4, 3, 12, 2, 1, 23, 23),
-(8, 4, 13, 2, 2, 13, 13),
-(2, 5, 14, 2, 1, 10, 10),
-(7, 6, 15, 2, 1, 18, 18),
-(5, 7, 16, 2, 1, 6, 6),
-(6, 8, 17, 2, 2, 5, 5),
-(9, 9, 18, 2, 5, 2, 2),
-(1, 1, 19, 3, 1, 17, 17),
-(3, 2, 20, 3, 1, 22, 22),
-(4, 3, 21, 3, 1, 23, 23),
-(8, 4, 22, 3, 2, 13, 13),
-(7, 6, 24, 3, 1, 18, 18),
-(5, 7, 25, 3, 1, 6, 6),
-(6, 8, 26, 3, 2, 5, 5),
-(9, 9, 27, 3, 5, 2, 2);
+(1, 1, nextval('cjv_s_itinerario'), 1, 2, 17, 17),
+(3, 2, nextval('cjv_s_itinerario'), 1, 1, 22, 22),
+(4, 3, nextval('cjv_s_itinerario'), 1, 1, 23, 23),
+(8, 4, nextval('cjv_s_itinerario'), 1, 3, 13, 13),
+(2, 5, nextval('cjv_s_itinerario'), 1, 1, 10, 10),
+(7, 6, nextval('cjv_s_itinerario'), 1, 2, 18, 18),
+(5, 7, nextval('cjv_s_itinerario'), 1, 1, 6, 6),
+(6, 8, nextval('cjv_s_itinerario'), 1, 3, 5, 5),
+(9, 9, nextval('cjv_s_itinerario'), 1, 5, 2, 2),
+(1, 1, nextval('cjv_s_itinerario'), 2, 2, 17, 17),
+(3, 2, nextval('cjv_s_itinerario'), 2, 1, 22, 22),
+(4, 3, nextval('cjv_s_itinerario'), 2, 1, 23, 23),
+(8, 4, nextval('cjv_s_itinerario'), 2, 2, 13, 13),
+(2, 5, nextval('cjv_s_itinerario'), 2, 1, 10, 10),
+(7, 6, nextval('cjv_s_itinerario'), 2, 1, 18, 18),
+(5, 7, nextval('cjv_s_itinerario'), 2, 1, 6, 6),
+(6, 8, nextval('cjv_s_itinerario'), 2, 2, 5, 5),
+(9, 9, nextval('cjv_s_itinerario'), 2, 5, 2, 2),
+(1, 1, nextval('cjv_s_itinerario'), 3, 1, 17, 17),
+(3, 2, nextval('cjv_s_itinerario'), 3, 1, 22, 22),
+(4, 3, nextval('cjv_s_itinerario'), 3, 1, 23, 23),
+(8, 4, nextval('cjv_s_itinerario'), 3, 2, 13, 13),
+(7, 6, nextval('cjv_s_itinerario'), 3, 1, 18, 18),
+(5, 7, nextval('cjv_s_itinerario'), 3, 1, 6, 6),
+(6, 8, nextval('cjv_s_itinerario'), 3, 2, 5, 5),
+(9, 9, nextval('cjv_s_itinerario'), 3, 5, 2, 2);
 
 
 ----ITIN_ATRACCION
@@ -1035,42 +1035,42 @@ INSERT INTO CJV_itin_atraccion VALUES
 (3, 2, 20, 22, 22, 44, 3),
 (4, 3, 21, 23, 23, 45, 3),
 (8, 4, 22, 13, 13, 26, 3),
-(7, 6, 24, 18, 18, 35, 3),
-(5, 7, 25, 6, 6, 11, 3),
-(6, 8, 26, 5, 5, 10, 3),
-(9, 9, 27, 2, 2, 4, 3);
+(7, 6, 23, 18, 18, 35, 3),
+(5, 7, 24, 6, 6, 11, 3),
+(6, 8, 25, 5, 5, 10, 3),
+(9, 9, 26, 2, 2, 4, 3);
 
 
 ----SERVICIO_DETALLE
 
 INSERT INTO CJV_servicio_detalle VALUES
-(1, 1, 1, 'Marriot International', 'Descanso en la mejor franquicia', 'hospedaje', true),
-(3, 2, 2, 'Marriot International', 'Descanso en la mejor franquicia', 'hospedaje', true),
-(4, 3, 3, 'Hilton WorldWide Holdings ', 'Uno de las mejores cadenas', 'hospedaje', true),
-(8, 4, 4, 'Melia Hotels International', 'Lo mejor de España en el mundo', 'hospedaje', true),
-(2, 5, 5, 'NH Hotel Group', 'Tradicion de Comodidad y Descanso', 'hospedaje', true),
-(7, 6, 6, 'Hilton WorldWide Holdings ', 'Uno de las mejores cadenas', 'hospedaje', true),
-(5, 7, 7, 'NH Hotel Group', 'Tradicion de Comodidad y Descanso, sin comida', 'hospedaje', false),
-(6, 8, 8, 'Melia Hotels International', 'Lo mejor de España en el mundo, sin comida', 'hospedaje', false),
-(9, 9, 9, 'Melia Hotels International', 'Lo mejor de España en el mundo, sin comida', 'hospedaje', false),
-(3, 2, 10, 'American Airlines', 'Aerolinea top mundial', 'vuelo', false),
-(5, 7, 11, 'Air France', 'Años de confianza en el aire', 'vuelo', false),
-(7, 6, 12, 'Air New Zealand', 'aerolinea confiable', 'vuelo', false),
-(4, 3, 13, 'Virgin Atlantic', 'A donde quieras ir con seguridad', 'vuelo', false);
+(1, 1, nextval('cjv_s_servicio_detalle'), 'Marriot International', 'Descanso en la mejor franquicia', 'hospedaje', true),
+(3, 2, nextval('cjv_s_servicio_detalle'), 'Marriot International', 'Descanso en la mejor franquicia', 'hospedaje', true),
+(4, 3, nextval('cjv_s_servicio_detalle'), 'Hilton WorldWide Holdings ', 'Uno de las mejores cadenas', 'hospedaje', true),
+(8, 4, nextval('cjv_s_servicio_detalle'), 'Melia Hotels International', 'Lo mejor de España en el mundo', 'hospedaje', true),
+(2, 5, nextval('cjv_s_servicio_detalle'), 'NH Hotel Group', 'Tradicion de Comodidad y Descanso', 'hospedaje', true),
+(7, 6, nextval('cjv_s_servicio_detalle'), 'Hilton WorldWide Holdings ', 'Uno de las mejores cadenas', 'hospedaje', true),
+(5, 7, nextval('cjv_s_servicio_detalle'), 'NH Hotel Group', 'Tradicion de Comodidad y Descanso, sin comida', 'hospedaje', false),
+(6, 8, nextval('cjv_s_servicio_detalle'), 'Melia Hotels International', 'Lo mejor de España en el mundo, sin comida', 'hospedaje', false),
+(9, 9, nextval('cjv_s_servicio_detalle'), 'Melia Hotels International', 'Lo mejor de España en el mundo, sin comida', 'hospedaje', false),
+(3, 2, nextval('cjv_s_servicio_detalle'), 'American Airlines', 'Aerolinea top mundial', 'vuelo', false),
+(5, 7, nextval('cjv_s_servicio_detalle'), 'Air France', 'Años de confianza en el aire', 'vuelo', false),
+(7, 6, nextval('cjv_s_servicio_detalle'), 'Air New Zealand', 'aerolinea confiable', 'vuelo', false),
+(4, 3, nextval('cjv_s_servicio_detalle'), 'Virgin Atlantic', 'A donde quieras ir con seguridad', 'vuelo', false);
 
 
 ----LUGAR_HOTEL
 
 INSERT INTO CJV_lugar_Hotel VALUES
-(1, 'Marriot International', 17, 17),
-(2, 'Marriot International', 22, 22),
-(3, 'Hilton WorldWide Holdings ', 23, 23),
-(4, 'Melia Hotels International', 13, 13),
-(5, 'NH Hotel Group', 10, 10),
-(6, 'Hilton WorldWide Holdings ', 18, 18),
-(7, 'NH Hotel Group', 6, 6),
-(8, 'Melia Hotels International', 5, 5),
-(9, 'Melia Hotels International', 2, 2);
+(nextval('cjv_s_lugar_hotel'), 'Marriot International', 17, 17),
+(nextval('cjv_s_lugar_hotel'), 'Marriot International', 22, 22),
+(nextval('cjv_s_lugar_hotel'), 'Hilton WorldWide Holdings ', 23, 23),
+(nextval('cjv_s_lugar_hotel'), 'Melia Hotels International', 13, 13),
+(nextval('cjv_s_lugar_hotel'), 'NH Hotel Group', 10, 10),
+(nextval('cjv_s_lugar_hotel'), 'Hilton WorldWide Holdings ', 18, 18),
+(nextval('cjv_s_lugar_hotel'), 'NH Hotel Group', 6, 6),
+(nextval('cjv_s_lugar_hotel'), 'Melia Hotels International', 5, 5),
+(nextval('cjv_s_lugar_hotel'), 'Melia Hotels International', 2, 2);
 
 ----DET_HOTEL
 
@@ -1166,15 +1166,15 @@ INSERT INTO CJV_registro_viajero VALUES
 ----CLIENTE
 
 INSERT INTO CJV_cliente VALUES
-(1, 'Inversiones Valle', 'J', null, 127163236, null, null, null, null),
-(2, 'Zira', 'J', null, 134232327, null, null, null, null),
-(3, 'Horizonte', 'J', null, 125786543, null, null, null, null),
-(4, 'Rebecca', 'P', 21177253, null, '4/2/1994', 'Maria', 'Vargas', 'Carrero'),
-(5, 'Ruben', 'P', 16570246, null, '28/8/1969', 'Esteban', 'Montiel', 'Goncalves'),
-(6, 'Fabiola', 'P', 21754763, null, '24/5/1990', 'Clara', 'Ferandez', 'Goncalves'),
-(7, 'Maria', 'P', 25964371, null, '18/8/1968', 'Josefina', 'Martinez', 'González'),
-(8, 'Alejandra', 'P', 15947541, null, '14/9/1958', null, 'Bolivar', 'Herrera'),
-(9, 'Esteban', 'P', 22403927, null, '6/2/1962', 'Carlos', 'Tovar', 'Avellaneda');
+(nextval('cjv_s_cliente'), 'Inversiones Valle', 'J', null, 127163236, null, null, null, null),
+(nextval('cjv_s_cliente'), 'Zira', 'J', null, 134232327, null, null, null, null),
+(nextval('cjv_s_cliente'), 'Horizonte', 'J', null, 125786543, null, null, null, null),
+(nextval('cjv_s_cliente'), 'Rebecca', 'P', 21177253, null, '4/2/1994', 'Maria', 'Vargas', 'Carrero'),
+(nextval('cjv_s_cliente'), 'Ruben', 'P', 16570246, null, '28/8/1969', 'Esteban', 'Montiel', 'Goncalves'),
+(nextval('cjv_s_cliente'), 'Fabiola', 'P', 21754763, null, '24/5/1990', 'Clara', 'Ferandez', 'Goncalves'),
+(nextval('cjv_s_cliente'), 'Maria', 'P', 25964371, null, '18/8/1968', 'Josefina', 'Martinez', 'González'),
+(nextval('cjv_s_cliente'), 'Alejandra', 'P', 15947541, null, '14/9/1958', null, 'Bolivar', 'Herrera'),
+(nextval('cjv_s_cliente'), 'Esteban', 'P', 22403927, null, '6/2/1962', 'Carlos', 'Tovar', 'Avellaneda');
 
 
 ----REGISTRO_CLIENTE
@@ -1194,15 +1194,15 @@ INSERT INTO CJV_registro_cliente VALUES
 ----PAQUETE_CONTRATO
 
 INSERT INTO CJV_paquete_contrato VALUES
-(1, 7564, '8/11/2018', '8/11/2018', '8/12/2018', 1101, 'JoséGarcia2@gmail.com', 1, 1, 1, 1, 1, '8/11/2018'),
-(2, 2377, '9/4/2020', '9/4/2020', '9/5/2020', 5178, 'AlejandraCarrero3@gmail.com', 2, 5, 2, 2, 2, '9/4/2020'),
-(3, 8754, '16/7/2019', '16/7/2019', '16/8/2019', 2456, 'AlejandraTovar11@gmail.com', 3, 2, 3, 3, 3, '16/7/2019'),
-(4, 5432, '13/5/2020', '13/5/2020', '13/6/2020', 5897, 'CarlosTovar08@gmail.com', 4, 3, 4, 4, 4, '13/5/2020'),
-(5, 3899, '10/5/2019', '10/5/2019', '15/5/2019', 2145, 'EstebanPerez0@gmail.com6', 5, 7, 5, 5, 5, '10/5/2019'),
-(6, 5799, '7/6/2018', '7/6/2018', '20/6/2018', 977, 'JosefinaPerez@gmail.com', 6, 8, 6, 6, 6, '7/6/2018'),
-(7, 6435, '8/8/2019', '12/8/2019', '12/10/2019', 2713, 'FabiolaMesa@gmail.com', 7, 6, 7, 7, 7, '8/8/2019'),
-(8, 4600, '20/2/2019', '23/2/2019', '15/3/2019', 2014, 'VicenteMárquez@gmail.com', 8, 4, 8, 8, 8, '20/2/2019'),
-(9, 15789, '5/1/2020', '11/1/2020', '11/3/2020', 4982, 'ClaraMontiel@gmail.com', 9, 9, 9, 9, 9, '5/1/2020');
+(nextval('cjv_s_paquete_contrato'), 5799, '7/6/2018', '7/6/2018', '20/6/2018', nextval('cjv_s_num_factura'), 'JosefinaPerez@gmail.com', 6, 8, 6, 6, 6, '7/6/2018'),
+(nextval('cjv_s_paquete_contrato'), 7564, '8/11/2018', '8/11/2018', '8/12/2018', nextval('cjv_s_num_factura'), 'JoséGarcia2@gmail.com', 1, 1, 1, 1, 1, '8/11/2018'),
+(nextval('cjv_s_paquete_contrato'), 4600, '20/2/2019', '23/2/2019', '15/3/2019', nextval('cjv_s_num_factura'), 'VicenteMárquez@gmail.com', 8, 4, 8, 8, 8, '20/2/2019'),
+(nextval('cjv_s_paquete_contrato'), 3899, '10/5/2019', '10/5/2019', '15/5/2019', nextval('cjv_s_num_factura'), 'EstebanPerez0@gmail.com6', 5, 7, 5, 5, 5, '10/5/2019'),
+(nextval('cjv_s_paquete_contrato'), 8754, '16/7/2019', '16/7/2019', '16/8/2019', nextval('cjv_s_num_factura'), 'AlejandraTovar11@gmail.com', 3, 2, 3, 3, 3, '16/7/2019'),
+(nextval('cjv_s_paquete_contrato'), 6435, '8/8/2019', '12/8/2019', '12/10/2019', nextval('cjv_s_num_factura'), 'FabiolaMesa@gmail.com', 7, 6, 7, 7, 7, '8/8/2019'),
+(nextval('cjv_s_paquete_contrato'), 15789, '5/1/2020', '11/1/2020', '11/3/2020', nextval('cjv_s_num_factura'), 'ClaraMontiel@gmail.com', 9, 9, 9, 9, 9, '5/1/2020'),
+(nextval('cjv_s_paquete_contrato'), 2377, '9/4/2020', '9/4/2020', '9/5/2020', nextval('cjv_s_num_factura'), 'AlejandraCarrero3@gmail.com', 2, 5, 2, 2, 2, '9/4/2020'),
+(nextval('cjv_s_paquete_contrato'), 5432, '13/5/2020', '13/5/2020', '13/6/2020', nextval('cjv_s_num_factura'), 'CarlosTovar08@gmail.com', 4, 3, 4, 4, 4, '13/5/2020');
 
 
 ----CONT_REG_VIAJERO
@@ -1244,15 +1244,15 @@ insert into cjv_banco values(nextval('cjv_s_banco'),'Kiwibank');
 ----INSTRUMENTO_PAGO
 
 INSERT INTO CJV_instrumento_pago VALUES
-(1, 1, 't_credito', 1, 4567458145265892, null),
-(2, 2, 't_debito', 2, 7412785498574365, null),
-(3, 3, 'c_bancaria', 3, 6547895321645897, null),
-(4, 4, 'zelle', 4, null, 'RebeccaVargas@gmail.com'),
-(5, 5, 't_credito', 5, 2457895641234753, null),
-(6, 6, 't_debito', 6, 4561789498763215, null),
-(7, 7, 'c_bancaria', 7, 9856741285219632, null),
-(8, 8, 'zelle', 8, null, 'AlejandraBolivar@gmail.com'),
-(9, 9, 't_credito', 9, 3579685424169514, null);
+(1, nextval('cjv_s_instrumento_pago'), 't_credito', 1, 4567458145265892, null),
+(2, nextval('cjv_s_instrumento_pago'), 't_debito', 2, 7412785498574365, null),
+(3, nextval('cjv_s_instrumento_pago'), 'c_bancaria', 3, 6547895321645897, null),
+(4, nextval('cjv_s_instrumento_pago'), 'zelle', 4, null, 'RebeccaVargas@gmail.com'),
+(5, nextval('cjv_s_instrumento_pago'), 't_credito', 5, 2457895641234753, null),
+(6, nextval('cjv_s_instrumento_pago'), 't_debito', 6, 4561789498763215, null),
+(7, nextval('cjv_s_instrumento_pago'), 'c_bancaria', 7, 9856741285219632, null),
+(8, nextval('cjv_s_instrumento_pago'), 'zelle', 8, null, 'AlejandraBolivar@gmail.com'),
+(9, nextval('cjv_s_instrumento_pago'), 't_credito', 9, 3579685424169514, null);
 
 
 ----FORMA_PAGO
@@ -1272,15 +1272,15 @@ INSERT INTO CJV_forma_pago VALUES
 ----RALLY
 
 INSERT INTO CJV_rally VALUES
-(1, 'Oriente Como Nunca', '10/5/2021', '10/6/2021', 10, 'P', 2745, 'Recorriendo Africa y Asia'),
-(2, 'Asia Fascinante', '7/6/2021', '7/8/2021', 15, 'I', 3457, 'VIsita los lugares más maravillosos de este continente'),
-(3, 'Portugal y Suiza juntos', '8/8/2021', '8/10/2021', 8, 'P', 2456, 'Recorre estos dos paises en pareja'),
-(4, 'Oceania Magica', '20/2/2021', '20/4/2021', 6, 'I', 4789, 'Recorre los lugares magicos de este continente'),
-(5, 'Segundo Tour Europa ', '5/1/2021', '5/3/2021', 4, 'I', 5879, 'Europa a inicio de Año'),
-(6, 'Africa de ensueño', '11/3/2021', '11/4/2021', 8, 'I', 2486, 'Conoce Africa recorriendo los mejores lugares'),
-(7, 'Playas del mundo', '17/5/2021', '17/8/2021', 6, 'P', 7618, 'Disfruta acompañado de estas maravillosas playas'),
-(8, 'Primer Tour Europa', '9/7/2020', '9/9/2020', 10, 'I', 4399, 'Europa en temporada de Vacaciones'),
-(9, 'America en Vivo', '13/9/2020', '13/10/2020', 10, 'I', 5124, 'Recorre America');
+(nextval('cjv_s_rally'), 'Oriente Como Nunca', '10/5/2021', '10/6/2021', 10, 'P', 2745, 'Recorriendo Africa y Asia'),
+(nextval('cjv_s_rally'), 'Asia Fascinante', '7/6/2021', '7/8/2021', 15, 'I', 3457, 'VIsita los lugares más maravillosos de este continente'),
+(nextval('cjv_s_rally'), 'Portugal y Suiza juntos', '8/8/2021', '8/10/2021', 8, 'P', 2456, 'Recorre estos dos paises en pareja'),
+(nextval('cjv_s_rally'), 'Oceania Magica', '20/2/2021', '20/4/2021', 6, 'I', 4789, 'Recorre los lugares magicos de este continente'),
+(nextval('cjv_s_rally'), 'Segundo Tour Europa ', '5/1/2021', '5/3/2021', 4, 'I', 5879, 'Europa a inicio de Año'),
+(nextval('cjv_s_rally'), 'Africa de ensueño', '11/3/2021', '11/4/2021', 8, 'I', 2486, 'Conoce Africa recorriendo los mejores lugares'),
+(nextval('cjv_s_rally'), 'Playas del mundo', '17/5/2021', '17/8/2021', 6, 'P', 7618, 'Disfruta acompañado de estas maravillosas playas'),
+(nextval('cjv_s_rally'), 'Primer Tour Europa', '9/7/2020', '9/9/2020', 10, 'I', 4399, 'Europa en temporada de Vacaciones'),
+(nextval('cjv_s_rally'), 'America en Vivo', '13/9/2020', '13/10/2020', 10, 'I', 5124, 'Recorre America');
 
 
 ----CIRCUITO
@@ -1392,65 +1392,65 @@ INSERT INTO CJV_organizador VALUES
 ----PARTICIPACION
 
 INSERT INTO CJV_participacion VALUES
-(8, 1, 12, 1, '11/8/2020',null,null, null, 5, 5, '10/5/2019'),
-(8, 2, 17, 2, '14/8/2020', 1, 24510592, '8/11/2018',null,null, null),
-(8, 3, 13, 3, '20/8/2020', 3, 18436954, '16/7/2019',null,null, null),
-(8, 4, 21, 4, '7/9/2020', 5, 21729173, '10/5/2019',null,null, null),
-(9, 5, 7, 1, '28/9/2020',null,null, null, 9, 9, '5/1/2020'),
-(9, 6, 11, 2, '30/9/2020', 2, 21708619, '9/4/2020',null,null, null),
-(9, 7, 14, 3, '2/10/2020', 3, 18436954, '16/7/2019',null,null, null),
-(9, 8, 19, 4, '4/10/2020', 2, 25986806, '9/4/2020',null,null, null),
-(9, 9, 23, 5, '6/10/2020', 3, 23234792, '16/7/2019',null,null, null);
+(8, nextval('cjv_s_participacion'), 12, 1, '11/8/2020',null,null, null, 5, 5, '10/5/2019'),
+(8, nextval('cjv_s_participacion'), 17, 2, '14/8/2020', 1, 24510592, '8/11/2018',null,null, null),
+(8, nextval('cjv_s_participacion'), 13, 3, '20/8/2020', 3, 18436954, '16/7/2019',null,null, null),
+(8, nextval('cjv_s_participacion'), 21, 4, '7/9/2020', 5, 21729173, '10/5/2019',null,null, null),
+(9, nextval('cjv_s_participacion'), 7, 1, '28/9/2020',null,null, null, 9, 9, '5/1/2020'),
+(9, nextval('cjv_s_participacion'), 11, 2, '30/9/2020', 2, 21708619, '9/4/2020',null,null, null),
+(9, nextval('cjv_s_participacion'), 14, 3, '2/10/2020', 3, 18436954, '16/7/2019',null,null, null),
+(9, nextval('cjv_s_participacion'), 19, 4, '4/10/2020', 2, 25986806, '9/4/2020',null,null, null),
+(9, nextval('cjv_s_participacion'), 23, 5, '6/10/2020', 3, 23234792, '16/7/2019',null,null, null);
 
 
 ----PREMIO
 
 INSERT INTO CJV_premio VALUES
-(1, 1, 'Iphone 10', 1, 'el primer lugar gana un iphone 10'),
-(1, 2, 'Boletos para Londres', 2, 'el segundo lugar gana boletos para londres'),
-(1, 3, 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia'),
-(2, 4, 'Automovil 0 Kilometros', 1, 'el primer lugar gana Automovil 0 Kilometros Marca Hyundai'),
-(2, 5, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
-(2, 6, 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia'),
-(3, 7, 'Crucero por el Caribe', 1, 'el primer lugar gana un crucero por el Caribe con todos los gastos pagos'),
-(3, 8, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
-(3, 9, 'Boletos para Paris', 3, 'el tercer lugar gana boletos para Paris'),
-(4, 10, 'Automovil 0 Kilometros', 1, 'el primer lugar gana Automovil 0 Kilometros Marca Chevrolet'),
-(4, 11, 'Samsung Galaxy S10', 2, 'el segundo lugar gana un Samsung Galaxy S10'),
-(4, 12, 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia'),
-(5, 13, 'Crucero por el Caribe', 1, 'el primer lugar gana un crucero por el Caribe con todos los gastos pagos'),
-(5, 14, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
-(5, 15, 'Afiche de la Agencia', 3, 'el tercer lugar gana un afiche de la Agencia con fondo de Lugar paradisiaco'),
-(6, 16, 'Automovil 0 Kilometros', 1, 'el primer lugar gana Automovil 0 Kilometros Marca Peugeot'),
-(6, 17, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
-(6, 18, 'Afiche de la Agencia', 3, 'el tercer lugar gana un afiche de la Agencia con fondo de Lugar paradisiaco'),
-(7, 19, 'Crucero por el Caribe', 1, 'el primer lugar gana un crucero por el Caribe con todos los gastos pagos'),
-(7, 20, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
-(7, 21, 'Boletos para Nueva York', 3, 'el tercer lugar gana boletos para New York'),
-(8, 22, 'Huawei P30', 1, 'el primer lugar gana un Huawei P30'),
-(8, 23, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
-(8, 24, 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia'),
-(9, 25, 'Automovil 0 Kilometros', 1, 'el primer lugar gana Automovil 0 Kilometros Marca Renault'),
-(9, 26, 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
-(9, 27, 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia');
+(1, nextval('cjv_s_premio'), 'Iphone 10', 1, 'el primer lugar gana un iphone 10'),
+(1, nextval('cjv_s_premio'), 'Boletos para Londres', 2, 'el segundo lugar gana boletos para londres'),
+(1, nextval('cjv_s_premio'), 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia'),
+(2, nextval('cjv_s_premio'), 'Automovil 0 Kilometros', 1, 'el primer lugar gana Automovil 0 Kilometros Marca Hyundai'),
+(2, nextval('cjv_s_premio'), 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(2, nextval('cjv_s_premio'), 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia'),
+(3, nextval('cjv_s_premio'), 'Crucero por el Caribe', 1, 'el primer lugar gana un crucero por el Caribe con todos los gastos pagos'),
+(3, nextval('cjv_s_premio'), 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(3, nextval('cjv_s_premio'), 'Boletos para Paris', 3, 'el tercer lugar gana boletos para Paris'),
+(4, nextval('cjv_s_premio'), 'Automovil 0 Kilometros', 1, 'el primer lugar gana Automovil 0 Kilometros Marca Chevrolet'),
+(4, nextval('cjv_s_premio'), 'Samsung Galaxy S10', 2, 'el segundo lugar gana un Samsung Galaxy S10'),
+(4, nextval('cjv_s_premio'), 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia'),
+(5, nextval('cjv_s_premio'), 'Crucero por el Caribe', 1, 'el primer lugar gana un crucero por el Caribe con todos los gastos pagos'),
+(5, nextval('cjv_s_premio'), 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(5, nextval('cjv_s_premio'), 'Afiche de la Agencia', 3, 'el tercer lugar gana un afiche de la Agencia con fondo de Lugar paradisiaco'),
+(6, nextval('cjv_s_premio'), 'Automovil 0 Kilometros', 1, 'el primer lugar gana Automovil 0 Kilometros Marca Peugeot'),
+(6, nextval('cjv_s_premio'), 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(6, nextval('cjv_s_premio'), 'Afiche de la Agencia', 3, 'el tercer lugar gana un afiche de la Agencia con fondo de Lugar paradisiaco'),
+(7, nextval('cjv_s_premio'), 'Crucero por el Caribe', 1, 'el primer lugar gana un crucero por el Caribe con todos los gastos pagos'),
+(7, nextval('cjv_s_premio'), 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(7, nextval('cjv_s_premio'), 'Boletos para Nueva York', 3, 'el tercer lugar gana boletos para New York'),
+(8, nextval('cjv_s_premio'), 'Huawei P30', 1, 'el primer lugar gana un Huawei P30'),
+(8, nextval('cjv_s_premio'), 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(8, nextval('cjv_s_premio'), 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia'),
+(9, nextval('cjv_s_premio'), 'Automovil 0 Kilometros', 1, 'el primer lugar gana Automovil 0 Kilometros Marca Renault'),
+(9, nextval('cjv_s_premio'), 'Paquete gratis', 2, 'el segundo lugar gana paquete para 2 personas'),
+(9, nextval('cjv_s_premio'), 'Popsocket con Logo', 3, 'el tercer lugar gana Popsocket con logo de la agencia');
 
 
 ----VALORACION
 
 INSERT INTO CJV_valoracion VALUES
-(1, 23,null,null,null,null,null,null, 3),
-(2,null, 23, 23,null,null,null,null, 3),
-(3,null,null,null, 23, 23, 45,null, 3),
-(4,null,null,null, 23, 23, 46,null, 3),
-(5, 3,null,null,null,null,null,null, 8),
-(6,null, 3, 3,null,null,null,null, 8),
-(7, 2,null,null,null,null,null,null, 8),
-(8,null, 2, 2,null,null,null,null, 8),
-(9, 1,null,null,null,null,null,null, 8),
-(10,null, 1, 1,null,null,null,null, 8),
-(11,null,null,null, 3, 3, 6,null, 8),
-(12,null,null,null, 3, 3, 5,null, 8),
-(13,null,null,null, 2, 2, 4,null, 8),
-(14,null,null,null, 2, 2, 3,null, 8),
-(15,null,null,null, 1, 1, 2,null, 8),
-(16,null,null,null, 1, 1, 1,null, 8);
+(nextval('cjv_s_valoracion'), 23,null,null,null,null,null,null, 3),
+(nextval('cjv_s_valoracion'),null, 23, 23,null,null,null,null, 3),
+(nextval('cjv_s_valoracion'),null,null,null, 23, 23, 45,null, 3),
+(nextval('cjv_s_valoracion'),null,null,null, 23, 23, 46,null, 3),
+(nextval('cjv_s_valoracion'), 3,null,null,null,null,null,null, 8),
+(nextval('cjv_s_valoracion'),null, 3, 3,null,null,null,null, 8),
+(nextval('cjv_s_valoracion'), 2,null,null,null,null,null,null, 8),
+(nextval('cjv_s_valoracion'),null, 2, 2,null,null,null,null, 8),
+(nextval('cjv_s_valoracion'), 1,null,null,null,null,null,null, 8),
+(nextval('cjv_s_valoracion'),null, 1, 1,null,null,null,null, 8),
+(nextval('cjv_s_valoracion'),null,null,null, 3, 3, 6,null, 8),
+(nextval('cjv_s_valoracion'),null,null,null, 3, 3, 5,null, 8),
+(nextval('cjv_s_valoracion'),null,null,null, 2, 2, 4,null, 8),
+(nextval('cjv_s_valoracion'),null,null,null, 2, 2, 3,null, 8),
+(nextval('cjv_s_valoracion'),null,null,null, 1, 1, 2,null, 8),
+(nextval('cjv_s_valoracion'),null,null,null, 1, 1, 1,null, 8);
