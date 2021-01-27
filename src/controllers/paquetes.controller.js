@@ -430,11 +430,15 @@ const getItinerarioByPaquete = async(req,res) =>{
         console.log('get Itinerario By Paquete: ', id_agencia, id_paquete)
         
         const response1 = await pool.query(` select id_agencia, id_paquete, itin.id, secuencia, 
-                                                tiempo_estancia_dias, itin.id_pais, itin.id_ciudad, 
-                                                ciu.nombre nombre_ciudad
-                                            from (select id_pais, id, nombre from cjv_ciudad) ciu, cjv_itinerario itin
-                                            where itin.id_pais = ciu.id_pais and itin.id_ciudad = ciu.id 
-                                                and itin.id_agencia = $1 and itin.id_paquete = $2`
+                                                tiempo_estancia_dias, itin.id_pais, pais.nombre_pais, 
+                                                itin.id_ciudad, ciu.nombre_ciudad 
+                                            from (select id_pais, id, nombre nombre_ciudad from cjv_ciudad) ciu, 
+                                                (select id, nombre nombre_pais from cjv_pais) pais, 
+                                                cjv_itinerario itin
+                                            where itin.id_pais = ciu.id_pais and itin.id_ciudad = ciu.id and
+                                            ciu.id_pais = pais.id
+                                            and itin.id_agencia = $1 and itin.id_paquete = $2
+                                            order by itin.id`
                                             ,[id_agencia, id_paquete]);
         res.status(200).json(response1.rows)   
     } catch (e) {
@@ -449,9 +453,11 @@ const getPaqueteEspecializaciones = async(req,res) =>{
         const {id_agencia, id_paquete} = req.body
         console.log('get Especializacion: ',id_agencia, id_paquete)
 
-        const response = await pool.query(`select ai.id, ai.nombre ,descripcion from cjv_area_interes ai,cjv_especializacion esp
-                                            where esp.id_area_interes = ai.id and id_agencia_paquete = $1 and id_paquete = $2`,
-                                            [id_agencia,id_paquete]);                            
+        const response = await pool.query(`select ai.id id_area_interes, esp.id, ai.nombre ,descripcion 
+                        from cjv_area_interes ai,cjv_especializacion esp
+                        where esp.id_area_interes = ai.id 
+                        and id_agencia_paquete = $1 and id_paquete = $2`,
+                        [id_agencia,id_paquete]);                            
         res.status(200).json(response.rows)
     } catch (e) {
         console.log(e)
@@ -472,6 +478,22 @@ const createEspecializacion = async(req,res) =>{
         console.log(e)
         res.status(500).send(e);
     }
+}
+
+const deletePaqueteEspecializacion = async(req,res) =>{
+    try {
+        const {id_area_interes, id_especializacion  } = req.query
+        console.log('delete Paquete Especializacion: ',id_area_interes, id_especializacion )
+
+        const response = await pool.query(`delete from cjv_especializacion 
+            where id_area_interes = $1 and id = $2`,
+            [id_area_interes, id_especializacion]);  
+
+        res.status(200).json(response.rows)
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    } 
 }
 
 module.exports = {
@@ -504,4 +526,5 @@ module.exports = {
 
     getPaqueteEspecializaciones,
     createEspecializacion,
+    deletePaqueteEspecializacion,
 }

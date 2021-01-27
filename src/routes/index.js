@@ -14,7 +14,8 @@ const { getPaquetes, createPaquete, getAgenciaByName,
     getServiciosPaquete, createServicioPaquete,
     deleteServicio,
     createElementoItinerario, getPaqueteEspecializaciones,
-    getItinerarioByPaquete,updateDuracionPaquete, createEspecializacion
+    getItinerarioByPaquete,updateDuracionPaquete, createEspecializacion,
+    deletePaqueteEspecializacion
     } = require('../controllers/paquetes.controller');
 
 const {getRallies, createRally } = require('../controllers/rallies.controller');
@@ -140,6 +141,8 @@ router.post('/paquete/itinerario/elemento/crear', createElementoItinerario)
 //PAQUETE - Especializacion
 router.post('/paquete/especializaciones', getPaqueteEspecializaciones)
 router.post('/paquete/especializacion/crear', createEspecializacion)
+router.delete('/paquete/especializacion/:id_area_interes?/:id_especilizacion?',deletePaqueteEspecializacion)
+
 
 
 router.get('/agencia/:agencia?', getAgenciaByName); 
