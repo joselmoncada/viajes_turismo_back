@@ -253,7 +253,7 @@ const getRegistroDeClienteVigente = async (req,res,next)=>{
 
 const createInstrumentoPago = async (req,res,next)=>{
 	try {
-		const {id_cliente, clasificacion, id_banco, numero, email} = req.body
+		const {id_cliente, clasificacion, id_banco, numero, email} = req.body;
 		console.log('create Instrumento Pago:',id_cliente, clasificacion, id_banco, numero, email)
 		const response = await pool.query(`insert into cjv_instrumento_pago
 									values($1,nextval('cjv_s_instrumento_pago'),$2,$3,$4,$5)`,
