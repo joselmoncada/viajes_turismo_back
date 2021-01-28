@@ -3,10 +3,24 @@ pool = DB.getPool()
 
 const getRallies = async (req, res) => {
 
-    const response = await pool.query('SELECT * FROM CJV_Rally;');
+    const response = await pool.query('SELECT * FROM CJV_rally as r left join (Select Distinct id_rally from CJV_participacion ) as p on r.id = p.id_rally order by r.id;');
+
+    
+
     console.log(response.rows);
 
     res.status(200).json(response.rows);
+};
+
+const getParticipantes = async (req, res) => {
+    try {
+    const response = await pool.query('SELECT * FROM CJV_participacion WHERE id_rally = ' + req.params.id + ';');
+    console.log(response.rows);
+
+    res.status(200).json(response.rows);
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 const createRally = async (req, res) => {
@@ -38,5 +52,6 @@ const deleteRally = async (req, res) => {
 module.exports = {
     getRallies,
     createRally,
-    deleteRally
+    deleteRally,
+    getParticipantes
 }
