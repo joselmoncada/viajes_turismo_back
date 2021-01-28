@@ -1,7 +1,6 @@
 const DB = require('../../DataBase');
 pool = DB.getPool()
 
-
 const getAgencias = async (req, res) =>{
     try{
                                     //no quitar el id de la consulta
@@ -11,7 +10,24 @@ const getAgencias = async (req, res) =>{
         console.log('Error:',e)
         res.status(500).send(e)
     }
+
 }
+
+const getAgenciaByName = async (req, res) => {
+    try {
+        console.log('Data: ' + req);
+        console.log('Agencia: ' + req);
+        const agencia = req;
+        const response = await pool.query("SELECT id FROM CJV_Agencia as a WHERE a.nombre = '" + agencia + "';");
+        console.log(response.rows);
+        return (response.rows);
+    } catch (error) {
+        console.log(error)
+    }
+
+    //res.status(404).json({"error":"No se encuentra en BD"});
+};
+
 
 const getAreaInteres = async (req, res) => {
 
@@ -75,6 +91,7 @@ const getAsociaciones  = async (req, res) => {
         console.log('Error:',e)
         res.status(500).send(e)
     }
+
 }
 
 // Aqui comienza el codigo de las asociaciones
@@ -131,9 +148,21 @@ const finalizarAsociacion =  async (req, res) => {
 }
 
 
+const getVendedoresFromAgencia = async (req, res) => {
+    try {
+        console.log('get Vendedores');
+        const agencia = req.query.id_agencia;
+        const response = await pool.query(`SELECT * FROM CJV_VENDEDOR WHERE ID_AGENCIA = $1;`, [agencia]);
+        console.log(response.rows);
+        res.status(200).json(response.rows);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 module.exports = {
-    
+
     getAgencias,
     getAreaInteres,
     getAreaInteresByAgenciaID,
@@ -141,5 +170,7 @@ module.exports = {
     getAgenciasNoRelacionadasConAgencia,
     createAsociacion,
     finalizarAsociacion,
-    getAsociaciones
+    getAsociaciones,
+    getAgenciaByName,
+    getVendedoresFromAgencia,
 }

@@ -1,8 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 
-
-const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones, getAreaInteresByAgenciaID, getAreaInteresByPaquetePK } = require('../controllers/index.controller');
+const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones,getVendedoresFromAgencia, getAreaInteresByAgenciaID, getAreaInteresByPaquetePK } = require('../controllers/index.controller');
 const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, getCiudadesByPais,getAtraccionesByPais, getAtraccionesByCiudad } = require('../controllers/regiones.controller');
 
 const { getPaquetes, createPaquete, getAgenciaByName, 
@@ -20,7 +19,10 @@ const { getPaquetes, createPaquete, getAgenciaByName,
     updateSecuenciaElementoItinerario, deleteElementoItinarario,
     updateOrdenAtraccionesElementoItinerario,
     deleteAtraccionDeElementoItinarario, 
+    getPrecioPaquete ,createPaqueteContrato, asociarFormaPago, 
+    getContratoId, asociarViajeroContrato
     } = require('../controllers/paquetes.controller');
+
 
 const {getRallies, createRally } = require('../controllers/rallies.controller');
 const { getHistoricoProveedor, getProveedoresNoRelacionadosConAgencia,
@@ -31,7 +33,7 @@ const {createViajero, deleteViajero, getViajeros, getViajerosNoClientes, createP
         deletePasaporte, registrarViajeroAAgencia, finalizarViajeroRelacionConAgencia,
         finalizarViajeroRelacionConAgenciasByIDViajero,
         getViajero,  getRegistroViajeroVigente, getTodosRegistrosViajero,
-        getViajeroAgenciasAsociables,cantidadViajesIncluidoViajero
+        getViajeroAgenciasAsociables,cantidadViajesIncluidoViajero, getViajerosRegistrados, getViajerosAsociadoAgencia
     } = require('../controllers/viajero.controller');
 const {getClientes, getClienteByDOCorRIF, getClientesNoViajeros, getClienteByID, crearClientePersona,  
     crearClienteJuridico, deleteCliente, registrarClienteAAgencia,finalizarClienteRelacionConAgencia,		
@@ -42,13 +44,21 @@ const {getClientes, getClienteByDOCorRIF, getClientesNoViajeros, getClienteByID,
 
 
 //EXAMPLE
-router.get('/regiones', getRegiones);
-router.post('/regiones', createRegion);
+//router.get('/regiones', getRegiones);
+//router.post('/regiones', createRegion);
 
-
+//AGENCIAS
 router.get('/agencias', getAgencias);
+
 router.get('/areas_interes/agencia/:id_agencia?',getAreaInteresByAgenciaID)
 router.get('/areas_interes/paquete/:id_agencia?/:id_paquete?',getAreaInteresByPaquetePK)
+
+router.get('/agencia/:agencia?', getAgenciaByName); 
+
+///VENDEDORES - ASESORES
+router.get('/agencia-vendedores/:id_agencia?', getVendedoresFromAgencia);
+
+//PAISES, CIUDADES, ATRACCIONES,INTERESES
 router.get('/areas_interes', getAreaInteres);
 router.get('/paises', getPaises);
 router.get('/ciudades', getCiudades);
@@ -88,6 +98,8 @@ router.post('/registro-viajero',registrarViajeroAAgencia)
 router.put('/registro-viajero/byid/:id_viajero?',finalizarViajeroRelacionConAgenciasByIDViajero)
 router.put('/registro-viajero/:id_agencia?/:id_viajero?/:fecha?',finalizarViajeroRelacionConAgencia)
 
+router.get('/registro-viajero',getViajerosRegistrados); //trae a todos los viajeros registrados
+router.get('/reg-viajero/:id_agencia?',getViajerosAsociadoAgencia);//viajeros vigentemente asociados a agencia en especifico
 
 
 //Clientes
@@ -161,6 +173,16 @@ router.delete('/paquete/especializacion/:id_area_interes?/:id_especilizacion?',d
 
 router.get('/agencia/:agencia?', getAgenciaByName); 
 
+router.post('/paquetes', createPaquete);
+
+router.delete('/paquetes/:id', deletePaquete);
+
+router.get('/paquete-costo/:id_agencia?/:id_paquete?', getPrecioPaquete);
+//apartado Contrato
+router.post('/contrato',createPaqueteContrato);
+router.post('/get-contrato', getContratoId);
+router.post('/contrato/forma-pago', asociarFormaPago);
+router.post('/contrato/viajeros',asociarViajeroContrato);
 
 //RALLIES
 router.get('/rallies', getRallies);
