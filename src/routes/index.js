@@ -16,7 +16,10 @@ const { getPaquetes, createPaquete, getAgenciaByName,
     createElementoItinerario, getPaqueteEspecializaciones,
     getItinerarioByPaquete,updateDuracionPaquete, createEspecializacion,
     deletePaqueteEspecializacion,getAtraccionesByElementoItinerario, 
-    getAtraccionesByElementoItinerarioDisponible ,assignAtraccionesAElemento
+    getAtraccionesByElementoItinerarioDisponible ,assignAtraccionesAElemento,
+    updateSecuenciaElementoItinerario, deleteElementoItinarario,
+    updateOrdenAtraccionesElementoItinerario,
+    deleteAtraccionDeElementoItinarario, 
     } = require('../controllers/paquetes.controller');
 
 const {getRallies, createRally } = require('../controllers/rallies.controller');
@@ -142,8 +145,10 @@ router.post('/paquete/itinerario/elemento/atracciones', getAtraccionesByElemento
 router.post('/paquete/itinerario/elemento/atracciones/disponibles', getAtraccionesByElementoItinerarioDisponible)
 router.post('/paquete/itinerario/elemento/crear', createElementoItinerario)
 router.post('/paquete/itinerario/asignar/atraccion', assignAtraccionesAElemento)
-
-
+router.put('/paquete/itinerario/secuencia',updateSecuenciaElementoItinerario)
+router.delete('/paquete/itinerario/elemento/:id_agencia?/:id_paquete?/:id_itinerario?',deleteElementoItinarario)
+router.put('/paquete/itinerario/atracciones/orden',updateOrdenAtraccionesElementoItinerario)
+router.delete('/paquete/itinerario/atraccion/:id_agencia?/:id_paquete?/:id_itinerario?/:id_atraccion?',deleteAtraccionDeElementoItinarario)
 
 
 

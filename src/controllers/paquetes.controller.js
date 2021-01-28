@@ -422,10 +422,6 @@ const createElementoItinerario = async(req,res) =>{
     }
 };
 
-const deleteElementoItinarario = async(req,res) =>{
-
-};
-
 const getItinerarioByPaquete = async(req,res) =>{
     try {
         const {id_agencia, id_paquete} = req.body
@@ -494,7 +490,7 @@ const getAtraccionesByElementoItinerario = async(req,res) =>{
             where atr.id_pais = itin.id_pais and atr.id_ciudad = itin.id_ciudad 
                 and atr.id = itin.id_atraccion and
                 itin.id_agencia = $1 and itin.id_paquete = $2 and itin.id_itinerario = $3
-            order by atr.id`,
+            order by itin.orden`,
             [id_agencia, id_paquete, id_itinerario]);
         res.status(200).json(response1.rows)   
     } catch (e) {
@@ -524,6 +520,69 @@ const assignAtraccionesAElemento = async(req,res) =>{
         }
     }
 };
+const updateSecuenciaElementoItinerario = async(req,res) =>{
+    try {
+        const {id_agencia, id_paquete, id_itinerario, secuencia} = req.body
+        console.log('update Secuencia Elemento Itinerario', req.body)
+        const response = await pool.query(`
+            update cjv_itinerario 
+                set secuencia = $1 
+            where id_agencia = $2 and id_paquete = $3 and id = $4`,
+            [secuencia,id_agencia,id_paquete,id_itinerario])                    
+        res.status(200).json(response.rows)
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    }
+};
+
+const deleteElementoItinarario = async(req,res) =>{
+    try {
+        const {id_agencia, id_paquete, id_itinerario} = req.query
+        console.log('delete Elemento Itinarario', req.query)
+        const response1 = await pool.query('delete from cjv_itin_atraccion where id_agencia = $1 and id_paquete = $2 and id_itinerario = $3;',
+                                            [id_agencia,id_paquete,id_itinerario])
+        const response2 = await pool.query('delete from cjv_itinerario where id_agencia = $1 and id_paquete = $2 and id = $3;',
+                                            [id_agencia,id_paquete,id_itinerario])                        
+        res.status(200).json(response2.rows)
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    }
+};
+
+const updateOrdenAtraccionesElementoItinerario = async(req,res) =>{
+    try {
+        const {id_agencia, id_paquete, id_itinerario, orden} = req.body
+        console.log('update Orden Atracciones Elemento Itinerario', id_agencia, id_paquete, id_itinerario, orden)
+        const response = await pool.query(`
+            update cjv_itin_atraccion 
+                set orden = $1 
+            where id_agencia = $2 and id_paquete = $3 and id_itinerario = $4`,
+            [orden,id_agencia,id_paquete,id_itinerario])                    
+        res.status(200).json(response.rows)
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    }
+};
+
+const deleteAtraccionDeElementoItinarario = async(req,res) =>{
+    try {
+        const {id_agencia, id_paquete, id_itinerario, id_atraccion } = req.query
+        console.log('delete Atraccion De Elemento Itinarario', req.query)
+        const response = await pool.query(`
+            delete from cjv_itin_atraccion 
+            where id_agencia = $1 and id_paquete = $2 and id_itinerario = $3 and id_atraccion = $4;`,
+            [id_agencia,id_paquete,id_itinerario,id_atraccion])                    
+        res.status(200).json(response.rows)
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    }
+};
+
+
 
 const getPaqueteEspecializaciones = async(req,res) =>{ 
     try {
@@ -603,6 +662,10 @@ module.exports = {
     getAtraccionesByElementoItinerario,
     getAtraccionesByElementoItinerarioDisponible,
     assignAtraccionesAElemento,
+    updateSecuenciaElementoItinerario,
+    deleteElementoItinarario, 
+    updateOrdenAtraccionesElementoItinerario,
+    deleteAtraccionDeElementoItinarario,
 
     getPaqueteEspecializaciones,
     createEspecializacion,
