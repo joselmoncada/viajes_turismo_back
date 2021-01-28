@@ -190,9 +190,11 @@ const deletePaquete = async(req,res) =>{
                                             [id_agencia,id_paquete])
         const response6 = await pool.query('delete from cjv_historico_precio where id_agencia = $1 and id_paquete = $2;',
                                             [id_agencia,id_paquete])
-        const response7 = await pool.query(`delete from cjv_paquete where id_agencia = $1 and id = $2;`,
+        const response7 = await pool.query('delete from cjv_especializacion where id_agencia = $1 and id_paquete = $2;',
+                                            [id_agencia,id_paquete])
+        const response8 = await pool.query(`delete from cjv_paquete where id_agencia = $1 and id = $2;`,
                                             [id_agencia,id_paquete]);                                   
-        res.status(200).json(response7.rows)
+        res.status(200).json(response8.rows)
         
     } catch (e) {
         console.log(e)
