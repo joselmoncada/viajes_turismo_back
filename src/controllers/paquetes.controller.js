@@ -99,39 +99,37 @@ const getHistoricoPreciosByPk = async (req, res) => {
 
 const getPaquetesDisponibles = async (req, res) => {
     try {
-        const response = await pool.query(`select * from cjv_paquete paq
-                                where id in(
-                                        select id_paquete 
-                                        from cjv_calendario_anual 
-                                        where id_paquete = paq.id and fecha_salida > current_date) and
-                                    id_agencia in(
-                                        select id_agencia 
-                                        from cjv_calendario_anual 
-                                        where id_agencia = paq.id_agencia and fecha_salida > current_date) and
-                                    id in(
-                                        select id_paquete 
-                                        from cjv_historico_precio 
-                                        where id_paquete = paq.id and fecha_fin is null ) and
-                                    id_agencia in(
-                                        select id_agencia 
-                                        from cjv_historico_precio 
-                                        where id_agencia = paq.id_agencia and fecha_fin is null) and
-                                    id in(
-                                        select id_paquete 
-                                        from cjv_itinerario 
-                                        where id_paquete = paq.id) and
-                                    id_agencia in(
-                                        select id_agencia 
-                                        from cjv_itinerario 
-                                        where id_agencia = paq.id_agencia) and
-                                    id in(
-                                        select id_paquete 
-                                        from cjv_servicio_detalle 
-                                        where id_paquete = paq.id) and
-                                    id_agencia in(
-                                        select id_agencia 
-                                        from cjv_servicio_detalle 
-                                        where id_agencia = paq.id_agencia)  `)
+        const response = await pool.query(`select paq.*, precio.valor_base from cjv_paquete paq left join ( 
+            select id_paquete, valor_base 
+            from cjv_historico_precio where fecha_fin is null ) as precio on precio.id_paquete = paq.id 
+    where id in(
+            select id_paquete 
+            from cjv_calendario_anual 
+            where id_paquete = paq.id and fecha_salida > current_date) and
+        id_agencia in(
+            select id_agencia 
+            from cjv_calendario_anual 
+            where id_agencia = paq.id_agencia and fecha_salida > current_date) and
+        id_agencia in(
+            select id_agencia 
+            from cjv_historico_precio 
+            where id_agencia = paq.id_agencia and fecha_fin is null) and
+        id in(
+            select id_paquete 
+            from cjv_itinerario 
+            where id_paquete = paq.id) and
+        id_agencia in(
+            select id_agencia 
+            from cjv_itinerario 
+            where id_agencia = paq.id_agencia) and
+        id in(
+            select id_paquete 
+            from cjv_servicio_detalle 
+            where id_paquete = paq.id) and
+        id_agencia in(
+            select id_agencia 
+            from cjv_servicio_detalle 
+            where id_agencia = paq.id_agencia); `)
 
         res.status(200).json(response.rows)
     } catch (e) {
@@ -385,14 +383,14 @@ const getLugaresHoteltes = async (req, res) => {
 
 const getPaqueteById = async (req, res) => {
     try {
-        const id = req.query.id;
+        const id = req.query.id_paquete;
+        console.log('ID PAQUETE : '+id);
         const response = await pool.query(`
-        SELECT paquete.id, paquete.id_agencia, paquete.descripcion, paquete.dias_duracion, paquete.max_num_viajeros,
-        precio.valor_base
+        SELECT paquete.*,precio.valor_base,agencia.nombre as nombre_agencia
         FROM CJV_PAQUETE paquete left join (select * from cjv_historico_precio)precio
         on (precio.id_paquete = paquete.id and paquete.id_agencia = precio.id_agencia)
-                where paquete.id = $1  and precio.fecha_fin is null;
-        `, [id]);
+        left join (select * from cjv_agencia)agencia on paquete.id_agencia = agencia.id
+                where paquete.id = $1  and precio.fecha_fin is null; `, [id]);
         res.status(200).json(response.rows[0]);
     } catch (error) {
         console.log(error);

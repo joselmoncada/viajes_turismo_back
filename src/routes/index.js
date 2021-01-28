@@ -128,7 +128,7 @@ router.get('/bancos',getBancos);
 
 //PAQUETES
 router.get('/paquetes', getPaquetes);
-router.get('/paquetes/:id?', getPaqueteById);
+router.get('/paquete-by-id/:id_paquete?', getPaqueteById);
 router.get('/paquete/:id_agencia?/:id?', getPaqueteByPk);
 router.get('/paquetes-diponibles', getPaquetesDisponibles) // te da todos los paquetes disponibles,. no tiene filtro de agencia u otros
 router.post('/paquete', createPaquete);
