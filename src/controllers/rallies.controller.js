@@ -65,6 +65,20 @@ const createRally = async (req, res) => {
     }
 }
 
+const createPremio = async (req, res) => {
+    try {
+
+        const {id_rally,nombre,puesto_destino,detalle} = req.body;
+        console.log('Rally: '+JSON.stringify(req.body))
+        const response = await pool.query("INSERT INTO CJV_premio (id_rally,id,nombre,puesto_destino,detalle)"+
+        "VALUES ($1,NEXTVAL('cjv_s_premio'),$2,$3,$4)", [id_rally,nombre,puesto_destino,detalle]);
+        
+        res.status(200).json("Premio :" + JSON.stringify(req.body) + " creado");
+    } catch (error) {        
+        console.log(error);
+    }
+}
+
 const deleteRally = async (req, res) => {
     try {
         
@@ -127,5 +141,6 @@ module.exports = {
     getOrganizadores,
     deleteOrganizador,
     deletePremio,
-    deleteParticipante
+    deleteParticipante, 
+    createPremio
 }
