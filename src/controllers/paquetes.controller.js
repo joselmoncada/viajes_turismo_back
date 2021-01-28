@@ -381,13 +381,14 @@ const getLugaresHoteltes = async (req,res) =>{
         //const {id_agencia, id_paquete} = req.body
         console.log('get Lugares Hoteltes: --- ')
 
-        const response = await pool.query(`select h.id, nombre, h.id_pais, h.id_ciudad, 
-                                                nombre_ciudad  
-                                            from cjv_lugar_hotel h, (select 
-                                                                        id_pais, id, 
-                                                                        nombre nombre_ciudad 
-                                                                        from cjv_ciudad) c
-                                            where id_ciudad = c.id`);                            
+        const response = await pool.query(`
+            select h.id, nombre, h.id_pais, h.id_ciudad, 
+                nombre_ciudad  
+            from cjv_lugar_hotel h, (select 
+                id_pais, id, 
+                nombre nombre_ciudad 
+                from cjv_ciudad) c
+            where id_ciudad = c.id`);                            
         res.status(200).json(response.rows)
     } catch (e) {
         console.log(e)
@@ -405,9 +406,10 @@ const createElementoItinerario = async(req,res) =>{
 
         console.log('create Elemento Itinerario: ', id_agencia, id_paquete, secuencia, tiempo_estancia_dias, id_pais, id_ciudad)
         
-        const response1 = await pool.query(`insert into cjv_itinerario
-                                            values($1,$2,nextval('cjv_s_itinerario'),$3,$4,$5,$6)`
-                                            ,[id_agencia,id_paquete,secuencia,tiempo_estancia_dias,id_pais,id_ciudad]);
+        const response1 = await pool.query(`
+            insert into cjv_itinerario
+            values($1,$2,nextval('cjv_s_itinerario'),$3,$4,$5,$6)`,
+            [id_agencia,id_paquete,secuencia,tiempo_estancia_dias,id_pais,id_ciudad]);
         res.status(200).json(response1.rows)   
     } catch (e) {
         if(e.code == 23505){
@@ -429,17 +431,26 @@ const getItinerarioByPaquete = async(req,res) =>{
         const {id_agencia, id_paquete} = req.body
         console.log('get Itinerario By Paquete: ', id_agencia, id_paquete)
         
-        const response1 = await pool.query(` select id_agencia, id_paquete, itin.id, secuencia, 
-                                                tiempo_estancia_dias, itin.id_pais, pais.nombre_pais, 
-                                                itin.id_ciudad, ciu.nombre_ciudad 
-                                            from (select id_pais, id, nombre nombre_ciudad from cjv_ciudad) ciu, 
-                                                (select id, nombre nombre_pais from cjv_pais) pais, 
-                                                cjv_itinerario itin
-                                            where itin.id_pais = ciu.id_pais and itin.id_ciudad = ciu.id and
-                                            ciu.id_pais = pais.id
-                                            and itin.id_agencia = $1 and itin.id_paquete = $2
-                                            order by itin.id`
-                                            ,[id_agencia, id_paquete]);
+        const response1 = await pool.query(` 
+            select id_agencia, id_paquete, itin.id, secuencia, 
+                tiempo_estancia_dias, itin.id_pais, pais.nombre_pais, 
+                itin.id_ciudad, ciu.nombre_ciudad, 
+                COALESCE(int.num_atracciones,0) num_atracciones
+            from (select id_pais, id, nombre nombre_ciudad 
+                    from cjv_ciudad) ciu, 
+                (select id, nombre nombre_pais 
+                    from cjv_pais) pais, 
+                cjv_itinerario itin
+            left join (select id_itinerario, count(*) num_atracciones 
+                   from cjv_itin_atraccion 
+                   where id_agencia = $1 and id_paquete = $2
+                   group by id_itinerario) int 
+                on int.id_itinerario = itin.id
+            where itin.id_pais = ciu.id_pais and itin.id_ciudad = ciu.id and
+                ciu.id_pais = pais.id
+                and itin.id_agencia = $1 and itin.id_paquete = $2
+            order by itin.id`,
+        [id_agencia, id_paquete]);
         res.status(200).json(response1.rows)   
     } catch (e) {
         console.log(e)
@@ -447,6 +458,72 @@ const getItinerarioByPaquete = async(req,res) =>{
     }
 };
 
+const getAtraccionesByElementoItinerarioDisponible = async(req,res) =>{
+    try {
+        const {id_agencia, id_paquete, id_itinerario} = req.body
+        console.log('get Atracciones By Elemento Itinerario Disponible: ', id_agencia, id_paquete, id_itinerario)
+        
+        const response1 = await pool.query(` 
+            select atr.id_pais, atr.id_ciudad, atr.id, atr.nombre, atr.descripcion, atr.url_imagen 
+            from cjv_itinerario itin, cjv_atraccion atr
+            where atr.id_pais = itin.id_pais and atr.id_ciudad = itin.id_ciudad and
+                atr.id not in(select id_atraccion 
+                      from cjv_itin_atraccion 
+                      where id_agencia= $1 and id_paquete = $2 
+                      and id_itinerario =$3)
+            and id_agencia= $1 and id_paquete = $2 and itin.id =$3`,
+            [id_agencia, id_paquete, id_itinerario]);
+        res.status(200).json(response1.rows)   
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    }
+};
+
+
+
+const getAtraccionesByElementoItinerario = async(req,res) =>{
+    try {
+        const {id_agencia, id_paquete, id_itinerario} = req.body
+        console.log('get Atracciones By Elemento Itinerario: ', id_agencia, id_paquete, id_itinerario)
+        
+        const response1 = await pool.query(` 
+            select atr.id_pais, atr.id_ciudad, atr.id, 
+                atr.nombre, atr.descripcion, url_imagen, itin.orden   
+            from cjv_atraccion atr, cjv_itin_atraccion itin
+            where atr.id_pais = itin.id_pais and atr.id_ciudad = itin.id_ciudad 
+                and atr.id = itin.id_atraccion and
+                itin.id_agencia = $1 and itin.id_paquete = $2 and itin.id_itinerario = $3
+            order by atr.id`,
+            [id_agencia, id_paquete, id_itinerario]);
+        res.status(200).json(response1.rows)   
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    }
+};
+
+const assignAtraccionesAElemento = async(req,res) =>{
+    try {
+        const {id_agencia, id_paquete,id_itinerario, id_pais, id_ciudad, id_atraccion, orden} = req.body
+
+        console.log('assign Atracciones A Elemento: ', id_agencia, id_paquete,id_itinerario, id_pais, id_ciudad, id_atraccion)
+        
+        const response1 = await pool.query(`
+            insert into cjv_itin_atraccion
+            values($1,$2,$3,$4,$5,$6,$7)`,
+            [id_agencia,id_paquete,id_itinerario,id_pais,id_ciudad,id_atraccion,orden]);
+        res.status(200).json(response1.rows)   
+    } catch (e) {
+        if(e.code == 23505){
+            console.log(e.detail)
+            res.status(409).send( e.detail);
+        }else{
+            console.log(e)
+            res.status(500).send( e.detail);
+        }
+    }
+};
 
 const getPaqueteEspecializaciones = async(req,res) =>{ 
     try {
@@ -523,6 +600,9 @@ module.exports = {
 
     getItinerarioByPaquete,
     createElementoItinerario,
+    getAtraccionesByElementoItinerario,
+    getAtraccionesByElementoItinerarioDisponible,
+    assignAtraccionesAElemento,
 
     getPaqueteEspecializaciones,
     createEspecializacion,

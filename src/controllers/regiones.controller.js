@@ -64,6 +64,38 @@ const getAtracciones = async(req, res) =>{
     }
 }
 
+const getAtraccionesByPais = async(req, res) =>{
+    try{
+        const{ id_pais } = req.body
+        console.log('get Atracciones By Pais:', id_pais)
+        const response = await pool.query(`
+            SELECT * 
+            FROM CJV_Atraccion 
+            where id_pais = $1`,
+            [id_pais]);
+        res.status(200).json(response.rows);
+    }catch(e){
+        console.log(e)
+        res.status(500).send(e)
+    }
+}
+
+const getAtraccionesByCiudad = async(req, res) =>{
+    try{
+        const{id_pais, id_ciudad} = req.body
+        console.log('get Atracciones By ciudad:', id_pais, id_ciudad)
+        const response = await pool.query(`
+            SELECT * 
+            FROM CJV_Atraccion 
+            where id_pais = $1 and id_ciudad = $2`,
+            [id_pais, id_ciudad]);
+        res.status(200).json(response.rows);
+    }catch(e){
+        console.log(e)
+        res.status(500).send(e)
+    }
+}
+
 module.exports = {
     getRegiones,
     createRegion,
@@ -71,4 +103,6 @@ module.exports = {
     getCiudadesByPais,
     getPaises,
     getAtracciones,
+    getAtraccionesByPais,
+    getAtraccionesByCiudad
 }

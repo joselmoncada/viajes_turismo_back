@@ -3,7 +3,7 @@ const router = Router();
 
 
 const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones, getAreaInteresByAgenciaID, getAreaInteresByPaquetePK } = require('../controllers/index.controller');
-const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, getCiudadesByPais, } = require('../controllers/regiones.controller');
+const { getCiudades, getPaises, getAtracciones, getRegiones, createRegion, getCiudadesByPais,getAtraccionesByPais, getAtraccionesByCiudad } = require('../controllers/regiones.controller');
 
 const { getPaquetes, createPaquete, getAgenciaByName, 
     deletePaquete, getPaqueteById,getPaqueteByPk,
@@ -15,7 +15,8 @@ const { getPaquetes, createPaquete, getAgenciaByName,
     deleteServicio,
     createElementoItinerario, getPaqueteEspecializaciones,
     getItinerarioByPaquete,updateDuracionPaquete, createEspecializacion,
-    deletePaqueteEspecializacion
+    deletePaqueteEspecializacion,getAtraccionesByElementoItinerario, 
+    getAtraccionesByElementoItinerarioDisponible ,assignAtraccionesAElemento
     } = require('../controllers/paquetes.controller');
 
 const {getRallies, createRally } = require('../controllers/rallies.controller');
@@ -48,8 +49,11 @@ router.get('/areas_interes/paquete/:id_agencia?/:id_paquete?',getAreaInteresByPa
 router.get('/areas_interes', getAreaInteres);
 router.get('/paises', getPaises);
 router.get('/ciudades', getCiudades);
-router.post('/ciudades-de-pais',getCiudadesByPais)
+router.post('/ciudades/pais',getCiudadesByPais)
 router.get('/atracciones', getAtracciones);
+router.post('/atracciones/pais',getAtraccionesByPais)
+router.post('/atracciones/ciudad',getAtraccionesByCiudad)
+
 
 //asocaciones
 router.get('/asociaciones', getAsociaciones);
@@ -134,7 +138,12 @@ router.post('/paquete/hoteles',getLugaresHoteltes)
 
 //PAQUETES - ITINERARIO
 router.post('/paquete/itinerario', getItinerarioByPaquete)
+router.post('/paquete/itinerario/elemento/atracciones', getAtraccionesByElementoItinerario)
+router.post('/paquete/itinerario/elemento/atracciones/disponibles', getAtraccionesByElementoItinerarioDisponible)
 router.post('/paquete/itinerario/elemento/crear', createElementoItinerario)
+router.post('/paquete/itinerario/asignar/atraccion', assignAtraccionesAElemento)
+
+
 
 
 
