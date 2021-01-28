@@ -138,6 +138,86 @@ const getPaquetesDisponibles = async (req, res) => {
     }
 }
 
+const getPaquetesDisponiblesOrderByDate = async (req, res) => {  //Envia informacion de los paquetes dando prioridad a las fechas proximas
+    try {
+        const response = await pool.query(`select paq.*, precio.valor_base, calendar.fecha_salida, calendar.descripcion from cjv_paquete paq left join ( 
+            select id_paquete, valor_base 
+            from cjv_historico_precio where fecha_fin is null ) as precio on precio.id_paquete = paq.id 
+left join ( select * from cjv_calendario_anual where fecha_salida > current_date) as calendar on paq.id_agencia = calendar.id_agencia
+    where paq.id in(
+            select id_paquete 
+            from cjv_calendario_anual 
+            where id_paquete = paq.id and fecha_salida > current_date) and
+        paq.id_agencia in(
+            select id_agencia 
+            from cjv_historico_precio 
+            where id_agencia = paq.id_agencia and fecha_fin is null) and
+        paq.id in(
+            select id_paquete 
+            from cjv_itinerario 
+            where id_paquete = paq.id) and
+        paq.id_agencia in(
+            select id_agencia 
+            from cjv_itinerario 
+            where id_agencia = paq.id_agencia) and
+        paq.id in(
+            select id_paquete 
+            from cjv_servicio_detalle 
+            where id_paquete = paq.id) and
+        paq.id_agencia in(
+            select id_agencia 
+            from cjv_servicio_detalle 
+            where id_agencia = paq.id_agencia) order by calendar.fecha_salida asc;
+             `)
+
+        res.status(200).json(response.rows)
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    }
+}
+
+const getPaquetesDisponiblesOrderByPrice = async (req, res) => {  //Envia informacion de los paquetes dando prioridad a las fechas proximas
+    try {
+        const response = await pool.query(`select paq.*, precio.valor_base, descuento.porcentaje as descuento, calendar.fecha_salida, calendar.descripcion from cjv_paquete paq left join ( 
+            select id_paquete, valor_base 
+            from cjv_historico_precio where fecha_fin is null ) as precio on precio.id_paquete = paq.id 
+left join ( select * from cjv_calendario_anual where fecha_salida > current_date) as calendar on paq.id_agencia = calendar.id_agencia
+left join (select * from cjv_descuento cd  where fecha_fin is null) as descuento on paq.id_agencia = descuento.id_agencia
+    where paq.id in(
+            select id_paquete 
+            from cjv_calendario_anual 
+            where id_paquete = paq.id and fecha_salida > current_date) and
+        paq.id_agencia in(
+            select id_agencia 
+            from cjv_historico_precio 
+            where id_agencia = paq.id_agencia and fecha_fin is null) and
+        paq.id in(
+            select id_paquete 
+            from cjv_itinerario 
+            where id_paquete = paq.id) and
+        paq.id_agencia in(
+            select id_agencia 
+            from cjv_itinerario 
+            where id_agencia = paq.id_agencia) and
+        paq.id in(
+            select id_paquete 
+            from cjv_servicio_detalle 
+            where id_paquete = paq.id) and
+        paq.id_agencia in(
+            select id_agencia 
+            from cjv_servicio_detalle 
+            where id_agencia = paq.id_agencia) order by descuento.porcentaje asc;
+            
+             `)
+
+        res.status(200).json(response.rows)
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e);
+    }
+}
+
 const updateDuracionPaquete = async (req, res) => {
     try {
         const { id_agencia, id_paquete, duracion } = req.body
@@ -687,8 +767,7 @@ const createPaqueteContrato = async (req, res) => {
             if (registro_cliente.id_agencia != id_paquete_agencia) {
                 const res4 = await pool.query(`update cjv_registro_cliente
                                             set fecha_fin = CURRENT_DATE
-                                            where fecha_fin is null and id_cliente = $1 `,
-                    [id_cliente]);
+                                            where fecha_fin is null and id_cliente = $1 `, [id_cliente]);
                 registro_cliente = res4.rows;
                 console.log('Finalizar Asociacion: ' + JSON.stringify(registro_cliente));
             }
@@ -805,6 +884,8 @@ module.exports = {
     getPaqueteById,
     getPaqueteByPk,
     getPaquetesDisponibles,
+    getPaquetesDisponiblesOrderByDate,
+    getPaquetesDisponiblesOrderByPrice,
     createPaquete,
     updateDuracionPaquete,
     deletePaquete,

@@ -20,7 +20,7 @@ const { getPaquetes, createPaquete,
     updateOrdenAtraccionesElementoItinerario,
     deleteAtraccionDeElementoItinarario, 
     getPrecioPaquete ,createPaqueteContrato, asociarFormaPago, 
-    getContratoId, asociarViajeroContrato,getContratoById
+    getContratoId, asociarViajeroContrato,getContratoById, getPaquetesDisponiblesOrderByDate,getPaquetesDisponiblesOrderByPrice
     } = require('../controllers/paquetes.controller');
 
 
@@ -39,7 +39,7 @@ const {getClientes, getClienteByDOCorRIF, getClientesNoViajeros, getClienteByID,
     crearClienteJuridico, deleteCliente, registrarClienteAAgencia,finalizarClienteRelacionConAgencia,		
     finalizarClienteRelacionConAgenciasByIDCliente, getTodosRegistrosCliente, getRegistroDeClienteVigente, createInstrumentoPago, 
     addBanco, getBancos, getInstrumentosPorCliente, getInstrumentoPago, deleteInstrumentoPago, 
-    getClienteAgenciasAsociables,cantidadContratosIncluidoCliente
+    getClienteAgenciasAsociables,cantidadContratosIncluidoCliente, getClientesFromAgencia
     } = require('../controllers/cliente.controller');
 
 
@@ -112,6 +112,9 @@ router.post('/cliente/persona',crearClientePersona);
 router.post('/cliente/juridico',crearClienteJuridico);
 router.delete('/cliente/:id?',deleteCliente);
     router.get('/registro-cliente-vigente/:id_cliente?',getRegistroDeClienteVigente)
+
+    router.get('/registro-clientes-vigentes/:id_agencia?',getClientesFromAgencia);
+
     router.get('/registro-cliente/agencias-disponibles/:id_cliente?',getClienteAgenciasAsociables)
     router.get('/registro-cliente/:id_cliente?',getTodosRegistrosCliente)
     router.post('/registro-cliente',registrarClienteAAgencia)
@@ -130,7 +133,9 @@ router.get('/bancos',getBancos);
 router.get('/paquetes', getPaquetes);
 router.get('/paquete-by-id/:id_paquete?', getPaqueteById);
 router.get('/paquete/:id_agencia?/:id?', getPaqueteByPk);
-router.get('/paquetes-diponibles', getPaquetesDisponibles) // te da todos los paquetes disponibles,. no tiene filtro de agencia u otros
+router.get('/paquetes-diponibles', getPaquetesDisponibles); // te da todos los paquetes disponibles,. no tiene filtro de agencia u otros
+router.get('/paquetes-proximos', getPaquetesDisponiblesOrderByDate);
+router.get('/paquetes-descuento', getPaquetesDisponiblesOrderByPrice);
 router.post('/paquete', createPaquete);
 router.put('/paquete/duracion',updateDuracionPaquete)
 router.delete('/paquete',deletePaquete)

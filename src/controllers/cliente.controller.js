@@ -245,7 +245,7 @@ const getClienteAgenciasAsociables = async(req,res,next)=>{
     }
 }
 
-const getRegistroDeClienteVigente = async (req,res,next)=>{
+const getRegistroDeClienteVigente = async (req,res,next)=>{ //(no se si esto lo usa alguien -JOSE)
 	try {
 		const id_cliente = req.query.id_cliente
 		console.log('get Registro De Cliente Vigente:',id_agencia, id_cliente)
@@ -256,6 +256,23 @@ const getRegistroDeClienteVigente = async (req,res,next)=>{
  										left join cjv_cliente as client on id_cliente = client.id
 									WHERE fecha_fin is nulland reg.id_cliente = $1`,
 									[id_cliente])
+		res.status(200).json(response.rows)
+	} catch (e) {
+		console.log(e.detail)
+        res.status(500).send(e)
+	}
+}
+const getClientesFromAgencia = async (req,res,next)=>{
+	try {
+		const id_agencia = req.query.id_agencia;
+		console.log('get Clientes from agencia:',id_agencia)
+		const response = await pool.query(`
+		select reg.id_agencia, agen.nombre as nombre_agencia, reg.id_cliente, 
+											cli.nombre as nombre_cliente, cli.primer_apellido, reg.fecha_inicio, fecha_fin 
+											from cjv_registro_cliente as reg
+												  left join cjv_agencia as agen   on id_agencia = agen.id
+												 left join cjv_cliente as cli on id_cliente = cli.id
+											WHERE fecha_fin is null and agen.id = $1;`,[id_agencia]);
 		res.status(200).json(response.rows)
 	} catch (e) {
 		console.log(e.detail)
@@ -386,6 +403,7 @@ module.exports = {
 	getRegistroDeClienteVigente,
 	getClienteAgenciasAsociables,
 	cantidadContratosIncluidoCliente,
+	getClientesFromAgencia,
 
 	createInstrumentoPago,
 	addBanco,
