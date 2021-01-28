@@ -24,9 +24,8 @@ const getRallies = async (req, res) => {
 
 const getRally = async (req, res) => {
     
-    const {id} = req.query
-    console.log('get Rally:')
-    const response = await pool.query('SELECT * FROM CJV_rally WHERE id = $1;',[id]);
+    console.log('get Rally:', req.params.id)
+    const response = await pool.query('SELECT * FROM CJV_rally WHERE id = $1;',[req.params.id]);
 
     console.log(response.rows);
 
@@ -35,6 +34,7 @@ const getRally = async (req, res) => {
 
 const getParticipantes = async (req, res) => {
     try {
+    console.log('get Participantes:', req.params.id)
     const response = await pool.query(`
         Select p.id, p.num_participacion, p.puesto_final, 
             p.fecha_culminacion, p.id_viajero, c.documento 
@@ -50,13 +50,37 @@ const getParticipantes = async (req, res) => {
     }
 };
 
+const getParticipantesData = async(req,res) =>{
+    try{
+        const id = req.params.id
+        console.log('get Participantes Data: ',id, '\n \n  \n')
+        const response = await pool.query(`
+        select part.id, num_participacion, puesto_final, fecha_culminacion, 
+	        via.documento documento_v, via.primer_nombre nombre_v, via.primer_apellido apellido_v, 
+	        cli.id, cli.documento documento_c ,cli.nombre nombre_c, cli.primer_apellido apellido_c from cjv_participacion part
+        left join cjv_viajero via on part.id_viajero = via.documento
+        left join cjv_cliente cli on part.id_cliente = cli.id
+        where id_rally = $1
+        order by num_participacion
+        `,[id])
+
+        res.status(200).json(response.rows)
+    }catch(e){
+        console.log('Error: ', e)
+        res.status(500).send(e)
+    }
+}
+
 const getOrganizadores = async (req, res) => {
     try {
+    const id = req.params.id
+    console.log('get Organizadores:', id);
     const response = await pool.query(`
         SELECT id_agencia, id_rally, num_cupos, nombre 
         FROM CJV_organizador 
-        left join CJV_agencia on id_agencia = id where id_rally = $1 ;`,
-        [req.params.id ]);
+        left join CJV_agencia on id_agencia = id 
+        where id_rally = $1 ;`,
+        [id]);
 
     console.log(response.rows);
 
@@ -170,6 +194,7 @@ module.exports = {
     createRally,
     deleteRally,
     getParticipantes,
+    getParticipantesData,
     getRally,
     getPremios,
     getOrganizadores,

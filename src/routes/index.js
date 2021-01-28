@@ -24,7 +24,7 @@ const { getPaquetes, createPaquete,
     } = require('../controllers/paquetes.controller');
 
 
-const {getRallies, createRally, deleteRally, getParticipantes, getRally, getPremios, getOrganizadores, deleteOrganizador, deletePremio, deleteParticipante, createPremio } = require('../controllers/rallies.controller');
+const {getRallies, createRally, deleteRally, getParticipantes, getRally, getPremios, getOrganizadores, deleteOrganizador, deletePremio, deleteParticipante, createPremio, getParticipantesData } = require('../controllers/rallies.controller');
 const { getHistoricoProveedor, getProveedoresNoRelacionadosConAgencia,
         createAsociacionConProveedor, updateAsocacionConProveedor 
     } = require('../controllers/proveedores.controller');
@@ -196,6 +196,7 @@ router.post('/rallies', createRally);
 router.post('/premio', createPremio);
 router.delete('/rallies/:id?', deleteRally);
 router.get('/participantes/:id?', getParticipantes);
+router.get('/participantes-data/:id?',getParticipantesData)
 router.get('/rally/:id?', getRally);
 router.get('/premios/:id?', getPremios);
 router.get('/organizadores/:id?', getOrganizadores);
