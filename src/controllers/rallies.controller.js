@@ -18,8 +18,9 @@ const createRally = async (req, res) => {
         console.log(response);
 
         res.send('Rally creado con exito!');
-    } catch (error) {
-        console.log(error);
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e)
     }
 }
 
