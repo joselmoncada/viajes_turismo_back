@@ -1,6 +1,6 @@
 const DB = require('../../DataBase');
 pool = DB.getPool()
-const { getAgenciaByName } = require('../controllers/index.controller');
+
 const { getClienteByID, finalizarClienteRelacionConAgenciasByIDCliente, registrarClienteAAgencia } = require('./cliente.controller');
 
 
