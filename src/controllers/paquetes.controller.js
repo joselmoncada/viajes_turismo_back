@@ -466,10 +466,11 @@ const getPaqueteById = async (req, res) => {
         const id = req.query.id_paquete;
         console.log('ID PAQUETE : '+id);
         const response = await pool.query(`
-        SELECT paquete.*,precio.valor_base,agencia.nombre as nombre_agencia
+        SELECT paquete.*,precio.valor_base,agencia.nombre as nombre_agencia, descuento.porcentaje as descuento, descuento.motivo as descuento_motivo
         FROM CJV_PAQUETE paquete left join (select * from cjv_historico_precio)precio
         on (precio.id_paquete = paquete.id and paquete.id_agencia = precio.id_agencia)
         left join (select * from cjv_agencia)agencia on paquete.id_agencia = agencia.id
+        left join (select * from cjv_descuento cd  where fecha_fin is null) descuento on paquete.id_agencia = descuento.id_agencia
                 where paquete.id = $1  and precio.fecha_fin is null; `, [id]);
         res.status(200).json(response.rows[0]);
     } catch (error) {
