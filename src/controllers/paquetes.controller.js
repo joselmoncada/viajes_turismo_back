@@ -150,7 +150,7 @@ const getContratoId = async(req,res)=>{
     if(response.rows.length>0){
         response = response.rows[0];
     }
-    console.log("Contrato: "+ response);
+    console.log("Contrato: "+ JSON.stringify(response));
     res.status(200).json(response);
    } catch (error) {
        console.log(error);
@@ -175,24 +175,30 @@ const asociarFormaPago = async (req, res )=>{
     }
 }
 
-const asociarViajeroContrato =  (req, res )=>{
+const asociarViajeroContrato = (req, res )=>{
     /**Asocia un listado de viajeros con un contrato generado */
     try {
-        
+        console.log('Data viajeros: '+ JSON.stringify(req.body));
         const {id_contrato,id_agencia,viajeros} = req.body;
        // id_contrato|id_agencia|id_viajero|fecha_registro
+       
 
-        viajeros.forEach(viajero => {
-           let res1 =  pool.query(`INSERT INTO CJV_FORMA_PAGO(id_contrato, id_cliente, id_instrumento, tipo )
+       viajeros.forEach(async viajero =>  {
+           try {
+            let res1 =  await pool.query(`INSERT INTO cjv_cont_reg_viajero( id_contrato, id_agencia, id_viajero, fecha_registro)
             VALUES ($1,$2,$3,CURRENT_DATE);`, [id_contrato, id_agencia, viajero.id_viajero]);
             console.log(res1);
+           } catch (error) {
+               console.log(error);
+           }
+         
         });
         //res.status(200).json(response.rows);
-        //res.send("Viajeros asociados exitosamente");
+        res.status(200).send("Viajeros asociados exitosamente");
     } catch (error) {
         
         console.log(JSON.stringify(error));
-        res.send(error);
+        
     }
 }
 

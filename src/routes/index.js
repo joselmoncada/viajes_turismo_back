@@ -14,7 +14,7 @@ const {createViajero, deleteViajero, getViajeros, getViajerosNoClientes, createP
         deletePasaporte, registrarViajeroAAgencia, finalizarViajeroRelacionConAgencia,
         finalizarViajeroRelacionConAgenciasByIDViajero,
         getViajero,  getRegistroViajeroVigente, getTodosRegistrosViajero,
-        getViajeroAgenciasAsociables,cantidadViajesIncluidoViajero
+        getViajeroAgenciasAsociables,cantidadViajesIncluidoViajero, getViajerosRegistrados, getViajerosAsociadoAgencia
     } = require('../controllers/viajero.controller');
 const {getClientes, getClienteByDOCorRIF, getClientesNoViajeros, getClienteByID, crearClientePersona,  
     crearClienteJuridico, deleteCliente, registrarClienteAAgencia,finalizarClienteRelacionConAgencia,		
@@ -71,6 +71,8 @@ router.post('/registro-viajero',registrarViajeroAAgencia)
 router.put('/registro-viajero/byid/:id_viajero?',finalizarViajeroRelacionConAgenciasByIDViajero)
 router.put('/registro-viajero/:id_agencia?/:id_viajero?/:fecha?',finalizarViajeroRelacionConAgencia)
 
+router.get('/registro-viajero',getViajerosRegistrados); //trae a todos los viajeros registrados
+router.get('/reg-viajero/:id_agencia?',getViajerosAsociadoAgencia);//viajeros vigentemente asociados a agencia en especifico
 
 
 //Clientes

@@ -183,6 +183,24 @@ const finalizarViajeroRelacionConAgenciasByIDViajero = async (req,res,next)=>{
     }
 }
 
+const getViajerosAsociadoAgencia = async (req,res)=>{
+    /**viajeros actualmente asociados a agencia en especifico */
+	try {
+		const id_agencia = req.query.id_agencia;
+		console.log('get viajeros asociados a:'+id_agencia);
+		const response = await pool.query(`select reg.id_agencia, agen.nombre as nombre_agencia, reg.id_viajero, 
+									viaj.primer_nombre, viaj.primer_apellido, reg.fecha_inicio, fecha_fin 
+									from cjv_registro_viajero as reg
+ 	 									left join cjv_agencia as agen on id_agencia = agen.id
+ 										left join cjv_viajero as viaj on id_viajero = viaj.documento
+									WHERE fecha_fin is null and reg.id_agencia = $1`,[id_agencia]);
+		res.status(200).json(response.rows);
+	} catch (e) {
+		console.log(error);
+	}
+}
+
+
 const getRegistroViajeroVigente = async (req,res,next)=>{
 	try {
 		const id_viajero = req.query.id_viajero
@@ -200,17 +218,28 @@ const getRegistroViajeroVigente = async (req,res,next)=>{
 	}
 }
 
+
+
 const getTodosRegistrosViajero = async (req,res,next)=>{
 	try {
-		const id_viajero = req.query.id_viajero
-		console.log('get Registro De Cliente:', id_viajero)
+		const id_viajero = req.query.id_viajero;
+		console.log('get Registro De Viajero:'+ id_viajero);
 		const response = await pool.query(`select reg.id_agencia, agen.nombre as nombre_agencia, reg.id_viajero, 
                                             viaj.primer_nombre as nombre_viajero, reg.fecha_inicio, fecha_fin 
                                             from cjv_registro_viajero as reg
                                             left join cjv_agencia as agen on id_agencia = agen.id
                                             left join cjv_viajero as viaj on id_viajero = viaj.documento
                                             WHERE reg.id_viajero = $1`,
-									        [id_viajero])
+									        [id_viajero]);
+		res.status(200).json(response.rows);
+	} catch (e) {
+		return next(e);
+	}
+}
+
+const getViajerosRegistrados = async (req,res,next)=>{
+	try {
+		const response = await pool.query(`select * from cjv_registro_viajero`);
 		res.status(200).json(response.rows)
 	} catch (e) {
 		return next(e);
@@ -266,5 +295,7 @@ module.exports = {
     getRegistroViajeroVigente,
     getTodosRegistrosViajero,
     getViajeroAgenciasAsociables,
-    cantidadViajesIncluidoViajero
+    cantidadViajesIncluidoViajero,
+    getViajerosRegistrados,
+    getViajerosAsociadoAgencia
 }
