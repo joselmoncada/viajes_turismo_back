@@ -3,9 +3,18 @@ pool = DB.getPool()
 
 const getRallies = async (req, res) => {
 
-    const response = await pool.query('SELECT * FROM CJV_rally as r left join (Select Distinct id_rally from CJV_participacion ) as p on r.id = p.id_rally order by r.id;');
+    const response = await pool.query('SELECT * FROM CJV_rally as r left join (Select Distinct id_rally from CJV_participacion ) as p on r.id = p.id_rally left join (Select Distinct id_rally as id_rally_2 from CJV_organizador ) as o on r.id = o.id_rally_2 left join (Select Distinct id_rally as id_rally_3 from CJV_circuito) as c on r.id = c.id_rally_3 left join (Select Distinct id_rally as id_rally_4 from CJV_premio) as pr on r.id = pr.id_rally_4 left join (Select Distinct id_rally as id_rally_5 from CJV_valoracion) as v on r.id = v.id_rally_5 order by r.id;');
 
     
+
+    console.log(response.rows);
+
+    res.status(200).json(response.rows);
+};
+
+const getRally = async (req, res) => {
+
+    const response = await pool.query('SELECT * FROM CJV_rally WHERE id = ' + req.params.id + ';');
 
     console.log(response.rows);
 
@@ -15,6 +24,28 @@ const getRallies = async (req, res) => {
 const getParticipantes = async (req, res) => {
     try {
     const response = await pool.query('SELECT * FROM CJV_participacion WHERE id_rally = ' + req.params.id + ';');
+    console.log(response.rows);
+
+    res.status(200).json(response.rows);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const getOrganizadores = async (req, res) => {
+    try {
+    const response = await pool.query('SELECT id_agencia, num_cupos, nombre FROM CJV_organizador left join CJV_agencia on id_agencia = id where id_rally =' +  8 + ';');
+    console.log(response.rows);
+
+    res.status(200).json(response.rows);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const getPremios = async (req, res) => {
+    try {
+    const response = await pool.query('SELECT nombre, puesto_destino, detalle FROM CJV_premio where id_rally =' + req.params.id + 'order by puesto_destino;');
     console.log(response.rows);
 
     res.status(200).json(response.rows);
@@ -53,5 +84,8 @@ module.exports = {
     getRallies,
     createRally,
     deleteRally,
-    getParticipantes
+    getParticipantes,
+    getRally,
+    getPremios,
+    getOrganizadores
 }
