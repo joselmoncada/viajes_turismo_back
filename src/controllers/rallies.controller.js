@@ -34,7 +34,7 @@ const getParticipantes = async (req, res) => {
 
 const getOrganizadores = async (req, res) => {
     try {
-    const response = await pool.query('SELECT id_agencia, num_cupos, nombre FROM CJV_organizador left join CJV_agencia on id_agencia = id where id_rally =' +  8 + ';');
+    const response = await pool.query('SELECT id_agencia, num_cupos, nombre FROM CJV_organizador left join CJV_agencia on id_agencia = id where id_rally =' +  req.params.id + ';');
     console.log(response.rows);
 
     res.status(200).json(response.rows);
