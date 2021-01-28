@@ -6,8 +6,8 @@ const getRallies = async (req, res) => {
     const response = await pool.query(`
         SELECT * FROM CJV_rally as r 
             left join (
-                Select Distinct id_rally f
-                rom CJV_participacion ) as p on r.id = p.id_rally 
+                Select Distinct id_rally 
+                from CJV_participacion ) as p on r.id = p.id_rally 
             left join (Select Distinct id_rally as id_rally_2 
                 from CJV_organizador ) as o on r.id = o.id_rally_2 
             left join (Select Distinct id_rally as id_rally_3 
@@ -23,8 +23,10 @@ const getRallies = async (req, res) => {
 };
 
 const getRally = async (req, res) => {
-
-    const response = await pool.query('SELECT * FROM CJV_rally WHERE id = $1;',[req.params.id]);
+    
+    const {id} = req.query
+    console.log('get Rally:')
+    const response = await pool.query('SELECT * FROM CJV_rally WHERE id = $1;',[id]);
 
     console.log(response.rows);
 
