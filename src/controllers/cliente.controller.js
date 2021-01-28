@@ -34,7 +34,8 @@ const getClienteByDOCorRIF = async (req,res,next)=>{
 											[ documento, num_rif])
 		res.status(200).json(response.rows)
     } catch (e) {
-        return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -60,7 +61,8 @@ const getClienteByID = async (req,res,next)=>{
 		
 		res.status(200).json(response.rows)
     } catch (e) {
-        return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -97,7 +99,8 @@ const getClientesNoViajeros = async (req,res,next)=>{
 												console.log('clientes no viajeros',response.rows)
 		res.status(200).json(response.rows)
     } catch (e) {
-        return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -117,7 +120,8 @@ const crearClientePersona = async (req,res,next)=>{
         console.log(response);
         res.send('cliente creado con exito');
     } catch (e) {
-        return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -133,7 +137,8 @@ const crearClienteJuridico = async (req,res,next)=>{
         console.log(response);
         res.send('cliente creado con exito');
     } catch (e) {
-        return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -148,7 +153,8 @@ const deleteCliente = async (req,res,next)=>{
         res.status(200)
         res.send('Se elimino correctamente la informacion');
 	} catch (e) {
-		return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -161,7 +167,8 @@ const registrarClienteAAgencia = async (req,res,next)=>{
 									[id_agencia, id_cliente])
 		res.send('cliente se registro a la agencia con exito');
 	} catch (e) {
-		return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -178,7 +185,8 @@ const finalizarClienteRelacionConAgencia = async (req,res,next)=>{
 		console.log(response.rows);
 		res.status(200).json(response.rows);
 	} catch (e) {
-		return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -195,7 +203,8 @@ const finalizarClienteRelacionConAgenciasByIDCliente = async (req,res,next)=>{
         console.log(response.rows);
         res.status(200).json(response.rows);
     } catch (e) {
-        return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -212,7 +221,8 @@ const getTodosRegistrosCliente = async (req,res,next)=>{
 									        [id_cliente])
 		res.status(200).json(response.rows)
 	} catch (e) {
-		return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -230,7 +240,8 @@ const getClienteAgenciasAsociables = async(req,res,next)=>{
         console.log(response.rows)
         res.status(200).json(response.rows)
     } catch(e){
-        return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
@@ -247,7 +258,8 @@ const getRegistroDeClienteVigente = async (req,res,next)=>{
 									[id_cliente])
 		res.status(200).json(response.rows)
 	} catch (e) {
-		return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -262,9 +274,8 @@ const createInstrumentoPago = async (req,res,next)=>{
 		res.send("Instrumento creado");
 		
 	} catch (e) {
-		console.log(JSON.stringify(error));
-		res.send(error);
-		return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -276,7 +287,8 @@ const addBanco = async(req,res,next) => {
 		res.status(200).json(response.rows)
 		console.log(response.rows)
 	} catch (e) {
-		return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -287,7 +299,8 @@ const getBancos = async(req,res,next) => {
 		res.status(200).json(response.rows)
 		console.log(response.rows)
 	} catch (e) {
-		return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -307,7 +320,8 @@ const getInstrumentosPorCliente = async(req,res,next) => {
 											where ban.id = id_banco and id_cliente = $1`,[id_cliente])
 		res.status(200).json(response.rows)
 	} catch (e) {
-		return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -323,7 +337,8 @@ const getInstrumentoPago = async(req,res,next) => {
 									where ins.id_cliente = $1 and ins.id = $2`,[id_cliente,id])
 		res.status(200).json(response.rows)
 	} catch (e) {
-		return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -336,7 +351,8 @@ const deleteInstrumentoPago = async(req,res,next) => {
 									`,[id_cliente,id])
 		res.status(200).json(response.rows)
 	} catch (e) {
-		return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
 	}
 }
 
@@ -349,7 +365,8 @@ const cantidadContratosIncluidoCliente = async(req,res,next)=>{
                                             [id_cliente])
         res.status(200).json(response.rows)
     } catch(e){
-        return next(e);
+		console.log(e.detail)
+        res.status(500).send(e)
     }
 }
 
