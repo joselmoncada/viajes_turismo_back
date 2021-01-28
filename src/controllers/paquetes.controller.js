@@ -804,7 +804,6 @@ const asociarViajeroContrato = (req, res, next) => {
 module.exports = {
 
     getPaquetes,
-    getAgenciaByName,
     getPaqueteById,
     getPaqueteByPk,
     getPaquetesDisponibles,

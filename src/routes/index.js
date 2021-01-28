@@ -1,10 +1,10 @@
 const { Router } = require('express');
 const router = Router();
 
-const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones,getVendedoresFromAgencia, getAreaInteresByAgenciaID, getAreaInteresByPaquetePK } = require('../controllers/index.controller');
+const { getAgencias, getAreaInteres, getAgenciasNoRelacionadasConAgencia, createAsociacion, finalizarAsociacion,getAsociaciones,getVendedoresFromAgencia, getAreaInteresByAgenciaID, getAreaInteresByPaquetePK, getAgenciaByName } = require('../controllers/index.controller');
 const { getCiudades, getPaises, getAtracciones, getCiudadesByPais,getAtraccionesByPais, getAtraccionesByCiudad } = require('../controllers/regiones.controller');
 
-const { getPaquetes, createPaquete, getAgenciaByName, 
+const { getPaquetes, createPaquete,
     deletePaquete, getPaqueteById,getPaqueteByPk,
     createPrecio, updatePrecio, getPrecioByPk,  
     getHistoricoPreciosByPk, getPaquetesDisponibles,
